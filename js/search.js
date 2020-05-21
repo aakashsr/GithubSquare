@@ -18,6 +18,10 @@ const searchController = (function () {
       return `We've an error here: ${e}`;
     }
   };
+
+  return {
+    Search,
+  };
 })();
 const viewController = (function () {
   function getValue() {
@@ -30,13 +34,21 @@ const viewController = (function () {
 })();
 
 const controller = (function () {
+  state = {};
+
   document.getElementById("player-1").addEventListener("submit", (e) => {
     e.preventDefault();
     handleSearch();
   });
 
-  const handleSearch = function () {
+  const handleSearch = async function () {
     // 1. get input value(username)
     let username = viewController.getValue();
+
+    // 2. create a new object and save in state
+    state.search = new searchController.Search(username);
+
+    // 3. make the request(search)
+    const data = await state.search.getResults();
   };
 })();
