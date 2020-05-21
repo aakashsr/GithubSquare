@@ -122,18 +122,26 @@ const controller = (function () {
   const handleResults = async function (e) {
     // 1. get the query
     let query = viewController.getValue(e);
+
     // 2. get the endpoint
     let endpoint = viewController.getEndpoint();
+
     // 3. Create object and save it in state
     state.search = new searchController.Search(query);
+
     // 4. clear previous result
     document.querySelector(".grid").innerHTML = "";
+
     // 5.render the loader
     base.renderLoader(base.elements.loaderContainer);
+
     // 6. make the search by calling method saved on object's prototype
     await state.search.displayResults(endpoint);
-    console.log(state.search);
-    // 7. render the results once the data has come
+
+    // 7. Clear loader
+    base.clearLoader();
+
+    // 8. render the results once the data has come
     viewController.showList(state.search.result);
   };
 
