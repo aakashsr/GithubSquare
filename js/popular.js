@@ -20,6 +20,14 @@ const viewController = (function () {
     return language;
   }
 
+  function toggleActive(e) {
+    const allButtons = document.querySelectorAll(".flex-center button");
+    allButtons.forEach(function (cur) {
+      cur.classList.remove("active");
+    });
+    e.target.classList.toggle("active");
+  }
+
   function getEndpoint() {
     endpoint = `https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`;
     return endpoint;
@@ -69,6 +77,7 @@ const viewController = (function () {
 
   return {
     getValue,
+    toggleActive,
     getEndpoint,
     showList,
     showNavigation,
@@ -133,32 +142,35 @@ const controller = (function () {
     // 1. get the query
     let query = viewController.getValue(e);
 
-    // 2. get the endpoint
+    // 2. toggle the active class on buttons
+    viewController.toggleActive(e);
+
+    // 3. get the endpoint
     let endpoint = viewController.getEndpoint();
 
-    // 3. Create object and save it in state
+    // 4. Create object and save it in state
     state.search = new searchController.Search(query);
 
-    // 4. clear previous result
+    // 5. clear previous result
     document.querySelector(".grid").innerHTML = "";
 
-    // 5.render the loader
+    // 6.render the loader
     base.renderLoader(base.elements.loaderContainer);
 
-    // 6. clearning navigation so that as soon as loader starts , navigation get disappear
+    // 7. clearning navigation so that as soon as loader starts , navigation get disappear
     // other wise navigation will move to top and will appear with loader
     document.querySelector(".navigation").innerHTML = "";
 
-    // 7. make the search by calling method saved on object's prototype
+    // 8. make the search by calling method saved on object's prototype
     await state.search.displayResults(endpoint);
 
-    // 8. Clear loader
+    // 9. Clear loader
     base.clearLoader();
 
-    // 9. showing navigation
+    // 10. showing navigation
     viewController.showNavigation();
 
-    // 10. render the results once the data has come
+    // 11. render the results once the data has come
     viewController.showList(state.search.result);
   };
 
