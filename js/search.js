@@ -28,8 +28,64 @@ const viewController = (function () {
     return document.querySelector(".username").value;
   }
 
+  const displayUserInfo = function (obj) {
+    let html;
+
+    html = `
+     <div id='card-big' class="card-content top-content user-card white-bg text-black">
+        <div class='user-col' class='user-image-container'>
+                <img src="${obj.avatar_url}" alt="" class="user-image">
+                <div class='user-info'>
+                <h2 class='info-1'>${obj.name}</h2>
+                <p class='info-2'>${obj.location}</p>
+                <p class='info-3'>${obj.bio}</p>
+            </div>
+            </div>
+            
+            <div class='git-info'>
+                <ul class='user-col' class='row'>
+                    <li class="user-row git-info-1">
+                        <div class='git-inf-desc medium'>${obj.login}</div>
+                        <span class="git-info-text regular">Username</span>
+                    </li>
+                    <li class="user-row git-info-1">
+                        <div class='git-inf-desc medium'>${obj.company}</div>
+                        <span class="git-info-text regular">Company</span>
+                    </li>
+                    <li class="user-row git-info-1">
+                        <div class='git-inf-desc medium'>${obj.blog}</div>
+                        <span class="git-info-text regular">Website</span>
+                    </li>
+                    <li class="user-row git-info-1">
+                        <div class='git-inf-desc medium'>${obj.followers}</div>
+                        <span class="git-info-text regular">Followers</span>
+                    </li>
+                    <li class="user-row git-info-2 border">
+                        <div class='git-inf-desc medium'>${obj.following}</div>
+                        <span class="git-info-text regular">Total Stars</span>
+                    </li>
+                    <li class="user-row git-info-3">
+                        <div class='git-inf-desc medium'>${obj.created_at.substring(
+                          0,
+                          10
+                        )}</div>
+                        <span class="git-info-text regular">Times Forked</span>
+                    </li>
+                     <button class='brk-btn mt-big'><a href='${
+                       obj.html_url
+                     }'>Profile</a></button>
+                </ul>
+            </div>
+            </div>`;
+
+    document
+      .querySelector(".top-content")
+      .insertAdjacentHTML("beforeend", html);
+  };
+
   return {
     getValue,
+    displayUserInfo,
   };
 })();
 
@@ -50,5 +106,8 @@ const controller = (function () {
 
     // 3. make the request(search)
     const data = await state.search.getResults();
+
+    // 4. render the userinfo on UI
+    viewController.displayUserInfo(state.search.username);
   };
 })();
