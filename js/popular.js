@@ -1,4 +1,13 @@
-const searchController = (function () {})();
+const searchController = (function () {
+  function Search(query) {
+    this.query = query;
+  }
+
+  Search.prototype.displayResults = async function () {
+    const res = await axios(endpoint);
+    this.result = res.data.items;
+  };
+})();
 
 const viewController = (function () {})();
 
