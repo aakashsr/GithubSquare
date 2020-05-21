@@ -28,6 +28,14 @@ const viewController = (function () {
     return document.querySelector(".username").value;
   }
 
+  const clearInput = function () {
+    document.querySelector(".username").value = "";
+  };
+
+  const clearPrevResults = function () {
+    document.querySelector(".top-content").innerHTML = "";
+  };
+
   const displayUserInfo = function (obj) {
     let html;
 
@@ -85,6 +93,8 @@ const viewController = (function () {
 
   return {
     getValue,
+    clearInput,
+    clearPrevResults,
     displayUserInfo,
   };
 })();
@@ -104,10 +114,14 @@ const controller = (function () {
     // 2. create a new object and save in state
     state.search = new searchController.Search(username);
 
-    // 3. make the request(search)
+    // 3.  clear the input field and prev Results
+    viewController.clearInput();
+    viewController.clearPrevResults();
+
+    // 4. make the request(search)
     const data = await state.search.getResults();
 
-    // 4. render the userinfo on UI
+    // 5. render the userinfo on UI
     viewController.displayUserInfo(state.search.username);
   };
 })();
