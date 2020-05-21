@@ -190,11 +190,20 @@ const controller = (function () {
     });
     e.target.classList.toggle("selected");
 
+    // clearning prev results of page when user clicks on navigatoin btns"
     document.querySelector(".grid").innerHTML = "";
 
     let pageNumber = parseInt(e.target.textContent);
     viewController.showList(state.search.result, pageNumber);
   };
+
+  (async function onFirstLoad() {
+    const res = await axios(
+      `https://api.github.com/search/repositories?q=stars:>1+language:All&sort=stars&order=desc&type=Repositories`
+    );
+    viewController.showList(res.data.items);
+  })();
+  //   onFirstLoad();
 
   return {
     init: function () {
