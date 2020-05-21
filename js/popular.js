@@ -3,8 +3,8 @@ const searchController = (function () {
     this.query = query;
   }
 
-  Search.prototype.displayResults = async function () {
-    const res = await axios(viewController.endpoint);
+  Search.prototype.displayResults = async function (endpoint) {
+    const res = await axios(endpoint);
     this.result = res.data.items;
   };
 
@@ -14,17 +14,20 @@ const searchController = (function () {
 })();
 
 const viewController = (function () {
-  let endpoint;
+  let endpoint, language;
   function getValue(e) {
-    let language = e.target.textContent;
-    endpoint = `https://cors-anywhere.herokuapp.com/https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`;
-
+    language = e.target.textContent;
     return language;
   }
 
+  function getEndpoint() {
+    endpoint = `https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`;
+    return endpoint;
+  }
+
   return {
-    endpoint,
     getValue,
+    getEndpoint,
   };
 })();
 
@@ -53,11 +56,14 @@ const controller = (function () {
       });
   };
 
-  const handleResults = function (e) {
+  const handleResults = async function (e) {
     // 1. get the query
     let query = viewController.getValue(e);
-    // 2. Create object and save it in state
+    // 2. get the endpoint
+    let endpoint = viewController.getEndpoint();
+    // 3. Create object and save it in state
     state.search = new searchController.Search(query);
+    // 4. make the search by calling method saved on object's prototype
   };
 
   return {
