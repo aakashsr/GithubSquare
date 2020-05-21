@@ -29,6 +29,8 @@ const viewController = (function () {
 })();
 
 const controller = (function () {
+  const state = {};
+
   const eventListeners = function () {
     document
       .querySelector(".languages-container")
@@ -52,8 +54,11 @@ const controller = (function () {
   };
 
   const handleResults = function (e) {
+    // 1. get the query
     let query = viewController.getValue(e);
-    console.log(query + ",");
+    // 2. Create object and save it in state
+    state.search = new searchController.Search(query);
+    console.log(state.search);
   };
 
   return {
