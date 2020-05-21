@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Duble User</title><g id="Duble_User" data-name="Duble User"><ellipse cx="7.04" cy="8.5" rx="3.52" ry="3.5" style="fill:#fff"/><path d="M12.45,14.43A12.13,12.13,0,0,0,7,13a12.13,12.13,0,0,0-5.41,1.43A3,3,0,0,0,0,17.1v.46A1.44,1.44,0,0,0,1.44,19H12.65a1.44,1.44,0,0,0,1.44-1.44V17.1A3,3,0,0,0,12.45,14.43Z" style="fill:#fff"/><ellipse cx="16.96" cy="8.5" rx="3.52" ry="3.5" style="fill:#fff"/><path d="M22.37,14.43A12.13,12.13,0,0,0,17,13a10.5,10.5,0,0,0-2.85.42.5.5,0,0,0-.21.84,4,4,0,0,1,1.2,2.85v.46a2.38,2.38,0,0,1-.14.78.5.5,0,0,0,.48.66h7.14A1.44,1.44,0,0,0,24,17.56V17.1A3,3,0,0,0,22.37,14.43Z" style="fill:#fff"/></g>
+	<metadata>
+		<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+			<rdf:Description about="https://iconscout.com/legal#licenses" dc:title="users; partner; share; duble" dc:description="users; partner; share; duble" dc:publisher="Iconscout" dc:date="2017-02-21" dc:format="image/svg+xml" dc:language="en">
+				<dc:creator>
+					<rdf:Bag>
+						<rdf:li>Alpár - Etele Méder</rdf:li>
+					</rdf:Bag>
+				</dc:creator>
+			</rdf:Description>
+		</rdf:RDF>
+    </metadata></svg>
