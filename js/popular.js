@@ -145,16 +145,20 @@ const controller = (function () {
     // 5.render the loader
     base.renderLoader(base.elements.loaderContainer);
 
-    // 6. make the search by calling method saved on object's prototype
+    // 6. clearning navigation so that as soon as loader starts , navigation get disappear
+    // other wise navigation will move to top and will appear with loader
+    document.querySelector(".navigation").innerHTML = "";
+
+    // 7. make the search by calling method saved on object's prototype
     await state.search.displayResults(endpoint);
 
-    // 7. Clear loader
+    // 8. Clear loader
     base.clearLoader();
 
-    // 8. showing navigation
+    // 9. showing navigation
     viewController.showNavigation();
 
-    // 9. render the results once the data has come
+    // 10. render the results once the data has come
     viewController.showList(state.search.result);
   };
 
