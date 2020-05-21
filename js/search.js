@@ -1,4 +1,24 @@
-const searchController = (function () {})();
+const searchController = (function () {
+  function Search(query) {
+    this.query = query;
+  }
+
+  Search.prototype.getResults = async function () {
+    try {
+      const reposData = await axios(
+        `https://api.github.com/users/${this.query}/repos`
+      );
+      const userData = await axios(
+        `https://api.github.com/users/${this.query}`
+      );
+      this.username = userData.data;
+      this.repos = reposData.data;
+      return userData.data;
+    } catch (e) {
+      return `We've an error here: ${e}`;
+    }
+  };
+})();
 const viewController = (function () {
   function getValue() {
     return document.querySelector(".username").value;
