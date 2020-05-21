@@ -180,7 +180,12 @@ const controller = (function () {
   };
 
   const handleNavigation = function (e) {
-    console.log(e.target);
+    // highlighting the selected button
+    const allButtons = document.querySelectorAll(".navigation .pagination");
+    allButtons.forEach(function (cur) {
+      cur.classList.remove("selected");
+    });
+    e.target.classList.toggle("selected");
   };
 
   return {
