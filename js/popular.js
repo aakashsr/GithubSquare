@@ -97,10 +97,12 @@ const controller = (function () {
     let endpoint = viewController.getEndpoint();
     // 3. Create object and save it in state
     state.search = new searchController.Search(query);
-    // 4. make the search by calling method saved on object's prototype
+    // 4. clear previous result
+    document.querySelector(".grid").innerHTML = "";
+    // 5. make the search by calling method saved on object's prototype
     await state.search.displayResults(endpoint);
     console.log(state.search);
-    // 5. render the results once the data has come
+    // 6. render the results once the data has come
     viewController.showList(state.search.result);
   };
 
