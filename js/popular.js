@@ -119,15 +119,31 @@ const base = (function () {
 const controller = (function () {
   const state = {};
 
-  // will save 'search' object into local storage
+  // save 'search' object into local storage
   const setData = function () {
     localStorage.setItem("data", JSON.stringify(state.search));
   };
 
-  // will get 'search' object from local storage
+  // get 'search' object from local storage
   const getStoredData = function () {
     const storedData = JSON.parse(localStorage.getItem("data"));
     return storedData;
+  };
+
+  // get data from local storage and render on UI on refresh or app startup
+  const loadData = function () {
+    // 1. getting stored data from local storage
+    const data = getStoredData();
+    if (data) {
+      // 1. creating a new object with help of saved data and saving into local state
+      state.search = new searchController.Search(data.query);
+      // 2. updating search's result property of local state
+      state.search.result = data.result;
+      // 3. updating search's lanugage property of local state
+      state.search.languages = data.languages;
+      // 4. rendering data from local state on UI on app startup
+      viewController.showList(state.search.result);
+    }
   };
 
   const eventListeners = function () {
@@ -228,6 +244,8 @@ const controller = (function () {
     init: function () {
       eventListeners();
     },
+    loadData,
   };
 })();
 controller.init();
+controller.loadData();
