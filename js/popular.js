@@ -136,6 +136,11 @@ const controller = (function () {
           }
         });
       });
+
+    // setting event listener for navigation buttons
+    document
+      .querySelector(".navigation")
+      .addEventListener("click", (e) => handleNavigation(e));
   };
 
   const handleResults = async function (e) {
@@ -172,6 +177,10 @@ const controller = (function () {
 
     // 11. render the results once the data has come
     viewController.showList(state.search.result);
+  };
+
+  const handleNavigation = function (e) {
+    console.log(e.target);
   };
 
   return {
