@@ -4,12 +4,29 @@ const searchController = (function () {
   }
 
   Search.prototype.displayResults = async function () {
-    const res = await axios(endpoint);
+    const res = await axios(viewController.endpoint);
     this.result = res.data.items;
+  };
+
+  return {
+    Search,
   };
 })();
 
-const viewController = (function () {})();
+const viewController = (function () {
+  let endpoint;
+  function getValue(e) {
+    let language = e.target.textContent;
+    endpoint = `https://cors-anywhere.herokuapp.com/https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`;
+
+    return language;
+  }
+
+  return {
+    endpoint,
+    getValue,
+  };
+})();
 
 const controller = (function () {
   const eventListeners = function () {
@@ -35,7 +52,8 @@ const controller = (function () {
   };
 
   const handleResults = function (e) {
-    console.log("Running");
+    let query = viewController.getValue(e);
+    console.log(query + ",");
   };
 
   return {
