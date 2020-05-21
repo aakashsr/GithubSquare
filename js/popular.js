@@ -2,7 +2,6 @@ const searchController = (function () {
   function Search(query) {
     this.query = query;
   }
-  s;
 
   Search.prototype.displayResults = async function () {
     const res = await axios(endpoint);
