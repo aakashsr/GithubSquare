@@ -259,13 +259,15 @@ const controller = (function () {
 
   //   On first load , fetching the data and rendering on UI . Also rendering the navigation
   (async function onFirstLoad() {
-    state.search = new searchController.Search("all");
-    const endpoint = `https://api.github.com/search/repositories?q=stars:>1+language:All&sort=stars&order=desc&type=Repositories`;
-    await state.search.displayResults(endpoint);
+    if (localStorage.getItem("data") === null) {
+      state.search = new searchController.Search("all");
+      const endpoint = `https://api.github.com/search/repositories?q=stars:>1+language:All&sort=stars&order=desc&type=Repositories`;
+      await state.search.displayResults(endpoint);
 
-    viewController.showList(state.search.result);
-    viewController.showNavigation();
-    handleNavigation();
+      viewController.showList(state.search.result);
+      viewController.showNavigation();
+      handleNavigation();
+    }
   })();
 
   return {
