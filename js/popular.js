@@ -58,7 +58,6 @@ const controller = (function () {
     let query = viewController.getValue(e);
     // 2. Create object and save it in state
     state.search = new searchController.Search(query);
-    console.log(state.search);
   };
 
   return {
