@@ -33,8 +33,11 @@ const viewController = (function () {
     return endpoint;
   }
 
-  function showList(array) {
-    array.forEach((obj) => {
+  function showList(array, pageNumber = 1) {
+    let resultPerPage = 12;
+    let lower = (pageNumber - 1) * resultPerPage;
+    let upper = pageNumber * resultPerPage;
+    array.slice(lower, upper).forEach((obj) => {
       let html = `
      <div class="card-content card-small top-content user-card">
         <div class='user-image-container image-container-small'>
@@ -186,6 +189,9 @@ const controller = (function () {
       cur.classList.remove("selected");
     });
     e.target.classList.toggle("selected");
+
+    pageNumber = parseInt(e.target.textContent);
+    viewController.showList(state.search.result, pageNumber);
   };
 
   return {
