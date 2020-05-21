@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search User</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <ul class="nav">
+            <li>
+                <a class='nav-btn' href="/index.html">Home</a>
+            </li>
+            <li>
+                <a class='nav-btn' href="/battle.html">Battle</a>
+            </li>
+            <li>
+                <a class='nav-btn' href="/popular.html">Popular</a>
+            </li>
+            <li>
+                <a class='nav-btn' href="/search.html">Search</a>
+            </li>
+        </ul>
+        <form id='player-1' class="column player search-form">
+            <label for="username" class="player-label">
+                Enter Github Username
+            </label>
+            <div class="row player-inputs">
+                <input type="text" id="username-one" class='username username1' placeholder="github username"
+                    autoComplete="off" />
+                <button class="brk-btn dark-btn">
+                    Submit
+                </button>
+            </div>
+            <p class='error'>Username doesn't exist</p>
+        </form>
+
+        <div class="loader-container"></div>
+        <div class="top-content card-big-container"></div>
+        <!-- <div class="card-content top-content">
+                    <div class='user-image-container'>
+                        <img src="./37246370.jfif" alt="" class="user-image">
+                        <div class="repos">
+                            <div class="repos-count">51</div>
+                            <div class="repos-text">REPOS</div>
+                        </div>
+                    </div>
+                    <div class='user-info'>
+                        <h2 class='name'>Aakash Srivastav</h2>
+                        <p class='location'>Delhi , India</p>
+                        <p class='tag-line'>UI Developer | JavaScript/CSS Lover</p>
+                    </div>
+                    <div class='git-info'>
+                        <ul>
+                            <li class="followers">
+                                <div class='followers-count medium'>52</div>
+                                <span class="followers-text small">FOLLOWRS</span>
+                            </li>
+                            <li class="stars">
+                                <div class='stars-count medium'>10</div>
+                                <span class="stars-text small">TOTAL STARS</span>
+                            </li>
+                            <li class="forked">
+                                <div class='forked-count medium'>12</div>
+                                <span class="forked-text small">TIMES FORKED</span>
+                            </li>
+                        </ul>
+                    </div>
+        
+                </div> -->
+        <div class="bottom-content">
+
+
+        </div>
+        <div class="bottom-grid">
+
+        </div>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src='./js/search.js'></script>
+</body>
+
+</html>
