@@ -69,6 +69,12 @@ const viewController = (function () {
     });
   }
 
+  const showLanguages = function (data) {
+    document
+      .querySelector(".languages-container")
+      .insertAdjacentHTML("afterbegin", data);
+  };
+
   const showNavigation = function () {
     let html = ` <button id='pagination-1' class='brk-btn pagination selected'>1</button>
             <button id='pagination-2' class='brk-btn pagination'>2</button>
@@ -83,6 +89,7 @@ const viewController = (function () {
     toggleActive,
     getEndpoint,
     showList,
+    showLanguages,
     showNavigation,
   };
 })();
@@ -143,6 +150,13 @@ const controller = (function () {
       state.search.languages = data.languages;
       // 4. rendering data from local state on UI on app startup
       viewController.showList(state.search.result);
+
+      // -------- rendering lanuguages on app startup -------------
+      // 1. clearing previous data
+      document.querySelector(".languages-container").innerHTML = "";
+      // 2. updating languages on refresh or startup
+      viewController.showLanguages(state.search.languages);
+      console.log("load data");
     }
   };
 
@@ -205,6 +219,10 @@ const controller = (function () {
 
     // 10. showing navigation
     viewController.showNavigation();
+
+    // 11. Save all the languages
+    const languages = document.querySelector(".languages-container").innerHTML;
+    state.search.languages = languages;
 
     // 11. render the results once the data has come
     viewController.showList(state.search.result);
