@@ -66,6 +66,10 @@ const viewController = (function () {
 })();
 
 const base = (function () {
+  const elements = {
+    loaderContainer: document.querySelector(".loader-container"),
+  };
+
   const renderLoader = function (parent) {
     const loader = `
     <div class='loader'>
@@ -84,6 +88,7 @@ const base = (function () {
     }
   };
   return {
+    elements,
     renderLoader,
     clearLoader,
   };
@@ -123,10 +128,12 @@ const controller = (function () {
     state.search = new searchController.Search(query);
     // 4. clear previous result
     document.querySelector(".grid").innerHTML = "";
-    // 5. make the search by calling method saved on object's prototype
+    // 5.render the loader
+    base.renderLoader(base.elements.loaderContainer);
+    // 6. make the search by calling method saved on object's prototype
     await state.search.displayResults(endpoint);
     console.log(state.search);
-    // 6. render the results once the data has come
+    // 7. render the results once the data has come
     viewController.showList(state.search.result);
   };
 
