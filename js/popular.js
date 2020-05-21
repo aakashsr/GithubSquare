@@ -25,9 +25,43 @@ const viewController = (function () {
     return endpoint;
   }
 
+  function showList(array) {
+    array.forEach((obj) => {
+      let html = `
+     <div class="card-content card-small top-content user-card">
+        <div class='user-image-container image-container-small'>
+                <a class='white' href=${obj.svn_url}><img src="${obj.owner.avatar_url}" alt="" class="user-image img-small"></a>
+               
+            </div>
+            <div class='user-info'>
+                <h2 class='name mb-medium'><a href=${obj.svn_url}>${obj.name}</a></h2>
+            </div>
+            <div class='git-info'>
+                <ul>
+                    <li class="followers">
+                        <div class='followers-count medium'>${obj.stargazers_count}</div>
+                       
+                        <span class="followers-text small"><img class='color-star' src='./img/starfilled.png'></span>
+                    </li>
+                    <li class="stars">
+                        <div class='stars-count medium'>${obj.forks}</div>
+                        <span class="forked-text small"><img class='color-forked' src='./img/forked.svg'></span>
+                    </li>
+                    <li class="forked">
+                        <div class='forked-count medium'>${obj.open_issues}</div>
+                         <span class="stars-text small"><img class='color-issues' src='./img/alert.svg'</span>
+                    </li>
+                </ul>
+            </div>
+            </div>`;
+      document.querySelector(".grid").insertAdjacentHTML("beforeend", html);
+    });
+  }
+
   return {
     getValue,
     getEndpoint,
+    showList,
   };
 })();
 
