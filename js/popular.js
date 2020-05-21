@@ -58,10 +58,20 @@ const viewController = (function () {
     });
   }
 
+  const showNavigation = function () {
+    let html = ` <button id='pagination-1' class='brk-btn pagination selected'>1</button>
+            <button id='pagination-2' class='brk-btn pagination'>2</button>
+            <button id='pagination-3' class='brk-btn pagination'>3</button>`;
+    document
+      .querySelector(".navigation")
+      .insertAdjacentHTML("afterbegin", html);
+  };
+
   return {
     getValue,
     getEndpoint,
     showList,
+    showNavigation,
   };
 })();
 
@@ -141,7 +151,10 @@ const controller = (function () {
     // 7. Clear loader
     base.clearLoader();
 
-    // 8. render the results once the data has come
+    // 8. showing navigation
+    viewController.showNavigation();
+
+    // 9. render the results once the data has come
     viewController.showList(state.search.result);
   };
 
