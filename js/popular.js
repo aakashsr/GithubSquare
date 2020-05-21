@@ -64,6 +64,8 @@ const controller = (function () {
     // 3. Create object and save it in state
     state.search = new searchController.Search(query);
     // 4. make the search by calling method saved on object's prototype
+    await state.search.displayResults(endpoint);
+    console.log(state.search);
   };
 
   return {
