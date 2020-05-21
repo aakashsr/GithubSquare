@@ -100,6 +100,8 @@ const controller = (function () {
     // 4. make the search by calling method saved on object's prototype
     await state.search.displayResults(endpoint);
     console.log(state.search);
+    // 5. render the results once the data has come
+    viewController.showList(state.search.result);
   };
 
   return {
