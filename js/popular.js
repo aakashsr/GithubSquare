@@ -1,3 +1,4 @@
+// localStorage.clear();
 const searchController = (function () {
   function Search(query) {
     this.query = query;
@@ -151,12 +152,18 @@ const controller = (function () {
       // 4. rendering data from local state on UI on app startup
       viewController.showList(state.search.result);
 
-      // -------- rendering lanuguages on app startup -------------
+      // -------- rendering lanuguages on app startup ------------- //
       // 1. clearing previous data
       document.querySelector(".languages-container").innerHTML = "";
       // 2. updating languages on refresh or startup
       viewController.showLanguages(state.search.languages);
-      console.log("load data");
+
+      // -------- rendering navigation on app startup -------------
+
+      // i) clearing the buttons added previously
+      document.querySelector(".navigation").innerHTML = "";
+      // ii) rendering the buttons( we haven't saved our buttons into state because we don't have any state attached to our buttons.Whenever we are refreshing , we just need to show all the three buttons because we always get the first page on refresh.We can't save 2nd or 3rd page result in localstorage)
+      viewSearchController.showNavigation(state.search.navigationContent);
     }
   };
 
@@ -224,10 +231,10 @@ const controller = (function () {
     const languages = document.querySelector(".languages-container").innerHTML;
     state.search.languages = languages;
 
-    // 11. render the results once the data has come
+    // 12. render the results once the data has come
     viewController.showList(state.search.result);
 
-    // 12. Saving data into Local Storage
+    // 13. Saving data into Local Storage
     setData();
   };
 
@@ -250,12 +257,15 @@ const controller = (function () {
     setData();
   };
 
-  // On first load , fetching the data and rendering on UI
+  //   On first load , fetching the data and rendering on UI . Also rendering the navigation
   (async function onFirstLoad() {
-    const res = await axios(
-      `https://api.github.com/search/repositories?q=stars:>1+language:All&sort=stars&order=desc&type=Repositories`
-    );
-    viewController.showList(res.data.items);
+    state.search = new searchController.Search("all");
+    const endpoint = `https://api.github.com/search/repositories?q=stars:>1+language:All&sort=stars&order=desc&type=Repositories`;
+    await state.search.displayResults(endpoint);
+
+    viewController.showList(state.search.result);
+    viewController.showNavigation();
+    handleNavigation();
   })();
 
   return {
