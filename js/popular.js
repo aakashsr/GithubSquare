@@ -119,6 +119,17 @@ const base = (function () {
 const controller = (function () {
   const state = {};
 
+  // will save 'search' object into local storage
+  const setData = function () {
+    localStorage.setItem("data", JSON.stringify(state.search));
+  };
+
+  // will get 'search' object from local storage
+  const getStoredData = function () {
+    const storedData = JSON.parse(localStorage.getItem("data"));
+    return storedData;
+  };
+
   const eventListeners = function () {
     document
       .querySelector(".languages-container")
@@ -146,6 +157,7 @@ const controller = (function () {
       .addEventListener("click", (e) => handleNavigation(e));
   };
 
+  // Listener for languages buttons
   const handleResults = async function (e) {
     // 1. get the query
     let query = viewController.getValue(e);
@@ -180,8 +192,12 @@ const controller = (function () {
 
     // 11. render the results once the data has come
     viewController.showList(state.search.result);
+
+    // 12. Saving data into Local Storage
+    setData();
   };
 
+  // listener for navigation
   const handleNavigation = function (e) {
     // highlighting the selected button
     const allButtons = document.querySelectorAll(".navigation .pagination");
@@ -195,15 +211,18 @@ const controller = (function () {
 
     let pageNumber = parseInt(e.target.textContent);
     viewController.showList(state.search.result, pageNumber);
+
+    // Saving data into Local Storage
+    setData();
   };
 
+  // On first load , fetching the data and rendering on UI
   (async function onFirstLoad() {
     const res = await axios(
       `https://api.github.com/search/repositories?q=stars:>1+language:All&sort=stars&order=desc&type=Repositories`
     );
     viewController.showList(res.data.items);
   })();
-  //   onFirstLoad();
 
   return {
     init: function () {
