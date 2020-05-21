@@ -190,7 +190,9 @@ const controller = (function () {
     });
     e.target.classList.toggle("selected");
 
-    pageNumber = parseInt(e.target.textContent);
+    document.querySelector(".grid").innerHTML = "";
+
+    let pageNumber = parseInt(e.target.textContent);
     viewController.showList(state.search.result, pageNumber);
   };
 
