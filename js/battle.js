@@ -59,7 +59,8 @@ const controller = (function () {
     state.userNames.firstName = userName;
     // 3. Make the fetch request and get the data
     const data1 = await searchController.getResults(state.userNames.firstName);
-    console.log(data1);
+    // 4. Hide the form from UI
+    document.getElementById("player-1").style.display = "none";
   };
   const handleControllerTwo = async function () {
     // 1. get the  username value
@@ -68,6 +69,7 @@ const controller = (function () {
     state.userNames.secondName = userName;
     // 3. Make the fetch request and get the data
     const data2 = await searchController.getResults(state.userNames.secondName);
-    console.log(data2);
+    // 4. Hide the form from UI
+    document.getElementById("player-2").style.display = "none";
   };
 })();
