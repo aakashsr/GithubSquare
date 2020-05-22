@@ -39,7 +39,9 @@ const viewController = (function () {
   };
 })();
 const controller = (function () {
-  const state = {};
+  const state = {
+    userNames: {},
+  };
 
   document.getElementById("player-1").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -50,16 +52,22 @@ const controller = (function () {
     handleControllerTwo();
   });
 
-  const handleControllerOne = function () {
+  const handleControllerOne = async function () {
     // 1. get the  username value
-    const username = viewController.getValue1();
+    const userName = viewController.getValue1();
     // 2. save in state
     state.userNames.firstName = userName;
+    // 3. Make the fetch request and get the data
+    const data1 = await searchController.getResults(state.userNames.firstName);
+    console.log(data1);
   };
-  const handleControllerTwo = function () {
+  const handleControllerTwo = async function () {
     // 1. get the  username value
-    const username = viewController.getValue2();
+    const userName = viewController.getValue2();
     // 2. save in state
     state.userNames.secondName = userName;
+    // 3. Make the fetch request and get the data
+    const data2 = await searchController.getResults(state.userNames.secondName);
+    console.log(data2);
   };
 })();
