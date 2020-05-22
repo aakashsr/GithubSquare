@@ -211,5 +211,8 @@ const controller = (function () {
 
     // 9. render the result of repos
     viewController.displayReposInfo(state.search.repos);
+
+    // 10. Save the data into local storage
+    setData();
   };
 })();
