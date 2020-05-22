@@ -178,6 +178,16 @@ const controller = (function () {
     return storedData;
   };
 
+  const loadData = function () {
+    const data = getStoredData();
+    if (data) {
+      state.search = new searchController.createObject(data.query);
+      state.search.query = data.query;
+      state.search.repos = data.repos;
+      state.search.username = data.username;
+    }
+  };
+
   document.getElementById("player-1").addEventListener("submit", (e) => {
     e.preventDefault();
     handleSearch();
@@ -215,4 +225,10 @@ const controller = (function () {
     // 10. Save the data into local storage
     setData();
   };
+
+  return {
+    loadData,
+  };
 })();
+
+controller.loadData();
