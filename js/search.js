@@ -124,6 +124,7 @@ const viewController = (function () {
 
   const displayHeading = function () {
     let html = `<h4>Latest Repos</h4>`;
+    document.querySelector(".bottom-content").innerHTML = "";
     document
       .querySelector(".bottom-content")
       .insertAdjacentHTML("afterbegin", html);
@@ -186,6 +187,7 @@ const controller = (function () {
       state.search.repos = data.repos;
       state.search.username = data.username;
       viewController.displayUserInfo(state.search.username);
+      viewController.displayHeading();
       viewController.displayReposInfo(state.search.repos);
     }
   };
