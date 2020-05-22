@@ -91,6 +91,37 @@ const viewController = (function () {
       .insertAdjacentHTML("beforeend", html);
   };
 
+  const displayReposInfo = function (obj) {
+    obj.forEach(function (cur) {
+      let html = `
+     <div class="card-content top-content repo-card">
+            <div class='user-info'>
+                <h2 class='name small'><a href=${cur.svn_url}>${cur.full_name}</a></h2>
+                <p class='tag-line'>${cur.description}</p>
+            </div>
+            <div class='git-info'>
+                <ul>
+                    <li class="git-inf-1">
+                        <div class='git-inf-desc medium'>${cur.stargazers_count}</div>
+                        <span class="git-info-test small"><img class='color-star' src='./img/starLight.png'></span>
+                    </li>
+                    <li class="git-info-2 border">
+                        <div class='git-inf-desc medium'>${cur.forks}</div>
+                        <span class="git-info-test small"><img class='color-forked' src='./img/forked.svg'></span>
+                    </li>
+                    <li class="git-info-3">
+                        <div class='git-inf-desc medium'>${cur.language}</div>
+                        <span class="git-info-test small"><img class='color-language' src='./img/code2.svg'></span>
+                    </li>
+                </ul>
+            </div>
+      </div>`;
+      document
+        .querySelector(".bottom-grid")
+        .insertAdjacentHTML("beforeend", html);
+    });
+  };
+
   const displayHeading = function () {
     let html = `<h4>Latest Repos</h4>`;
     document
@@ -104,6 +135,7 @@ const viewController = (function () {
     clearPrevResults,
     displayUserInfo,
     displayHeading,
+    displayReposInfo,
   };
 })();
 
@@ -165,5 +197,8 @@ const controller = (function () {
 
     // 8. render heading of bottom content
     viewController.displayHeading();
+
+    // 9. render the result of repos
+    viewController.displayReposInfo(state.search.repos);
   };
 })();
