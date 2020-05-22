@@ -162,6 +162,6 @@ const controller = (function () {
 
   const controlSearch = function () {
     // 1. remove the content container element(containing instructions and both form elements)from UI
-    searchViewController.removeElement("content-container");
+    viewController.removeElement("content-container");
   };
 })();
