@@ -61,8 +61,15 @@ const viewController = (function () {
   }
 
   function displayContainer() {
-    let html, newHtml;
-    html = `<div id='results' class="results grid center container-sm"></div>`;
+    let html;
+    html = `
+    <div class='results-container'>
+        <div id='results' class="results grid center container-sm"></div>
+         <div class='reset-container center'><a onClick="window.location.reload();" id="btn-reset"
+                class="btn-reset brk-btn dark-btn btn-space" href="#">Reset</a>
+        </div>
+    </div>
+    `;
 
     document.querySelector(".container").insertAdjacentHTML("beforeend", html);
   }
@@ -312,5 +319,8 @@ const controller = (function () {
     // 7. Appending the cards to above container and passing scores too
     viewController.displayResult(result1, score1, matchResult1, "player1");
     viewController.displayResult(result2, score2, matchResult2, "player2");
+
+    // 8. display the reset button
+    document.getElementById("btn-reset").style.display = "inline-block";
   };
 })();

@@ -498,8 +498,9 @@ li {
 }
 
 
-#btn-battle {
-    /* Initially hide the button */
+#btn-battle,
+#btn-reset {
+    /* Initially hide the buttons */
     display: none;
     text-align: center;
 }
