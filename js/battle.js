@@ -67,6 +67,11 @@ const viewController = (function () {
     document.querySelector(".container").insertAdjacentHTML("beforeend", html);
   }
 
+  function removeElement(id) {
+    const element = document.getElementById(id);
+    element.parentNode.removeChild(element);
+  }
+
   return {
     getValue1,
     getValue2,
@@ -217,5 +222,31 @@ const controller = (function () {
 
     // 5. adding a new container to the page
     viewController.displayContainer();
+
+    // 6. Get stars count
+    const getStars = function (repos) {
+      let stars = 0;
+      repos.forEach(function (cur) {
+        stars += cur.stargazers_count;
+      });
+      return stars;
+    };
+
+    (function getResult() {
+      let userOneStars = getStars(repos1);
+      let userTwoStars = getStars(repos2);
+      let score1 = result1.followers * 3 + userOneStars;
+      let score2 = result2.followers * 3 + userTwoStars;
+      if (score1 > score2) {
+        matchResult1 = "WINNER!";
+        matchResult2 = "LOSER";
+      } else if (score2 > score1) {
+        matchResult2 = "WINNER!";
+        matchResult1 = "LOSER";
+      } else {
+        matchResult1 = "TIE";
+        matchResult2 = "TIE";
+      }
+    })();
   };
 })();
