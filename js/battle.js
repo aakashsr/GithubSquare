@@ -67,6 +67,64 @@ const viewController = (function () {
     document.querySelector(".container").insertAdjacentHTML("beforeend", html);
   }
 
+  function displayResult(obj, score, result, player) {
+    console.log(obj.name);
+    let html, newHTML;
+    html = `
+     <div class="card-content top-content user-card">
+        <div class='${
+          result === "WINNER!" ? "success " : "defeat "
+        }user-result'>${result}</div>
+        <div class='user-image-container'>
+                <img src="${obj.avatar_url}" alt="" class="user-image">
+  
+            </div>
+            <div class='user-info'>
+                <h2 class='info-1'>${score}</h2>
+                <p class='info-2'><a href='${obj.html_url}' class='link'>${
+      obj.login
+    }</a></p>
+       
+            </div>
+            <div class='git-info'>
+                <ul class='column pad-md'>
+		    <li class="git-info-1 reverse">
+                        <div class='git-inf-desc medium'>${obj.name}</div>
+                        <span class="git-info-text small">NAME</span>
+                    </li>
+                    <li class="git-info-2 reverse">
+                        <div class='git-inf-desc medium'>${obj.location}</div>
+                        <span class="git-info-text small">LOCATION</span>
+                    </li>
+                    <li class="git-info-3 reverse">
+                        <div class='git-inf-desc medium'>${obj.followers}</div>
+                        <span class="git-info-text small">FOLLOWERS</span>
+                    </li>
+                    <li class="git-info-4 reverse">
+                        <div class='git-inf-desc medium'>${obj.following}</div>
+                        <span class="git-info-text small">FOLLOWING</span>
+                    </li>
+                     <li class="git-info-5 reverse">
+                        <div class='git-inf-desc medium'>${
+                          obj.public_repos
+                        }</div>
+                        <span class="git-info-text small">PUBLIC REPOS</span>
+                    </li>
+                     <li class="git-info-6 reverse">
+                        <div class='git-inf-desc medium'>${obj.blog}</div>
+                        <span class="git-info-text small">WEBSITE</span>
+                    </li>
+                </ul>
+            </div>
+            </div>`;
+
+    if (player === "player1") {
+      document.querySelector(".results").insertAdjacentHTML("afterbegin", html);
+    } else {
+      document.querySelector(".results").insertAdjacentHTML("beforeend", html);
+    }
+  }
+
   function removeElement(id) {
     const element = document.getElementById(id);
     element.parentNode.removeChild(element);
@@ -77,6 +135,7 @@ const viewController = (function () {
     getValue2,
     displayUserName,
     removeElement,
+    displayResult,
     displayContainer,
   };
 })();
@@ -223,7 +282,8 @@ const controller = (function () {
     // 5. adding a new container to the page
     viewController.displayContainer();
 
-    // 6. Get stars count
+    // 6. Get stars count and result
+    let score1, score2, matchResult1, matchResult2;
     const getStars = function (repos) {
       let stars = 0;
       repos.forEach(function (cur) {
@@ -235,8 +295,8 @@ const controller = (function () {
     (function getResult() {
       let userOneStars = getStars(repos1);
       let userTwoStars = getStars(repos2);
-      let score1 = result1.followers * 3 + userOneStars;
-      let score2 = result2.followers * 3 + userTwoStars;
+      score1 = result1.followers * 3 + userOneStars;
+      score2 = result2.followers * 3 + userTwoStars;
       if (score1 > score2) {
         matchResult1 = "WINNER!";
         matchResult2 = "LOSER";
@@ -248,5 +308,9 @@ const controller = (function () {
         matchResult2 = "TIE";
       }
     })();
+
+    // 7. Appending the cards to above container and passing scores too
+    viewController.displayResult(result1, score1, matchResult1, "player1");
+    viewController.displayResult(result2, score2, matchResult2, "player2");
   };
 })();
