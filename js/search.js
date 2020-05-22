@@ -91,11 +91,19 @@ const viewController = (function () {
       .insertAdjacentHTML("beforeend", html);
   };
 
+  const displayHeading = function () {
+    let html = `<h4>Latest Repos</h4>`;
+    document
+      .querySelector(".bottom-content")
+      .insertAdjacentHTML("afterbegin", html);
+  };
+
   return {
     getValue,
     clearInput,
     clearPrevResults,
     displayUserInfo,
+    displayHeading,
   };
 })();
 
@@ -154,5 +162,8 @@ const controller = (function () {
 
     // 7. render the userinfo on UI
     viewController.displayUserInfo(state.search.username);
+
+    // 8. render heading of bottom content
+    viewController.displayHeading();
   };
 })();
