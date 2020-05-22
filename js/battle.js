@@ -90,6 +90,15 @@ const controller = (function () {
     const deleteElementId =
       e.target.parentNode.parentNode.parentNode.parentNode.id;
     viewController.removeElement(deleteElementId);
+    if (playerName === "firstName") {
+      // removing the query from state too
+      state.userNames.firstName = "";
+      // display the form element again
+      document.getElementById("player-1").style.display = "block";
+    } else if (playerName === "secondName") {
+      state.userNames.secondName = "";
+      document.getElementById("player-2").style.display = "block";
+    }
   }
 
   const handleControllerOne = async function () {
