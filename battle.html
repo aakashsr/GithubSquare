@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Github Battle</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <ul class="nav">
+            <li>
+                <a class='nav-btn' href="/index.html">Home</a>
+            </li>
+            <li>
+                <a class='nav-btn' href="/battle.html">Battle</a>
+            </li>
+            <li>
+                <a class='nav-btn' href="/popular.html">Popular</a>
+            </li>
+            <li>
+                <a class='nav-btn' href="/search.html">Search</a>
+            </li>
+        </ul>
+        <div class="loader-container"></div>
+        <div id='content-container' class="content-container">
+            <div id='instruction-container' class="instructions-container">
+                <h1 class="center-text header-lg">Instructions</h1>
+                <ol class="container-sm grid center-text battle-instructions">
+                    <li>
+                        <h3 class="header-sm">Enter two Github users</h3>
+                        <div class="instruction-user"
+                            style='width:150px;height:160px;border-radius:20px;background-color:#ffca07;padding: 10px;box-sizing: border-box;display: flex;align-items: center;justify-content: center;margin: 0 auto;'>
+                            <img src='./img/users.svg' width='90px'>
+                        </div>
+                    </li>
+                    <li>
+                        <h3 class="header-sm">Battle</h3>
+                        <img src='./img/fencing.svg' width='160px'>
+                    </li>
+                    <li>
+                        <h3 class="header-sm">See the winners</h3>
+                        <img src='./img/trophy.svg' width='160px'>
+                    </li>
+                </ol>
+            </div>
+            <div class="players-container">
+                <h1 class="center-text header-lg">Players</h1>
+                <div class="row space-around">
+                    <!-- <div class="column player">
+                    <h3 class="player-label">Player One</h3>
+                    <div class="row bg-light">
+                        <div class="player-info">
+                            <img src="%url%" alt="%desc%" class="avatar-small">
+                            <a href="%link%" class="link">%name%</a>
+                        </div>
+                        <button class="btn-clear flex-center">
+                            close svg
+                        </button>
+                    </div>
+                  </div> -->
+                    <div class="player-container-1">
+                        <form id='player-1' class="column player player-sm">
+                            <label for="username" class="player-label">
+                                Player One
+                            </label>
+                            <div class="row player-inputs">
+                                <input type="text" id="username-one" class='username username1 input-light'
+                                    placeholder="github username" autoComplete="off" />
+                                <button class=" brk-btn dark-btn">
+                                    Submit
+                                </button>
+                            </div>
+                        </form>
+                        <p class='error'>Username doesn't exist</p>
+                    </div>
+                    <div class="player-container-2">
+                        <form id='player-2' class="column player player-sm">
+                            <label for="username" class="player-label">
+                                Player Two
+                            </label>
+                            <div class="row player-inputs">
+                                <input type="text" id="username-two" class='username username2 input-light'
+                                    placeholder="github username" autoComplete="off" />
+                                <button class=" brk-btn dark-btn">
+                                    Submit
+                                </button>
+                            </div>
+                        </form>
+                        <p class='error'>Username doesn't exist</p>
+                    </div>
+                </div>
+                <a id="btn-battle" class="btn-battle brk-btn dark-btn btn-space" href="#">Battle</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/battle.js"></script>
+</body>
+
+</html>
