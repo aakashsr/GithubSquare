@@ -1,4 +1,28 @@
-const searchController = (function () {})();
+const searchController = (function () {
+  async function getResults(username) {
+    try {
+      const res = await axios(`https://api.github.com/users/${username}`);
+      return res.data;
+    } catch (e) {
+      return `We have an error here: ${e}`;
+    }
+  }
+
+  async function getRepos(username) {
+    try {
+      const res = await axios(`https://api.github.com/users/${username}/repos`);
+      return res.data;
+    } catch (e) {
+      return `We have an error here: ${e}`;
+    }
+  }
+
+  return {
+    getResults,
+    getRepos,
+  };
+})();
+
 const viewController = (function () {
   function getValue1() {
     const value1 = document.querySelector(".username1").value;
