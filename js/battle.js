@@ -2,9 +2,7 @@
 const searchController = (function () {
   async function getResults(username) {
     try {
-      const res = await axios(
-        `https://cors-anywhere.herokuapp.com/https://api.github.com/users/${username}`
-      );
+      const res = await axios(`https://api.github.com/users/${username}`);
       return res.data;
     } catch (e) {
       return `We have an error here: ${e}`;
@@ -13,9 +11,7 @@ const searchController = (function () {
 
   async function getRepos(username) {
     try {
-      const res = await axios(
-        `https://cors-anywhere.herokuapp.com/https://api.github.com/users/${username}/repos`
-      );
+      const res = await axios(`https://api.github.com/users/${username}/repos`);
       return res.data;
     } catch (e) {
       return `We have an error here: ${e}`;
@@ -195,13 +191,23 @@ const controller = (function () {
     state.userNames.firstName = userName;
     // 3. Make the fetch request and get the data
     const data1 = await searchController.getResults(state.userNames.firstName);
-    // 4. Hide the form from UI
+
+    // 4. show error if we get error
+    var element = document.querySelector(".player-container-1 .error");
+    if (typeof data1 === "string") {
+      element.style.display = "block";
+      return false;
+    } else {
+      element.style.display = "none";
+    }
+
+    // 5. Hide the form from UI
     document.getElementById("player-1").style.display = "none";
 
-    // 5. render the playerone UI
+    // 6. render the playerone UI
     viewController.displayUserName(data1, "player1", 1);
 
-    //  6. Add event listener to remove button
+    // 7. Add event listener to remove button
     document
       .querySelector(".player-container-1")
       .addEventListener("click", (e) => {
@@ -219,16 +225,25 @@ const controller = (function () {
     state.userNames.secondName = userName;
     // 3. Make the fetch request and get the data
     const data2 = await searchController.getResults(state.userNames.secondName);
-    // 4. Hide the form from UI
+
+    // 4. show error if we get error
+    var element = document.querySelector(".player-container-2 .error");
+    if (typeof data2 === "string") {
+      element.style.display = "block";
+      return false;
+    } else {
+      element.style.display = "none";
+      // 5. Show the battle btn only if we get data back from api
+      document.getElementById("btn-battle").style.display = "inline-block";
+    }
+
+    // 6. Hide the form from UI
     document.getElementById("player-2").style.display = "none";
 
-    // 5. render the playertwo UI
+    // 7. render the playertwo UI
     viewController.displayUserName(data2, "player2", 2);
 
-    // 6. Show the battle btn
-    document.getElementById("btn-battle").style.display = "inline-block";
-
-    //  7. Add event listener to remove button
+    // 8. Add event listener to remove button
     document
       .querySelector(".player-container-2")
       .addEventListener("click", (e) => {
@@ -237,7 +252,7 @@ const controller = (function () {
         }
       });
 
-    // 8. add event listener to battle button if it exist
+    // 9. add event listener to battle button if it exist
     battleBtn = document.querySelector(".btn-battle");
     if (battleBtn) {
       battleBtn.addEventListener("click", (e) => {
@@ -313,10 +328,9 @@ const controller = (function () {
 
     // 8. display the reset button
     document.getElementById("btn-reset").style.display = "inline-block";
-
-    return {
-      init,
-    };
+  };
+  return {
+    init,
   };
 })();
 
