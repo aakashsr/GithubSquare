@@ -91,6 +91,9 @@ const viewController = (function () {
   };
 
   const displayReposInfo = function (obj) {
+    // clear previous result first
+    document.querySelector(".bottom-grid").innerHTML = "";
+
     obj.forEach(function (cur) {
       let html = `
      <div class="card-content top-content repo-card">
@@ -224,6 +227,7 @@ const controller = (function () {
 
     // 9. render the result of repos
     viewController.displayReposInfo(state.search.repos);
+    console.log(state.search.repos);
 
     // 10. Save the data into local storage
     setData();
