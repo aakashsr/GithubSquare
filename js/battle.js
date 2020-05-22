@@ -33,9 +33,37 @@ const viewController = (function () {
     return value2;
   }
 
+  function displayUserName(obj, player, num) {
+    let html;
+    html = `<div id='togglePlayer-${num}' class="column player player-sm">
+                    <h3 class="player-label">Player One</h3>
+                    <div class="row bg-light">
+                        <div class="player-info">
+                            <img src="${obj.avatar_url}" alt="Profile of %desc%" class="avatar-small">
+                            <a href="${obj.html_url}" class="link">${obj.name}</a>
+                             <button class="btn-clear flex-center">
+                            <img src='img/close.png' class='close close-${num}'>
+                        </button>
+                        </div>
+                       
+                    </div>`;
+
+    // insert into the DOM
+    if (player === "player1") {
+      document
+        .querySelector(".player-container-1")
+        .insertAdjacentHTML("afterbegin", html);
+    } else {
+      document
+        .querySelector(".player-container-2")
+        .insertAdjacentHTML("afterbegin", html);
+    }
+  }
+
   return {
     getValue1,
     getValue2,
+    displayUserName,
   };
 })();
 const controller = (function () {
@@ -61,6 +89,9 @@ const controller = (function () {
     const data1 = await searchController.getResults(state.userNames.firstName);
     // 4. Hide the form from UI
     document.getElementById("player-1").style.display = "none";
+
+    // 5. render the UI
+    viewController.displayUserName(data1, "player1", 1);
   };
   const handleControllerTwo = async function () {
     // 1. get the  username value
@@ -71,5 +102,8 @@ const controller = (function () {
     const data2 = await searchController.getResults(state.userNames.secondName);
     // 4. Hide the form from UI
     document.getElementById("player-2").style.display = "none";
+
+    // 5. render the UI
+    viewController.displayUserName(data2, "player2", 2);
   };
 })();
