@@ -185,11 +185,25 @@ const controller = (function () {
     }
   };
 
-  const controlSearch = function () {
+  const controlSearch = async function () {
     // 1. remove the content container element(containing instructions and both form elements)from UI
     viewController.removeElement("content-container");
 
     // 2.Show the loader
     renderLoader(document.querySelector(".loader-container"));
+
+    // Make two async request for both users
+    if (state.userNames.firstName !== "" && state.userNames.secondName !== "") {
+      var result1 = await searchController.getResults(
+        state.userNames.firstName
+      );
+      var result2 = await searchController.getResults(
+        state.userNames.secondName
+      );
+    } else {
+      alert("Please enter the query!");
+      // make input fields red and showing a message  - 'please enter a valid github username'
+    }
+    console.log(result1, result2);
   };
 })();
