@@ -111,7 +111,7 @@ const controller = (function () {
     // 4. Hide the form from UI
     document.getElementById("player-1").style.display = "none";
 
-    // 5. render the UI
+    // 5. render the playerone UI
     viewController.displayUserName(data1, "player1", 1);
 
     //  6. Add event listener to remove button
@@ -133,7 +133,7 @@ const controller = (function () {
     // 4. Hide the form from UI
     document.getElementById("player-2").style.display = "none";
 
-    // 5. render the UI
+    // 5. render the playertwo UI
     viewController.displayUserName(data2, "player2", 2);
 
     // 6. Show the battle btn
@@ -147,5 +147,20 @@ const controller = (function () {
           handleToggle(e, "secondName");
         }
       });
+
+    // Add event listener to battle button if it exist
+    battleBtn = document.querySelector(".btn-battle");
+    if (battleBtn) {
+      battleBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        controlSearch();
+      });
+    } else {
+      console.log("does not exist");
+    }
+  };
+
+  const controlSearch = function () {
+    console.log("control");
   };
 })();
