@@ -69,6 +69,7 @@ const viewController = (function () {
     getValue1,
     getValue2,
     displayUserName,
+    removeElement,
   };
 })();
 const controller = (function () {
@@ -88,7 +89,7 @@ const controller = (function () {
   function handleToggle(e, playerName) {
     const deleteElementId =
       e.target.parentNode.parentNode.parentNode.parentNode.id;
-    console.log(deleteElementId);
+    viewController.removeElement(deleteElementId);
   }
 
   const handleControllerOne = async function () {
