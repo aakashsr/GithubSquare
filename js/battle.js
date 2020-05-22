@@ -1,3 +1,4 @@
+// --------------- SEARCH CONTROLLER ------------------ //
 const searchController = (function () {
   async function getResults(username) {
     try {
@@ -27,6 +28,7 @@ const searchController = (function () {
   };
 })();
 
+// --------------- VIEW CONTROLLER ------------------ //
 const viewController = (function () {
   function getValue1() {
     const value1 = document.querySelector(".username1").value;
@@ -74,13 +76,12 @@ const viewController = (function () {
         </div>
     </div>
     `;
-
     document.querySelector(".container").insertAdjacentHTML("beforeend", html);
   }
 
   function displayResult(obj, score, result, player) {
     console.log(obj.name);
-    let html, newHTML;
+    let html;
     html = `
      <div class="card-content top-content user-card">
         <div class='${
@@ -151,20 +152,26 @@ const viewController = (function () {
   };
 })();
 
+// --------------- MAIN CONTROLLER ------------------ //
+
 const controller = (function () {
+  // STATE
   const state = {
     userNames: {},
   };
 
-  document.getElementById("player-1").addEventListener("submit", (e) => {
-    e.preventDefault();
-    handleControllerOne();
-  });
-  document.getElementById("player-2").addEventListener("submit", (e) => {
-    e.preventDefault();
-    handleControllerTwo();
-  });
-
+  // EVENT LISTENERS
+  function init() {
+    document.getElementById("player-1").addEventListener("submit", (e) => {
+      e.preventDefault();
+      handleControllerOne();
+    });
+    document.getElementById("player-2").addEventListener("submit", (e) => {
+      e.preventDefault();
+      handleControllerTwo();
+    });
+  }
+  // EVENT LISTENER FOR CLOSE BUTTON
   function handleToggle(e, playerName) {
     const deleteElementId =
       e.target.parentNode.parentNode.parentNode.parentNode.id;
@@ -180,6 +187,7 @@ const controller = (function () {
     }
   }
 
+  // HANDLER FOR INPUT ONE
   const handleControllerOne = async function () {
     // 1. get the  username value
     const userName = viewController.getValue1();
@@ -202,6 +210,8 @@ const controller = (function () {
         }
       });
   };
+
+  // HANDLER FOR INPUT TWO
   const handleControllerTwo = async function () {
     // 1. get the  username value
     const userName = viewController.getValue2();
@@ -227,7 +237,7 @@ const controller = (function () {
         }
       });
 
-    // Add event listener to battle button if it exist
+    // 8. add event listener to battle button if it exist
     battleBtn = document.querySelector(".btn-battle");
     if (battleBtn) {
       battleBtn.addEventListener("click", (e) => {
@@ -239,6 +249,7 @@ const controller = (function () {
     }
   };
 
+  // HANDLER FOR BATTLE BUTTON
   const controlSearch = async function () {
     // 1. remove the content container element(containing instructions and both form elements)from UI
     viewController.removeElement("content-container");
@@ -269,7 +280,7 @@ const controller = (function () {
     // 5. adding a new container to the page
     viewController.displayContainer();
 
-    // 6. Get stars count and result
+    // 6. Get stars count , calculate score and decide winner
     let score1, score2, matchResult1, matchResult2;
     const getStars = function (repos) {
       let stars = 0;
@@ -302,5 +313,11 @@ const controller = (function () {
 
     // 8. display the reset button
     document.getElementById("btn-reset").style.display = "inline-block";
+
+    return {
+      init,
+    };
   };
 })();
+
+controller.init();
