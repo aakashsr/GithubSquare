@@ -181,10 +181,12 @@ const controller = (function () {
   const loadData = function () {
     const data = getStoredData();
     if (data) {
-      state.search = new searchController.createObject(data.query);
+      state.search = new searchController.Search(data.query);
       state.search.query = data.query;
       state.search.repos = data.repos;
       state.search.username = data.username;
+      viewController.displayUserInfo(state.search.username);
+      viewController.displayReposInfo(state.search.repos);
     }
   };
 
