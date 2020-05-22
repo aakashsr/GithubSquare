@@ -143,10 +143,16 @@ const controller = (function () {
     viewController.clearInput();
     viewController.clearPrevResults();
 
-    // 4. make the request(search)
+    // 4. Render the loader
+    base.renderLoader(document.querySelector(".loader-container"));
+
+    // 5. make the request(search)
     const data = await state.search.getResults();
 
-    // 5. render the userinfo on UI
+    // 6. Clear loader
+    base.clearLoader();
+
+    // 7. render the userinfo on UI
     viewController.displayUserInfo(state.search.username);
   };
 })();
