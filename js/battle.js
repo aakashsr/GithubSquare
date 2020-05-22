@@ -188,5 +188,8 @@ const controller = (function () {
   const controlSearch = function () {
     // 1. remove the content container element(containing instructions and both form elements)from UI
     viewController.removeElement("content-container");
+
+    // 2.Show the loader
+    renderLoader(document.querySelector(".loader-container"));
   };
 })();
