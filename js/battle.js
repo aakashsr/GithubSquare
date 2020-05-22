@@ -60,16 +60,19 @@ const viewController = (function () {
     }
   }
 
-  const removeElement = function (id) {
-    const element = document.getElementById(id);
-    element.parentNode.removeChild(element);
-  };
+  function displayContainer() {
+    let html, newHtml;
+    html = `<div id='results' class="results grid center container-sm"></div>`;
+
+    document.querySelector(".container").insertAdjacentHTML("beforeend", html);
+  }
 
   return {
     getValue1,
     getValue2,
     displayUserName,
     removeElement,
+    displayContainer,
   };
 })();
 
@@ -205,10 +208,14 @@ const controller = (function () {
       // make input fields red and showing a message  - 'please enter a valid github username'
     }
 
+    // 4. Make two async request for repos info for both users
+    let repos1 = await searchController.getRepos(state.userNames.firstName);
+    let repos2 = await searchController.getRepos(state.userNames.secondName);
+
     // 4. clearing loader
     clearLoader();
 
     // 5. adding a new container to the page
-    searchViewController.displayContainer();
+    viewController.displayContainer();
   };
 })();
