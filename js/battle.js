@@ -80,6 +80,12 @@ const controller = (function () {
     handleControllerTwo();
   });
 
+  function handleToggle(e, playerName) {
+    const deleteElementId =
+      e.target.parentNode.parentNode.parentNode.parentNode.id;
+    console.log(deleteElementId);
+  }
+
   const handleControllerOne = async function () {
     // 1. get the  username value
     const userName = viewController.getValue1();
@@ -92,6 +98,15 @@ const controller = (function () {
 
     // 5. render the UI
     viewController.displayUserName(data1, "player1", 1);
+
+    //  6. Add event listener to remove button
+    document
+      .querySelector(".player-container-1")
+      .addEventListener("click", (e) => {
+        if (e.target.classList.contains("close-1")) {
+          handleToggle(e, "firstName");
+        }
+      });
   };
   const handleControllerTwo = async function () {
     // 1. get the  username value
@@ -108,5 +123,14 @@ const controller = (function () {
 
     // 6. Show the battle btn
     document.getElementById("btn-battle").style.display = "inline-block";
+
+    //  7. Add event listener to remove button
+    document
+      .querySelector(".player-container-2")
+      .addEventListener("click", (e) => {
+        if (e.target.classList.contains("close-2")) {
+          handleToggle(e, "secondName");
+        }
+      });
   };
 })();
