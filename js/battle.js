@@ -105,5 +105,8 @@ const controller = (function () {
 
     // 5. render the UI
     viewController.displayUserName(data2, "player2", 2);
+
+    // 6. Show the battle btn
+    document.getElementById("btn-battle").style.display = "inline-block";
   };
 })();
