@@ -15,6 +15,8 @@ const viewController = (function () {
   };
 })();
 const controller = (function () {
+  const state = {};
+
   document.getElementById("player-1").addEventListener("submit", (e) => {
     e.preventDefault();
     handleControllerOne();
@@ -25,11 +27,15 @@ const controller = (function () {
   });
 
   const handleControllerOne = function () {
-    const value1 = viewController.getValue1();
-    console.log(value1);
+    // 1. get the  username value
+    const username = viewController.getValue1();
+    // 2. save in state
+    state.userNames.firstName = userName;
   };
   const handleControllerTwo = function () {
-    const value2 = viewController.getValue2();
-    console.log(value2);
+    // 1. get the  username value
+    const username = viewController.getValue2();
+    // 2. save in state
+    state.userNames.secondName = userName;
   };
 })();
