@@ -167,6 +167,17 @@ const base = (function () {
 const controller = (function () {
   state = {};
 
+  // set data into local storage
+  const setData = function () {
+    localStorage.setItem("data", JSON.stringify(state.search));
+  };
+
+  // get data from local storage
+  const getStoredData = function () {
+    const storedData = JSON.parse(localStorage.getItem("data"));
+    return storedData;
+  };
+
   document.getElementById("player-1").addEventListener("submit", (e) => {
     e.preventDefault();
     handleSearch();
