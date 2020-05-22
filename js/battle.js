@@ -60,6 +60,11 @@ const viewController = (function () {
     }
   }
 
+  const removeElement = function (id) {
+    const element = document.getElementById(id);
+    element.parentNode.removeChild(element);
+  };
+
   return {
     getValue1,
     getValue2,
