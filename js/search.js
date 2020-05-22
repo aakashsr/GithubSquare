@@ -142,31 +142,6 @@ const viewController = (function () {
   };
 })();
 
-// base
-const base = (function () {
-  const renderLoader = function (parent) {
-    const loader = `
-    <div class='loader'>
-      <svg>
-        <use href='./img/icons.svg#icon-cw'></use>
-      </svg>
-    </div>
-    `;
-    parent.insertAdjacentHTML("afterbegin", loader);
-  };
-
-  const clearLoader = function () {
-    const loader = document.querySelector(".loader");
-    if (loader) {
-      loader.parentNode.removeChild(loader);
-    }
-  };
-  return {
-    renderLoader,
-    clearLoader,
-  };
-})();
-
 const controller = (function () {
   state = {};
 
@@ -211,13 +186,13 @@ const controller = (function () {
     viewController.clearPrevResults();
 
     // 4. Render the loader
-    base.renderLoader(document.querySelector(".loader-container"));
+    renderLoader(document.querySelector(".loader-container"));
 
     // 5. make the request(search)
     await state.search.getResults();
 
     // 6. Clear loader
-    base.clearLoader();
+    clearLoader();
 
     // 7. render the userinfo on UI
     viewController.displayUserInfo(state.search.username);

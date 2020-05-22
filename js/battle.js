@@ -1,7 +1,9 @@
 const searchController = (function () {
   async function getResults(username) {
     try {
-      const res = await axios(`https://api.github.com/users/${username}`);
+      const res = await axios(
+        `https://cors-anywhere.herokuapp.com/https://api.github.com/users/${username}`
+      );
       return res.data;
     } catch (e) {
       return `We have an error here: ${e}`;
@@ -10,7 +12,9 @@ const searchController = (function () {
 
   async function getRepos(username) {
     try {
-      const res = await axios(`https://api.github.com/users/${username}/repos`);
+      const res = await axios(
+        `https://cors-anywhere.herokuapp.com/https://api.github.com/users/${username}/repos`
+      );
       return res.data;
     } catch (e) {
       return `We have an error here: ${e}`;
@@ -144,30 +148,6 @@ const viewController = (function () {
     removeElement,
     displayResult,
     displayContainer,
-  };
-})();
-
-const base = (function () {
-  const renderLoader = function (parent) {
-    const loader = `
-    <div class='loader'>
-      <svg>
-        <use href='./img/icons.svg#icon-cw'></use>
-      </svg>
-    </div>
-    `;
-    parent.insertAdjacentHTML("afterbegin", loader);
-  };
-
-  const clearLoader = function () {
-    const loader = document.querySelector(".loader");
-    if (loader) {
-      loader.parentNode.removeChild(loader);
-    }
-  };
-  return {
-    renderLoader,
-    clearLoader,
   };
 })();
 

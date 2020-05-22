@@ -97,27 +97,8 @@ const base = (function () {
     navigation: document.querySelector(".navigation"),
   };
 
-  const renderLoader = function (parent) {
-    const loader = `
-    <div class='loader'>
-      <svg>
-        <use href='./img/icons.svg#icon-cw'></use>
-      </svg>
-    </div>
-    `;
-    parent.insertAdjacentHTML("afterbegin", loader);
-  };
-
-  const clearLoader = function () {
-    const loader = document.querySelector(".loader");
-    if (loader) {
-      loader.parentNode.removeChild(loader);
-    }
-  };
   return {
     elements,
-    renderLoader,
-    clearLoader,
   };
 })();
 
@@ -207,7 +188,7 @@ const controller = (function () {
     base.elements.grid.innerHTML = "";
 
     // 6.render the loader
-    base.renderLoader(base.elements.loaderContainer);
+    renderLoader(base.elements.loaderContainer);
 
     // 7. clearning navigation so that as soon as loader starts , navigation get disappear
     // other wise navigation will move to top and will appear with loader
@@ -217,7 +198,7 @@ const controller = (function () {
     await state.search.displayResults(endpoint);
 
     // 9. Clear loader
-    base.clearLoader();
+    clearLoader();
 
     // 10. showing navigation
     viewController.showNavigation();
@@ -264,7 +245,14 @@ const controller = (function () {
     if (localStorage.getItem("data") === null) {
       state.search = new searchController.Search("all");
       const endpoint = `https://api.github.com/search/repositories?q=stars:>1+language:All&sort=stars&order=desc&type=Repositories`;
+
+      // render loader
+      renderLoader(document.querySelector(".loader-container"));
+
       await state.search.displayResults(endpoint);
+
+      // clear loader
+      clearLoader();
 
       viewController.showList(state.search.result);
       viewController.showNavigation();
