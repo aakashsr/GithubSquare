@@ -500,7 +500,7 @@ li {
 
 #btn-battle,
 #btn-reset {
-    /* Initially hide the buttons */
+    /* Initially hide both the buttons */
     display: none;
     text-align: center;
 }
