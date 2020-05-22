@@ -13,7 +13,6 @@ const searchController = (function () {
       );
       this.username = userData.data;
       this.repos = reposData.data;
-      return userData.data;
     } catch (e) {
       return `We've an error here: ${e}`;
     }
@@ -212,7 +211,7 @@ const controller = (function () {
     base.renderLoader(document.querySelector(".loader-container"));
 
     // 5. make the request(search)
-    const data = await state.search.getResults();
+    await state.search.getResults();
 
     // 6. Clear loader
     base.clearLoader();
