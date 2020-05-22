@@ -192,7 +192,7 @@ const controller = (function () {
     // 2.Show the loader
     renderLoader(document.querySelector(".loader-container"));
 
-    // Make two async request for both users
+    // 3. Make two async request for both users
     if (state.userNames.firstName !== "" && state.userNames.secondName !== "") {
       var result1 = await searchController.getResults(
         state.userNames.firstName
@@ -204,6 +204,11 @@ const controller = (function () {
       alert("Please enter the query!");
       // make input fields red and showing a message  - 'please enter a valid github username'
     }
-    console.log(result1, result2);
+
+    // 4. clearing loader
+    clearLoader();
+
+    // 5. adding a new container to the page
+    searchViewController.displayContainer();
   };
 })();
