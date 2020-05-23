@@ -107,7 +107,7 @@ const viewController = (function () {
                 <ul>
                     <li class="git-inf-1">
                         <div class='git-inf-desc medium'>${cur.stargazers_count}</div>
-                        <span class="git-info-test small"><img class='color-star' src='./img/starLight.png'></span>
+                        <span class="git-info-test small"><img class='color-star' src='../img/starfilled.png'></span>
                     </li>
                     <li class="git-info-2 border">
                         <div class='git-inf-desc medium'>${cur.forks}</div>
