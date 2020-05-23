@@ -1,56 +1,56 @@
 @font-face {
     font-family: "bold";
-    src: url("./fonts/ProspectusM-Bold.otf") format('woff');
+    src: url("../fonts/ProspectusM-Bold.otf") format('woff');
 }
 
 @font-face {
     font-family: "semibold";
-    src: url("./fonts/ProspectusL-SemiBold.otf") format('woff');
+    src: url("../fonts/ProspectusL-SemiBold.otf") format('woff');
 }
 
 @font-face {
     font-family: "regular";
-    src: url("./fonts/ProspectusL-Regular.otf") format('woff');
+    src: url("../fonts/ProspectusL-Regular.otf") format('woff');
 }
 
 @font-face {
     font-family: "r-bold";
-    src: url("./fonts/Recoleta-Bold.woff") format('woff');
+    src: url("../fonts/Recoleta-Bold.woff") format('woff');
 }
 
 @font-face {
     font-family: "r-regular";
-    src: url("./fonts/Recoleta-Regular.woff") format('woff');
+    src: url("../fonts/Recoleta-Regular.woff") format('woff');
 }
 
 @font-face {
     font-family: "r-medium";
-    src: url("./fonts/Recoleta-Medium.woff") format('woff');
+    src: url("../fonts/Recoleta-Medium.woff") format('woff');
 }
 
 @font-face {
     font-family: "m-bold";
-    src: url("./fonts/mostbold.ttf") format('woff');
+    src: url("../fonts/mostbold.ttf") format('woff');
 }
 
 @font-face {
     font-family: "m-medium";
-    src: url("./fonts/mostmedium.ttf") format('woff');
+    src: url("../fonts/mostmedium.ttf") format('woff');
 }
 
 @font-face {
     font-family: "m-semibold";
-    src: url("./fonts/mostmedium.ttf") format('woff');
+    src: url("../fonts/mostmedium.ttf") format('woff');
 }
 
 @font-face {
     font-family: "m-extrabold";
-    src: url("./fonts/mostextrabold.ttf") format('woff');
+    src: url("../fonts/mostextrabold.ttf") format('woff');
 }
 
 @font-face {
     font-family: "m-ultrabold";
-    src: url("./fonts/mostultrabold.ttf") format('woff');
+    src: url("../fonts/mostultrabold.ttf") format('woff');
 }
 
 
@@ -93,8 +93,6 @@ li {
 }
 
 .container {
-    font-family: 'Jost',
-        sans-serif;
     max-width: 1350px;
     margin: 0 auto;
     padding: 30px;
@@ -102,6 +100,8 @@ li {
 }
 
 .flex-center {
+    font-family: 'Jost',
+        sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
