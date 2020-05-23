@@ -38,11 +38,17 @@ const viewController = (function () {
   function displayUserName(obj, player, num) {
     let html;
     html = `<div id='togglePlayer-${num}' class="column player player-sm">
-                    <h3 class="player-label">Player One</h3>
+                    <h3 class="player-label">Player ${
+                      num === 1 ? "One" : "Two"
+                    }</h3>
                     <div class="row bg-light">
                         <div class="player-info">
-                            <img src="${obj.avatar_url}" alt="Profile of %desc%" class="avatar-small">
-                            <a href="${obj.html_url}" class="link">${obj.name}</a>
+                            <img src="${
+                              obj.avatar_url
+                            }" alt="Profile of %desc%" class="avatar-small">
+                            <a href="${obj.html_url}" class="link">${
+      obj.name
+    }</a>
                              <button class="btn-clear flex-center">
                             <img src='img/close.png' class='close close-${num}'>
                         </button>
