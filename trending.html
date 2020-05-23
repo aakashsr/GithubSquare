@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trending</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <ul class="nav">
+            <li>
+                <a class='nav-btn' href="/index.html">Home</a>
+            </li>
+            <li>
+                <a class='nav-btn' href="/battle.html">Battle</a>
+            </li>
+            <li>
+                <a class='nav-btn' href="/popular.html">Popular</a>
+            </li>
+            <li>
+                <a class='nav-btn' href="/search.html">Search</a>
+            </li>
+        </ul>
+        <div class="categories-container">
+            <ul class="categories">
+                <li><button class="btn-clear active nav-link">Repositories</button></li>
+                <li><button class="btn-clear nav-link">Developers</button></li>
+
+            </ul>
+        </div>
+        <div class="loader-container"></div>
+        <ul class="grid popular-grid">
+
+        </ul>
+    </div>
+    <div class="navigation">
+
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/loader.js"></script>
+    <script src="./js/trending.js"></script>
+</body>
+
+</html>
