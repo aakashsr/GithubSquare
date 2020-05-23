@@ -3,7 +3,7 @@ const searchController = (function () {
     this.query = query;
   }
 
-  Search.prototype.repositoriesForMain = async function () {
+  Search.prototype.repositoriesByMain = async function () {
     try {
       const reposData = await axios(`https://ghapi.huchen.dev/repositories`);
       this.repos = reposData.data;
@@ -13,7 +13,7 @@ const searchController = (function () {
     }
   };
 
-  Search.prototype.developersForMain = async function () {
+  Search.prototype.developersByMain = async function () {
     try {
       const developersData = await axios(`https://ghapi.huchen.dev/developers`);
       this.developers = developersData.data;
@@ -23,7 +23,7 @@ const searchController = (function () {
     }
   };
 
-  Search.prototype.repositoriesForCategories = async function (language) {
+  Search.prototype.repositoriesByCategories = async function (language) {
     try {
       const reposData = await axios(
         `https://ghapi.huchen.dev/repositories?language=${language}&since=daily`
@@ -35,10 +35,34 @@ const searchController = (function () {
     }
   };
 
-  Search.prototype.DevelopersForCategories = async function (language) {
+  Search.prototype.developersByCategories = async function () {
     try {
       const developersData = await axios(
         `https://ghapi.huchen.dev/developers?language=${language}&since=daily`
+      );
+      this.developers = developersData.data;
+      return developers.data;
+    } catch (e) {
+      return `We've an error here: ${e}`;
+    }
+  };
+
+  Search.prototype.repositoriesByDuration = async function (language) {
+    try {
+      const reposData = await axios(
+        `https://ghapi.huchen.dev/repositories?language=${language}&since=${duration}`
+      );
+      this.repos = reposData.data;
+      return reposData.data;
+    } catch (e) {
+      return `We've an error here: ${e}`;
+    }
+  };
+
+  Search.prototype.DevelopersByDuration = async function (language) {
+    try {
+      const developersData = await axios(
+        `https://ghapi.huchen.dev/developers?language=${language}&since=${duration}`
       );
       this.developers = developersData.data;
       return developersData.data;
@@ -112,9 +136,9 @@ const controller = (function () {
 
     // 5. make the request(search)
     if (query === "Repositories") {
-      let data1 = await state.type.repositoriesForMain();
+      let data1 = await state.type.repositoriesByMain();
     } else if (query === "Developers") {
-      let data2 = await state.type.developersForMain();
+      let data2 = await state.type.developersByMain();
     }
 
     console.log(state);
@@ -129,7 +153,7 @@ const controller = (function () {
 
     // 3. make the request(search) based on which request is active
     if (document.querySelector(".btn-repo").classList.contains("active")) {
-      let data = await state.type.repositoriesForCategories(query);
+      let data = await state.type.repositoriesByCategories(query);
     } else {
       console.log("no");
       let data = await state.type.DevelopersForCategories(query);
