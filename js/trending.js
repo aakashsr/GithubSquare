@@ -1,15 +1,30 @@
-const selected = document.querySelector(".selected");
-const optionsContainer = document.querySelector(".options-container");
+const searchController = (function () {})();
+const viewController = (function () {})();
 
-const optionsList = document.querySelectorAll(".option");
+// main controller module
+const controller = (function () {
+  // Event listeners
 
-selected.addEventListener("click", () => {
-  optionsContainer.classList.toggle("active");
-});
-
-optionsList.forEach((o) => {
-  o.addEventListener("click", () => {
-    selected.innerHTML = o.querySelector("label").innerHTML;
-    optionsContainer.classList.remove("active");
+  // To toggle select menu
+  document.querySelector(".selected").addEventListener("click", () => {
+    document.querySelector(".options-container").classList.toggle("active");
   });
-});
+
+  // To update select menu
+  document.querySelectorAll(".option").forEach((item) => {
+    item.addEventListener("click", () => {
+      document.querySelector(".selected").innerHTML = item.querySelector(
+        "label"
+      ).innerHTML;
+      document.querySelector(".options-container").classList.remove("active");
+
+      handleResult(item);
+    });
+  });
+
+  function handleResult(item) {
+    // 1. get the query
+    let query = item.querySelector("label").innerHTML;
+    console.log(query);
+  }
+})();
