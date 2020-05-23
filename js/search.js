@@ -13,6 +13,7 @@ const searchController = (function () {
       );
       this.username = userData.data;
       this.repos = reposData.data;
+      return reposData.data;
     } catch (e) {
       return `We've an error here: ${e}`;
     }
@@ -33,6 +34,7 @@ const viewController = (function () {
 
   const clearPrevResults = function () {
     document.querySelector(".top-content").innerHTML = "";
+    document.querySelector(".bottom-grid").innerHTML = "";
   };
 
   const displayUserInfo = function (obj) {
@@ -189,22 +191,30 @@ const controller = (function () {
     renderLoader(document.querySelector(".loader-container"));
 
     // 5. make the request(search)
-    await state.search.getResults();
+    data = await state.search.getResults();
 
-    // 6. Clear loader
+    // 6. Show error if we didn't get data back
+    var element = document.querySelector(".error");
+    if (typeof data === "string") {
+      element.style.display = "block";
+    } else {
+      element.style.display = "none";
+    }
+
+    // // 7. Clear loader
     clearLoader();
 
-    // 7. render the userinfo on UI
+    // 8. render the userinfo on UI
     viewController.displayUserInfo(state.search.username);
 
-    // 8. render heading of bottom content
+    // 9. render heading of bottom content
     viewController.displayHeading();
 
-    // 9. render the result of repos
+    // 10. render the result of repos
     viewController.displayReposInfo(state.search.repos);
     console.log(state.search.repos);
 
-    // 10. Save the data into local storage
+    // 11. Save the data into local storage
     setData();
   };
 
@@ -214,3 +224,4 @@ const controller = (function () {
 })();
 
 controller.loadData();
+localStorage.clear();

@@ -269,3 +269,4 @@ const controller = (function () {
 })();
 controller.init();
 controller.loadData();
+localStorage.clear();
