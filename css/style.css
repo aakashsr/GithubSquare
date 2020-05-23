@@ -545,7 +545,7 @@ li {
     /* background: linear-gradient(rgba(243, 246, 251, .99), rgba(243, 246, 251, .99)),
         url('img/blackgrit-15c168539fb7109ce300574e7b4b0732.png'); */
     background: linear-gradient(rgba(217, 236, 363, .99), rgba(217, 236, 349, .99)),
-        url('./img/blackgrit-15c168539fb7109ce300574e7b4b0732.png');
+        url('../img/blackgrit-15c168539fb7109ce300574e7b4b0732.png');
     background-size: contain;
 
     background-blend-mode: saturation;
@@ -557,7 +557,7 @@ li {
     /* background: linear-gradient(rgba(241, 231, 255, .99), rgba(241, 231, 255, .99)),
         url('img/blackgrit-15c168539fb7109ce300574e7b4b0732.png'); */
     background: linear-gradient(rgba(241, 222, 208, .99), rgba(241, 222, 208, .99)),
-        url('img/blackgrit-15c168539fb7109ce300574e7b4b0732.png');
+        url('../img/blackgrit-15c168539fb7109ce300574e7b4b0732.png');
     background-size: contain;
     background-blend-mode: saturation;
     color: inherit;
@@ -658,13 +658,17 @@ li {
 
 #card-big {
     color: #084468;
+    background: linear-gradient(rgba(251, 226, 218, .99), rgba(251, 226, 218, 99)),
+        url('../img/blackgrit-15c168539fb7109ce300574e7b4b0732.png');
+    background-size: contain;
+    background-blend-mode: saturation;
     /* width: 800px; */
     width: 900px;
     flex-direction: row;
     margin: 0 auto;
 
     transform: rotate(-3deg);
-    background: #fbe2da;
+    /* background: #fbe2da; */
 }
 
 .user-col {
@@ -744,7 +748,7 @@ li {
     /* background: linear-gradient(rgba(241, 231, 255, .99), rgba(241, 231, 255, .99)),
         url('./img/blackgrit-15c168539fb7109ce300574e7b4b0732.png'); */
     background: linear-gradient(rgba(217, 236, 363, .99), rgba(217, 236, 349, .99)),
-        url('./img/blackgrit-15c168539fb7109ce300574e7b4b0732.png');
+        url('../img/blackgrit-15c168539fb7109ce300574e7b4b0732.png');
     background-size: contain;
     background-blend-mode: saturation;
     color: inherit;
@@ -923,7 +927,7 @@ body {
 .popular-grid .card-small {
     flex-basis: 22%;
     background: linear-gradient(rgba(217, 236, 243, 0.99), rgba(217, 236, 243, .99)),
-        url('./img/blackgrit-15c168539fb7109ce300574e7b4b0732.png');
+        url('../img/blackgrit-15c168539fb7109ce300574e7b4b0732.png');
     background-size: contain;
     background-blend-mode: saturation;
     color: inherit;
@@ -1035,7 +1039,7 @@ body {
 }
 
 .logo-container {
-    background: url('./img/blackgrit-15c168539fb7109ce300574e7b4b0732.png');
+    background: url('../img/blackgrit-15c168539fb7109ce300574e7b4b0732.png');
     background-size: cover;
     width: 310px;
     height: 310px;
