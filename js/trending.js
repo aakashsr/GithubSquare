@@ -3,29 +3,45 @@ const searchController = (function () {
     this.query = query;
   }
 
-  Search.prototype.displayResultsForMain = async function (endpoint) {
+  Search.prototype.repositoriesForMain = async function () {
     try {
       const reposData = await axios(`https://ghapi.huchen.dev/repositories`);
-      const developersData = await axios(`https://ghapi.huchen.dev/developers`);
       this.repos = reposData.data;
-      this.developers = developersData.data;
       return reposData.data;
     } catch (e) {
       return `We've an error here: ${e}`;
     }
   };
 
-  Search.prototype.displayResultsForCategories = async function (endpoint) {
+  Search.prototype.developersForMain = async function () {
+    try {
+      const developersData = await axios(`https://ghapi.huchen.dev/developers`);
+      this.developers = developersData.data;
+      return developers.data;
+    } catch (e) {
+      return `We've an error here: ${e}`;
+    }
+  };
+
+  Search.prototype.repositoriesForCategories = async function (language) {
     try {
       const reposData = await axios(
-        `https://ghapi.huchen.dev/repositorieslanguage=${language}&since=daily`
-      );
-      const developersData = await axios(
-        `https://ghapi.huchen.dev/developers?language${language}=&since=daily`
+        `https://ghapi.huchen.dev/repositories?language=${language}&since=daily`
       );
       this.repos = reposData.data;
-      this.developers = developersData.data;
       return reposData.data;
+    } catch (e) {
+      return `We've an error here: ${e}`;
+    }
+  };
+
+  Search.prototype.DevelopersForCategories = async function (language) {
+    try {
+      const developersData = await axios(
+        `https://ghapi.huchen.dev/developers?language=${language}&since=daily`
+      );
+      this.developers = developersData.data;
+      return developersData.data;
     } catch (e) {
       return `We've an error here: ${e}`;
     }
@@ -40,8 +56,19 @@ const viewController = (function () {
     return e.target.textContent;
   }
 
+  function addClass(e) {
+    const navLinks = document.querySelectorAll(".nav-link");
+    console.log(navLinks);
+    navLinks.forEach(function (cur) {
+      console.log(cur.classList);
+      cur.classList.remove("active");
+      e.target.classList.add("active");
+    });
+  }
+
   return {
     getValue,
+    addClass,
   };
 })();
 
@@ -74,10 +101,23 @@ const controller = (function () {
 
   async function handleMain(e) {
     // 1. get the query
+
     let query = viewController.getValue(e);
+
+    // 2. Add the class active
+    viewController.addClass(e);
 
     // 2. create and object and save into state
     state.type = new searchController.Search(query);
+
+    // 5. make the request(search)
+    if (query === "Repositories") {
+      let data1 = await state.type.repositoriesForMain();
+    } else if (query === "Developers") {
+      let data2 = await state.type.developersForMain();
+    }
+
+    console.log(state);
   }
 
   async function handleCategories(item) {
@@ -85,11 +125,15 @@ const controller = (function () {
     let query = item.querySelector("label").innerHTML;
 
     // 2. create a new object and save in state
-    state.trending = new searchController.Search(query);
+    state.type = new searchController.Search(query);
 
-    // 3. make the request(search)
-    await state.trending.displayResults();
-
-    // console.log(state);
+    // 3. make the request(search) based on which request is active
+    if (document.querySelector(".btn-repo").classList.contains("active")) {
+      let data = await state.type.repositoriesForCategories(query);
+    } else {
+      console.log("no");
+      let data = await state.type.DevelopersForCategories(query);
+    }
+    console.log(state);
   }
 })();
