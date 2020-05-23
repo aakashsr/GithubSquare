@@ -3,16 +3,28 @@ const searchController = (function () {
     this.query = query;
   }
 
-  Search.prototype.displayResults = async function (endpoint) {
+  Search.prototype.displayResultsForMain = async function (endpoint) {
     try {
       const reposData = await axios(`https://ghapi.huchen.dev/repositories`);
       const developersData = await axios(`https://ghapi.huchen.dev/developers`);
-      console.log(reposData.data);
-      console.log(developersData.data);
       this.repos = reposData.data;
       this.developers = developersData.data;
-      console.log(reposData.data);
-      console.log(developersData.data);
+      return reposData.data;
+    } catch (e) {
+      return `We've an error here: ${e}`;
+    }
+  };
+
+  Search.prototype.displayResultsForCategories = async function (endpoint) {
+    try {
+      const reposData = await axios(
+        `https://ghapi.huchen.dev/repositorieslanguage=${language}&since=daily`
+      );
+      const developersData = await axios(
+        `https://ghapi.huchen.dev/developers?language${language}=&since=daily`
+      );
+      this.repos = reposData.data;
+      this.developers = developersData.data;
       return reposData.data;
     } catch (e) {
       return `We've an error here: ${e}`;
@@ -23,7 +35,15 @@ const searchController = (function () {
     Search,
   };
 })();
-const viewController = (function () {})();
+const viewController = (function () {
+  function getValue(e) {
+    return e.target.textContent;
+  }
+
+  return {
+    getValue,
+  };
+})();
 
 // main controller module
 const controller = (function () {
@@ -53,7 +73,11 @@ const controller = (function () {
   });
 
   async function handleMain(e) {
-    console.log("handlecommon");
+    // 1. get the query
+    let query = viewController.getValue(e);
+
+    // 2. create and object and save into state
+    state.type = new searchController.Search(query);
   }
 
   async function handleCategories(item) {
