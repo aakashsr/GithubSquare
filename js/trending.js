@@ -184,28 +184,23 @@ const controller = (function () {
     .addEventListener("click", (e) => handleMain(e));
 
   // languages select menu listener
-  document.querySelectorAll(".option-languages").forEach((item) => {
+  document.querySelectorAll(".opt-lan").forEach((item) => {
     item.addEventListener("click", () => {
       document.querySelector(
         ".selected-language"
       ).innerHTML = item.querySelector("label").innerHTML;
-      document
-        .querySelector(".languages-options-container")
-        .classList.remove("active");
+      document.querySelector(".lan-opt-container").classList.remove("active");
 
       handleCategories(item);
     });
   });
 
-  document.querySelectorAll(".option-duration").forEach((item) => {
+  document.querySelectorAll(".opt-duration").forEach((item) => {
     item.addEventListener("click", () => {
       document.querySelector(
         ".selected-duration"
       ).innerHTML = item.querySelector("label").innerHTML;
-      document
-        .querySelector(".duration-options-container")
-        .classList.remove("active");
-
+      document.querySelector(".dur-opt-container").classList.remove("active");
       handleDuration(item);
     });
   });
@@ -245,6 +240,7 @@ const controller = (function () {
   }
 
   async function handleCategories(item) {
+    console.log(handleCategories);
     // 1. get the query
     let query = item.querySelector("label").innerHTML;
 
@@ -254,6 +250,7 @@ const controller = (function () {
     // 3. make the request(search) based on which request is active
     if (document.querySelector(".btn-repo").classList.contains("active")) {
       let data = await state.type.repositoriesByCategories(query);
+      viewController.displayRepos(state.type.repos);
     } else {
       console.log("no");
       let data = await state.type.DevelopersForCategories(query);
