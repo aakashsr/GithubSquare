@@ -1039,8 +1039,8 @@ a {
     transition: all 0.4s;
     border-radius: 8px;
     overflow: hidden;
-
     order: 1;
+    z-index: 1;
 }
 
 .selected {
