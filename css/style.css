@@ -1193,17 +1193,19 @@ a {
 
 .repoCard__about--text {
     font-size: 13px;
+    margin-right: 10px;
 }
 
 
 .repoCard__about--language {
-    margin-right: 15px;
+    margin-right: 20px;
 }
 
 .repoCard__about--developers,
 .repoCard__about--images {
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .repoCard__ratings {
@@ -1220,20 +1222,28 @@ a {
 }
 
 .repocard__about--developer1 {
-    left: 21px;
+    left: 24px;
 
 }
 
 .repocard__about--developer2 {
-    left: 42px;
+    left: 48px;
 }
 
 .repocard__about--developer3 {
-    left: 63px;
+    left: 72px;
 }
 
 .repocard__about--developer4 {
-    left: 84px;
+    left: 96px;
+}
+
+.repocard__about--developer5 {
+    left: 120px;
+}
+
+.repocard__about--developer5 {
+    left: 144px;
 }
 
 

@@ -88,9 +88,78 @@ const viewController = (function () {
     });
   }
 
+  function displayDevelopers(cur) {
+    return `<a class='repocard__about--developer1' href="#">
+          <img src="${cur.avatar}" alt="">
+       </a>`;
+  }
+
+  function displayRepos(array) {
+    console.log(array);
+    document.querySelector(".grid").innerHTML = "";
+    array.forEach(function (obj) {
+      let html = `
+    <div class="repoCard">
+                <div class="repoCard__header">
+                    <div class="repoCard__logo">
+                        <img src="./img/fb.png" width='20px' height='20px' alt="">
+                    </div>
+                    <div class="repoCard__content">
+                        <h5>${obj.author}</h5>
+                    </div>
+                </div>
+                <div class="repoCard__main">
+                    <div class="repoCard__name">${obj.name}</div>
+                    <div class="repoCard__about">
+                        <div class="repoCard__about--language">
+                            ${obj.language}
+                        </div>
+                        <div class="repoCard__about--developers">
+                            <span class="repoCard__about--text">Built by</span>
+                            <span class="repoCard__about--images">
+                            ${obj.builtBy
+                              .map(function (cur, i = 0) {
+                                let newText = `<a class='repocard__about--developer${i}' href="#"><img src=${cur.avatar} alt=""></a>`;
+                                i++;
+                                return newText;
+                              })
+                              .join("")}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="repoCard__description">
+                        <p>${obj.description}</p>
+                    </div>
+                    <div class="repoCard__ratings">
+                        <a href="" class="repoCard__ratings--stars">
+                            <span class="followers-text small">${
+                              obj.stars
+                            }<img class='color-star'
+                                    src='./img/starfilled.png'></span>
+                        </a>
+                        <a href="" class="repoCard__ratings--forks">
+                            <span class="forked-text small">${
+                              obj.forks
+                            }<img class='color-forked' src='./img/forked.svg'></span>
+                        </a>
+                        <a href="" class="repoCard__ratings--starsRecent">
+                            <span class="stars-text small">${
+                              obj.currentPeriodStars
+                            }<img class='color-issues' src='./img/alert.svg' </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    `;
+      document.querySelector(".grid").insertAdjacentHTML("beforeend", html);
+    });
+  }
+
   return {
     getValue,
     addClass,
+    displayRepos,
+    displayDevelopers,
   };
 })();
 
@@ -162,6 +231,15 @@ const controller = (function () {
     } else if (query === "Developers") {
       let data2 = await state.type.developersByMain();
     }
+
+    // 6. show the lists
+    // console.log(state.type.repos);
+    viewController.displayRepos(state.type.repos);
+
+    // state.type.repos.forEach(function (cur) {
+    //   console.log(cur.builtBy.length);
+    // });
+    // viewController.displayDevelopers(state.type.repos);
 
     console.log(state);
   }
