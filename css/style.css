@@ -1020,19 +1020,13 @@ a {
 /*---------------  Tredning PAGE  styles ------------------*/
 /*------------------------------------------------------*/
 
-.categories-container {
-    display: flex;
-}
-
-.categories {
-    display: flex;
-}
 
 .select-box {
     display: flex;
-    width: 400px;
     flex-direction: column;
     margin-left: auto;
+    width: 145px;
+    text-align: center;
 }
 
 .select-box .options-container {
@@ -1097,7 +1091,7 @@ a {
 
 .select-box .option,
 .selected {
-    padding: 12px 24px;
+    padding: 10px 6px;
     cursor: pointer;
 }
 
@@ -1109,15 +1103,29 @@ a {
     cursor: pointer;
 }
 
-.select-box .option .radio {
-    display: none;
-}
-
 .active {
     color: #0000ff;
 }
 
+.main-container,
+.selectMenu-container,
+.categories {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.categories li {
+    margin-right: 20px;
+}
+
+.selectMenu-container div {
+    margin-left: 20px;
+}
+
+.select-box .option .radio {
+    display: none;
+}
 
 
 

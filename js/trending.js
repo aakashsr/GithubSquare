@@ -82,9 +82,7 @@ const viewController = (function () {
 
   function addClass(e) {
     const navLinks = document.querySelectorAll(".nav-link");
-    console.log(navLinks);
     navLinks.forEach(function (cur) {
-      console.log(cur.classList);
       cur.classList.remove("active");
       e.target.classList.add("active");
     });
@@ -102,26 +100,55 @@ const controller = (function () {
   const state = {};
   // Event listeners
 
+  // To toggle select menu
+  document.querySelector(".selected-language").addEventListener("click", () => {
+    console.log("cliked");
+    document
+      .querySelector(".selected-options-container")
+      .classList.toggle("active");
+  });
+
+  document.querySelector(".selected-duration").addEventListener("click", () => {
+    document
+      .querySelector(".duration-options-container")
+      .classList.toggle("active");
+  });
+
+  // repositories or developers listener
   document
     .querySelector(".categories")
     .addEventListener("click", (e) => handleMain(e));
 
-  // To toggle select menu
-  document.querySelector(".selected").addEventListener("click", () => {
-    document.querySelector(".options-container").classList.toggle("active");
-  });
-
-  // To update select menu
-  document.querySelectorAll(".option").forEach((item) => {
+  // languages select menu listener
+  document.querySelectorAll(".option-languages").forEach((item) => {
     item.addEventListener("click", () => {
-      document.querySelector(".selected").innerHTML = item.querySelector(
-        "label"
-      ).innerHTML;
-      document.querySelector(".options-container").classList.remove("active");
+      document.querySelector(
+        ".selected-language"
+      ).innerHTML = item.querySelector("label").innerHTML;
+      document
+        .querySelector(".languages-options-container")
+        .classList.remove("active");
 
       handleCategories(item);
     });
   });
+
+  document.querySelectorAll(".option-duration").forEach((item) => {
+    item.addEventListener("click", () => {
+      document.querySelector(
+        ".selected-duration"
+      ).innerHTML = item.querySelector("label").innerHTML;
+      document
+        .querySelector(".duration-options-container")
+        .classList.remove("active");
+
+      handleDuration(item);
+    });
+  });
+
+  document.querySelector;
+
+  // duration select menu listener
 
   async function handleMain(e) {
     // 1. get the query
@@ -157,6 +184,23 @@ const controller = (function () {
     } else {
       console.log("no");
       let data = await state.type.DevelopersForCategories(query);
+    }
+    console.log(state);
+  }
+
+  async function handleDuration(item) {
+    // 1. get the query
+    let query = item.querySelector("label").innerHTML;
+
+    // 2. create a new object and save in state
+    state.type = new searchController.Search(query);
+
+    // 3. make the request(search) based on which request is active
+    if (document.querySelector(".btn-repo").classList.contains("active")) {
+      let data = await state.type.repositoriesByDuration(query);
+    } else {
+      console.log("no");
+      let data = await state.type.DevelopersByDuration(query);
     }
     console.log(state);
   }
