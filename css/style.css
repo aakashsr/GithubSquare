@@ -1027,6 +1027,7 @@ a {
     margin-left: auto;
     width: 145px;
     text-align: center;
+    position: relative;
 }
 
 .select-box .options-container {
@@ -1063,14 +1064,29 @@ a {
     width: 32px;
     right: 10px;
     top: 5px;
-
     transition: all 0.4s;
 }
+
+.options-container {
+    position: absolute;
+    top: 100%;
+}
+
+.lan-opt-container {
+    width: 250px;
+}
+
+.dur-opt-container {
+    width: 100px;
+}
+
+
 
 .select-box .options-container.active {
     max-height: 240px;
     opacity: 1;
     overflow-y: scroll;
+    width: 250px;
 }
 
 .select-box .options-container.active+.selected::after {
@@ -1130,6 +1146,94 @@ a {
 
 .select-box .option .radio {
     display: none;
+}
+
+/* ------------------ REPO CARD --------*/
+
+
+.repoCard {
+    height: 320px;
+    width: 350px;
+    background: aqua;
+    padding: 15px;
+    box-sizing: border-box;
+    background: linear-gradient(rgba(217, 236, 243, 0.99), rgba(217, 236, 243, .99));
+}
+
+.repoCard__logo {
+    margin-right: 10px;
+}
+
+.repoCard__header {
+    display: flex;
+    align-items: center;
+}
+
+.repoCard img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.repoCard__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.repoCard__about {
+    display: flex;
+    position: relative;
+    line-height: 2.5;
+}
+
+.repoCard__about--image {
+    position: relative;
+}
+
+.repoCard__about--text {
+    font-size: 13px;
+}
+
+
+.repoCard__about--language {
+    margin-right: 15px;
+}
+
+.repoCard__about--developers,
+.repoCard__about--images {
+    display: flex;
+    align-items: center;
+}
+
+.repoCard__ratings {
+    display: flex;
+}
+
+.repoCard__about--images a {
+    position: absolute;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.repocard__about--developer1 {
+    left: 21px;
+
+}
+
+.repocard__about--developer2 {
+    left: 42px;
+}
+
+.repocard__about--developer3 {
+    left: 63px;
+}
+
+.repocard__about--developer4 {
+    left: 84px;
 }
 
 
