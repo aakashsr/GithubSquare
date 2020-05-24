@@ -102,16 +102,11 @@ const controller = (function () {
 
   // To toggle select menu
   document.querySelector(".selected-language").addEventListener("click", () => {
-    console.log("cliked");
-    document
-      .querySelector(".selected-options-container")
-      .classList.toggle("active");
+    document.querySelector(".options-container").classList.toggle("active");
   });
 
   document.querySelector(".selected-duration").addEventListener("click", () => {
-    document
-      .querySelector(".duration-options-container")
-      .classList.toggle("active");
+    document.querySelector(".dur-opt-container").classList.toggle("active");
   });
 
   // repositories or developers listener

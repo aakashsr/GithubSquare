@@ -1115,6 +1115,11 @@ a {
     align-items: center;
 }
 
+.selectMenu-container,
+.main-container {
+    align-items: flex-start;
+}
+
 .categories li {
     margin-right: 20px;
 }
