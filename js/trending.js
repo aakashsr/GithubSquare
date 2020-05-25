@@ -47,12 +47,16 @@ const searchController = (function () {
     }
   };
 
-  Search.prototype.repositoriesByDuration = async function (language) {
+  Search.prototype.repositoriesByDuration = async function (
+    language,
+    duration
+  ) {
     try {
       const reposData = await axios(
         `https://ghapi.huchen.dev/repositories?language=${language}&since=${duration}`
       );
       this.repos = reposData.data;
+      console.log(reposData.data);
       return reposData.data;
     } catch (e) {
       return `We've an error here: ${e}`;
@@ -65,6 +69,7 @@ const searchController = (function () {
         `https://ghapi.huchen.dev/developers?language=${language}&since=${duration}`
       );
       this.developers = developersData.data;
+      console.log(developersData.data);
       return developersData.data;
     } catch (e) {
       return `We've an error here: ${e}`;
@@ -330,13 +335,19 @@ const controller = (function () {
   async function handleDuration(item) {
     // 1. get the query
     let query = item.querySelector("label").innerHTML;
+    console.log(query);
 
     // 2. create a new object and save in state
     state.type = new searchController.Search(query);
 
     // 3. make the request(search) based on which request is active
     if (document.querySelector(".btn-repo").classList.contains("active")) {
-      let data = await state.type.repositoriesByDuration(query);
+      console.log("yes");
+      let data = await state.type.repositoriesByDuration(
+        document.querySelector(".selected").textContent,
+        query
+      );
+      console.log(data);
       viewController.displayRepos(state.type.repos);
     } else {
       console.log("no");
