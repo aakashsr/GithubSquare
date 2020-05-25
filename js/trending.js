@@ -102,7 +102,9 @@ const viewController = (function () {
     <div class="repoCard">
                 <div class="repoCard__header">
                     <div class="repoCard__logo">
-                        <img src="./img/fb.png" width='20px' height='20px' alt="">
+                        <img class='repoImage' src="${
+                          obj.avatar
+                        }" width='20px' height='20px' alt="">
                     </div>
                     <div class="repoCard__content">
                         <h5>${obj.author}</h5>
@@ -119,7 +121,7 @@ const viewController = (function () {
                             <span class="repoCard__about--images">
                             ${obj.builtBy
                               .map(function (cur, i = 0) {
-                                let newText = `<a class='repocard__about--developer${i}' href="#"><img src=${cur.avatar} alt=""></a>`;
+                                let newText = `<a class='repocard__about--developer${i}' href="#"><img class='teamImage' src=${cur.avatar} alt=""></a>`;
                                 i++;
                                 return newText;
                               })
@@ -155,10 +157,46 @@ const viewController = (function () {
     });
   }
 
+  function displayDevelopers(array) {
+    document.querySelector(".grid").innerHTML = "";
+    array.forEach(function (obj) {
+      let html = `
+    <div class="repoCard developerCard ">
+                <div class="repoCard__header">
+                    <div class="repoCard__logo developer__logo">
+                        <img class='developerImage' src="${obj.avatar}" alt="">
+                    </div>
+                    <div class="repoCard__content">
+                        <h5 class='margin-0'>${obj.name}</h5>
+                        <span>${obj.username}</span>
+                    </div>
+                </div>
+                <div class="repoCard__main">
+                    <div class="repoCard__about">
+                      <div class="repoCard__name">${obj.repo.name}</div>
+                      <div class='repoCard__status'>
+                        <div class='repoCard__status--img'>
+                          <img width="50px" height="50px" src="../img/trendingdev.svg" />
+                        </div>
+                        <div class='repoCard__text'>Popular</div>
+                      </div>
+                    </div>
+                    
+                    <div class="repoCard__description">
+                        <p>${obj.repo.description}</p>
+                    </div>
+                </div>
+            </div>
+    `;
+      document.querySelector(".grid").insertAdjacentHTML("beforeend", html);
+    });
+  }
+
   return {
     getValue,
     addClass,
     displayRepos,
+    displayDevelopers,
     displayDevelopers,
   };
 })();
@@ -171,7 +209,7 @@ const controller = (function () {
 
   // To toggle select menu
   document.querySelector(".selected-language").addEventListener("click", () => {
-    document.querySelector(".options-container").classList.toggle("active");
+    document.querySelector(".lan-opt-container").classList.toggle("active");
   });
 
   document.querySelector(".selected-duration").addEventListener("click", () => {
@@ -183,9 +221,14 @@ const controller = (function () {
     .querySelector(".categories")
     .addEventListener("click", (e) => handleMain(e));
 
+  const all = document.querySelectorAll(".opt-lan");
+  console.log(all);
+
   // languages select menu listener
   document.querySelectorAll(".opt-lan").forEach((item) => {
     item.addEventListener("click", () => {
+      console.log("yes");
+      console.log(item.querySelector("label").innerHTML);
       document.querySelector(
         ".selected-language"
       ).innerHTML = item.querySelector("label").innerHTML;
@@ -195,12 +238,15 @@ const controller = (function () {
     });
   });
 
+  // duration select menu listener
   document.querySelectorAll(".opt-duration").forEach((item) => {
     item.addEventListener("click", () => {
+      console.log(item.querySelector("label").innerHTML);
       document.querySelector(
         ".selected-duration"
       ).innerHTML = item.querySelector("label").innerHTML;
       document.querySelector(".dur-opt-container").classList.remove("active");
+
       handleDuration(item);
     });
   });
@@ -213,23 +259,26 @@ const controller = (function () {
     // 1. get the query
 
     let query = viewController.getValue(e);
+    console.log(query);
 
     // 2. Add the class active
     viewController.addClass(e);
 
-    // 2. create and object and save into state
+    // 2. create andobject and save into state
     state.type = new searchController.Search(query);
 
     // 5. make the request(search)
     if (query === "Repositories") {
       let data1 = await state.type.repositoriesByMain();
+      viewController.displayRepos(state.type.repos);
     } else if (query === "Developers") {
       let data2 = await state.type.developersByMain();
+      console.log(state.type.developers);
+      viewController.displayDevelopers(state.type.developers);
     }
 
     // 6. show the lists
     // console.log(state.type.repos);
-    viewController.displayRepos(state.type.repos);
 
     // state.type.repos.forEach(function (cur) {
     //   console.log(cur.builtBy.length);
@@ -250,6 +299,7 @@ const controller = (function () {
     // 3. make the request(search) based on which request is active
     if (document.querySelector(".btn-repo").classList.contains("active")) {
       let data = await state.type.repositoriesByCategories(query);
+      console.log(state.type.developers);
       viewController.displayRepos(state.type.repos);
     } else {
       console.log("no");
@@ -268,6 +318,7 @@ const controller = (function () {
     // 3. make the request(search) based on which request is active
     if (document.querySelector(".btn-repo").classList.contains("active")) {
       let data = await state.type.repositoriesByDuration(query);
+      viewController.displayRepos(state.type.repos);
     } else {
       console.log("no");
       let data = await state.type.DevelopersByDuration(query);

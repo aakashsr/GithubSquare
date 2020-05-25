@@ -904,6 +904,10 @@ a {
     margin-top: 50px;
 }
 
+.margin-0 {
+    margin: 0;
+}
+
 /*---------------  Index PAGE  styles ------------------*/
 /*------------------------------------------------------*/
 
@@ -1033,14 +1037,16 @@ a {
 .select-box .options-container {
     background: #2f3640;
     color: #f5f6fa;
-    max-height: 0;
     width: 100%;
-    opacity: 0;
+    /* opacity: 0;
+    visibility: hidden; */
+    display: none;
     transition: all 0.4s;
     border-radius: 8px;
     overflow: hidden;
     order: 1;
     z-index: 1;
+    /* display: none; */
 }
 
 .selected {
@@ -1076,17 +1082,25 @@ a {
     width: 250px;
 }
 
-.dur-opt-container {
+/* .dur-opt-container {
     width: 100px;
-}
+    z-index: 2;
+} */
 
 
 
 .select-box .options-container.active {
     max-height: 240px;
     opacity: 1;
+    visibility: visible;
+    display: block;
     overflow-y: scroll;
     width: 250px;
+}
+
+.select-box .dur-opt-container.active {
+    width: 100px;
+    z-index: 2;
 }
 
 .select-box .options-container.active+.selected::after {
@@ -1169,10 +1183,19 @@ a {
     align-items: center;
 }
 
-.repoCard img {
-    width: 35px;
-    height: 35px;
+.repoImage,
+.teamImage {
     border-radius: 50%;
+}
+
+.repoImage {
+    width: 45px;
+    height: 45px;
+}
+
+.teamImage {
+    width: 30px;
+    height: 30px;
 }
 
 .repoCard__main {
@@ -1247,6 +1270,28 @@ a {
 }
 
 
+/* .developer__logo img {
+    width: 65px;
+    height: 65px;
+} */
+
+
+/* ------------------ DEVELOPER CARD --------*/
+
+.developerCard {
+    height: 250px;
+    width: 250px;
+    background: aqua;
+    padding: 10px;
+    box-sizing: border-box;
+    background: linear-gradient(rgba(217, 236, 243, 0.99), rgba(217, 236, 243, .99));
+}
+
+.developerImage {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+}
 
 
 
