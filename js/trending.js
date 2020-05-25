@@ -171,8 +171,8 @@ const viewController = (function () {
     array.forEach(function (obj) {
       let html = `
     <div class="repoCard developerCard ">
-                <div class="repoCard__header">
-                    <div class="repoCard__logo developer__logo">
+                <div class="card__header developers__header">
+                    <div class="card__logo developer__logo">
                         <img class='developerImage' src="${obj.avatar}" alt="">
                     </div>
                     <div class="repoCard__content">
@@ -180,7 +180,7 @@ const viewController = (function () {
                         <span class='developer__username'>${obj.username}</span>
                     </div>
                 </div>
-                <div class="repoCard__main">
+                <div class="developer__main">
                     <div class="developers__about">
                       <div class="repoCard__name developerRepo__name"><a href=${obj.url}>${obj.repo.name}</a></div>
                       <div class='developer__status'>

@@ -1184,6 +1184,8 @@ a {
 
 .card__logo {
     margin-right: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .card__header {
@@ -1270,24 +1272,24 @@ a {
 }
 
 .card__about--developer1 {
-    left: 24px;
+    left: 20px;
 
 }
 
 .card__about--developer2 {
-    left: 48px;
+    left: 40px;
 }
 
 .card__about--developer3 {
-    left: 72px;
+    left: 60px;
 }
 
 .card__about--developer4 {
-    left: 96px;
+    left: 80px;
 }
 
 .card__about--developer5 {
-    left: 120px;
+    left: 100px;
 }
 
 .card__about--developer5 {
@@ -1318,12 +1320,14 @@ a {
 /* ------------------ DEVELOPER CARD --------*/
 
 .developerCard {
-    height: 250px;
-    width: 250px;
+    width: 300px;
     background: aqua;
-    padding: 10px;
+    padding: 15px;
     box-sizing: border-box;
-    background: linear-gradient(rgba(217, 236, 243, 0.99), rgba(217, 236, 243, .99));
+    background: linear-gradient(rgba(217, 236, 243, 0.99), rgba(217, 236, 243, .99)),
+        url('../img/blackgrit-15c168539fb7109ce300574e7b4b0732.png');
+    background-size: contain;
+    background-blend-mode: saturation;
 }
 
 .developerImage {
@@ -1333,11 +1337,12 @@ a {
 }
 
 .developer__name {
-    font-size: 18px;
+    font-size: 16px;
+    font-family: m-medium;
 }
 
 .developerRepo__name {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     margin-right: 20px;
 }
@@ -1349,6 +1354,10 @@ a {
 .developer__status,
 .developers__about {
     display: flex;
+}
+
+.developers__about {
+    padding: 8px 0;
 }
 
 .status__img {
@@ -1386,6 +1395,18 @@ a {
 .card__ratings .git-info img {
     width: 20px;
 }
+
+.developers__header {
+    height: 60px;
+    flex-basis: auto;
+}
+
+.developer__main {
+    padding: 10px 0;
+    height: 110px;
+    flex-basis: auto;
+}
+
 
 
 
