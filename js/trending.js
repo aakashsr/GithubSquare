@@ -182,7 +182,13 @@ const viewController = (function () {
                 </div>
                 <div class="developer__main">
                     <div class="developers__about">
-                      <div class="repoCard__name developerRepo__name"><a href=${obj.url}>${obj.repo.name}</a></div>
+                      <div class="repoCard__name developerRepo__name"><a href=${
+                        obj.url
+                      }>${
+        obj.repo.name.length > 11
+          ? obj.repo.name.substr(0, 11) + "..."
+          : obj.repo.name
+      }</a></div>
                       <div class='developer__status'>
                         <div class='repoCard__status--img'>
                           <img class="status__img" src="../img/trendingdev.svg" />
@@ -192,7 +198,11 @@ const viewController = (function () {
                     </div>
                     
                     <div class="repoCard__description">
-                        <p>${obj.repo.description}</p>
+                        <p>${
+                          obj.repo.description.length > 70
+                            ? obj.repo.description.substr(0, 70) + "..."
+                            : obj.repo.description
+                        }</p>
                     </div>
                 </div>
             </div>

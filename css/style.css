@@ -1334,6 +1334,8 @@ a {
     width: 65px;
     height: 65px;
     border-radius: 50%;
+    border: 1px solid #0AE0DF;
+    padding: 4px;
 }
 
 .developer__name {
