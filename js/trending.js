@@ -100,28 +100,28 @@ const viewController = (function () {
     array.forEach(function (obj) {
       let html = `
     <div class="repoCard">
-                <div class="repoCard__header">
-                    <div class="repoCard__logo">
+                <div class="card__header">
+                    <div class="card__logo">
                         <img class='repoImage' src="${
                           obj.avatar
                         }" width='20px' height='20px' alt="">
                     </div>
-                    <div class="repoCard__content">
+                    <div class="card__content">
                         <h5>${obj.author}</h5>
                     </div>
                 </div>
-                <div class="repoCard__main">
-                    <div class="repoCard__name">${obj.name}</div>
-                    <div class="repoCard__about">
-                        <div class="repoCard__about--language">
+                <div class="card__main">
+                    <div class="card__name">${obj.name}</div>
+                    <div class="card__about">
+                        <div class="card__about--language">
                             ${obj.language}
                         </div>
-                        <div class="repoCard__about--developers">
-                            <span class="repoCard__about--text">Built by</span>
-                            <span class="repoCard__about--images">
+                        <div class="card__about--developers">
+                            <span class="card__about--text">Built by</span>
+                            <span class="card__about--images">
                             ${obj.builtBy
                               .map(function (cur, i = 0) {
-                                let newText = `<a class='repocard__about--developer${i}' href="#"><img class='teamImage' src=${cur.avatar} alt=""></a>`;
+                                let newText = `<a class='card__about--developer${i}' href="#"><img class='teamImage' src=${cur.avatar} alt=""></a>`;
                                 i++;
                                 return newText;
                               })
@@ -129,26 +129,35 @@ const viewController = (function () {
                             </span>
                         </div>
                     </div>
-                    <div class="repoCard__description">
-                        <p>${obj.description}</p>
+                    <div class="card__description">
+                        <p>${
+                          obj.description.length > 120
+                            ? obj.description.substr(0, 120) + "..."
+                            : obj.description
+                        }</p>
                     </div>
-                    <div class="repoCard__ratings">
-                        <a href="" class="repoCard__ratings--stars">
-                            <span class="followers-text small">${
-                              obj.stars
-                            }<img class='color-star'
-                                    src='./img/starfilled.png'></span>
-                        </a>
-                        <a href="" class="repoCard__ratings--forks">
-                            <span class="forked-text small">${
-                              obj.forks
-                            }<img class='color-forked' src='./img/forked.svg'></span>
-                        </a>
-                        <a href="" class="repoCard__ratings--starsRecent">
-                            <span class="stars-text small">${
-                              obj.currentPeriodStars
-                            }<img class='color-issues' src='./img/alert.svg' </span>
-                        </a>
+                    <div class="card__ratings">
+                         <div class='git-info'>
+                <ul>
+                    <li class="followers">
+                      <span class="followers-text small"><img class='color-star' src='./img/starfilled.png'></span>
+                      <div class='followers-count'>${
+                        obj.stars
+                      }</div>                       
+                    </li>
+                    <li class="stars">
+                      <span class="forked-text small"><img class='color-forked' src='./img/forked.svg'></span>
+                      <div class='stars-count'>${
+                        obj.forks
+                      }</div>                    
+                    </li>
+                    <li class="forked">
+                      <span class="stars-text small"><img class='color-issues' src='./img/alert.svg'></span>
+                      <div class='forked-count'>${obj.forks}</div>
+                    
+                    </li>
+                </ul>
+            </div>
                     </div>
                 </div>
             </div>
@@ -167,16 +176,16 @@ const viewController = (function () {
                         <img class='developerImage' src="${obj.avatar}" alt="">
                     </div>
                     <div class="repoCard__content">
-                        <h5 class='margin-0'>${obj.name}</h5>
-                        <span>${obj.username}</span>
+                        <h5 class='margin-0 developer__name'>${obj.name}</h5>
+                        <span class='developer__username'>${obj.username}</span>
                     </div>
                 </div>
                 <div class="repoCard__main">
-                    <div class="repoCard__about">
-                      <div class="repoCard__name">${obj.repo.name}</div>
-                      <div class='repoCard__status'>
+                    <div class="developers__about">
+                      <div class="repoCard__name developerRepo__name"><a href=${obj.url}>${obj.repo.name}</a></div>
+                      <div class='developer__status'>
                         <div class='repoCard__status--img'>
-                          <img width="50px" height="50px" src="../img/trendingdev.svg" />
+                          <img class="status__img" src="../img/trendingdev.svg" />
                         </div>
                         <div class='repoCard__text'>Popular</div>
                       </div>
@@ -326,3 +335,20 @@ const controller = (function () {
     console.log(state);
   }
 })();
+
+/* <a href="" class="card__ratings--stars">
+                            <span class="followers-text small">${
+                              obj.stars
+                            }<img class='color-star'
+                                    src='./img/starfilled.png'></span>
+                        </a>
+                        <a href="" class="card__ratings--forks">
+                            <span class="forked-text small">${
+                              obj.forks
+                            }<img class='color-forked' src='./img/forked.svg'></span>
+                        </a>
+                        <a href="" class="card__ratings--starsRecent">
+                            <span class="stars-text small">${
+                              obj.currentPeriodStars
+                            }<img class='color-issues' src='./img/alert.svg' </span>
+                        </a> */

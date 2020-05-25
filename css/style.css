@@ -1166,21 +1166,30 @@ a {
 
 
 .repoCard {
-    height: 320px;
     width: 350px;
+    flex-direction: column;
+    display: flex;
     background: aqua;
     padding: 15px;
     box-sizing: border-box;
-    background: linear-gradient(rgba(217, 236, 243, 0.99), rgba(217, 236, 243, .99));
+    background: linear-gradient(rgba(217, 236, 243, 0.99), rgba(217, 236, 243, .99)),
+        url('../img/blackgrit-15c168539fb7109ce300574e7b4b0732.png');
+    background-size: contain;
+    background-blend-mode: saturation;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    box-shadow: 3px 3px 25px 0 rgba(46, 61, 73, .14);
 }
 
-.repoCard__logo {
+.card__logo {
     margin-right: 10px;
 }
 
-.repoCard__header {
+.card__header {
     display: flex;
     align-items: center;
+    flex-basis: 18%;
 }
 
 .repoImage,
@@ -1194,48 +1203,64 @@ a {
 }
 
 .teamImage {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
 }
 
-.repoCard__main {
+.card__main {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    /* justify-content: space-around; */
+    flex-basis: 82%;
 }
 
-.repoCard__about {
+.card__about {
     display: flex;
     position: relative;
     line-height: 2.5;
 }
 
-.repoCard__about--image {
+.card__description {
+    height: 100px;
+}
+
+.card__about,
+.card__ratings {
+    padding: 5px 0
+}
+
+.card__name {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 0 5px 0;
+}
+
+.card__about--image {
     position: relative;
 }
 
-.repoCard__about--text {
+.card__about--text {
     font-size: 13px;
     margin-right: 10px;
 }
 
 
-.repoCard__about--language {
+.card__about--language {
     margin-right: 20px;
 }
 
-.repoCard__about--developers,
-.repoCard__about--images {
+.card__about--developers,
+.card__about--images {
     display: flex;
     align-items: center;
     position: relative;
 }
 
-.repoCard__ratings {
+.card__ratings {
     display: flex;
 }
 
-.repoCard__about--images a {
+.card__about--images a {
     position: absolute;
     border: 2px solid #fff;
     border-radius: 50%;
@@ -1244,36 +1269,50 @@ a {
     justify-content: center;
 }
 
-.repocard__about--developer1 {
+.card__about--developer1 {
     left: 24px;
 
 }
 
-.repocard__about--developer2 {
+.card__about--developer2 {
     left: 48px;
 }
 
-.repocard__about--developer3 {
+.card__about--developer3 {
     left: 72px;
 }
 
-.repocard__about--developer4 {
+.card__about--developer4 {
     left: 96px;
 }
 
-.repocard__about--developer5 {
+.card__about--developer5 {
     left: 120px;
 }
 
-.repocard__about--developer5 {
+.card__about--developer5 {
     left: 144px;
 }
 
 
-/* .developer__logo img {
-    width: 65px;
-    height: 65px;
-} */
+.card__content h5 {
+    font-size: 16px;
+    margin: 10px 0;
+    font-family: m-medium;
+}
+
+
+
+
+.followers-count.medium {
+    font-size: 16px;
+}
+
+
+
+
+
+
 
 
 /* ------------------ DEVELOPER CARD --------*/
@@ -1293,7 +1332,60 @@ a {
     border-radius: 50%;
 }
 
+.developer__name {
+    font-size: 18px;
+}
 
+.developerRepo__name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+.developer__username {
+    font-size: 16px;
+}
+
+.developer__status,
+.developers__about {
+    display: flex;
+}
+
+.status__img {
+    width: 15px;
+    height: 15px;
+}
+
+.developers__name {
+    margin-right: 20px;
+}
+
+.card__ratings .git-info {
+    width: 60%;
+}
+
+.card__ratings .git-info ul {
+    justify-content: space-between;
+}
+
+.card__ratings .git-info ul li {
+    display: flex;
+    margin-right: 8px;
+    margin-right: 14px;
+    align-items: center;
+}
+
+/* .card__ratings .git-info img {
+    width: 12px;
+} */
+
+.card__ratings .git-info ul li span {
+    margin-right: 5px;
+}
+
+.card__ratings .git-info img {
+    width: 20px;
+}
 
 
 
