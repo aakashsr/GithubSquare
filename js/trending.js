@@ -120,20 +120,33 @@ const searchController = (function () {
 })();
 const viewController = (function () {
   function getValue(e) {
-    return e.target.textContent;
+    console.log(e.target.closest(".opt-lan"));
+    return e.target.textContent.trim();
   }
 
   function addClass(e) {
     const navLinks = document.querySelectorAll(".nav-link");
-    navLinks.forEach(function (cur) {
-      cur.classList.remove("active");
-      e.target.classList.add("active");
-    });
+    if (e.target.classList.contains("nav-link")) {
+      navLinks.forEach(function (cur) {
+        cur.classList.remove("active");
+        e.target.classList.add("active");
+      });
+    }
   }
 
   function clearPreviousResult() {
     document.querySelector(".grid").innerHTML = "";
   }
+
+  const showSelectedOption = function (data) {
+    document.querySelector(".selected-language").textContent = "";
+    document.querySelector(".selected-language").textContent = data;
+  };
+
+  const showSelectedDuration = function (data) {
+    document.querySelector(".selected-duration").textContent = "";
+    document.querySelector(".selected-duration").textContent = data;
+  };
 
   function applyBgColor(language) {
     if (language === "Shell") {
@@ -289,6 +302,8 @@ const viewController = (function () {
     displayRepos,
     displayDevelopers,
     displayDevelopers,
+    showSelectedOption,
+    showSelectedDuration,
   };
 })();
 
@@ -306,6 +321,48 @@ const controller = (function () {
   const getStoredData = function () {
     const storedData = JSON.parse(localStorage.getItem("trendingData"));
     return storedData;
+  };
+
+  const loadData = function () {
+    const storedData = getStoredData();
+    if (storedData) {
+      // 1. create a new object with the help of saved data
+      state.type = new searchController.Search(storedData.query);
+      // 2. update the query property of local state
+      state.type.query = storedData.query;
+      if (storedData.query === "Repositories") {
+        console.log("LS REPO");
+        // 3. if query is 'repositories' , update the repos property with the stored data
+        state.type.repos = storedData.repos;
+
+        // 4. render on UI
+        viewController.displayRepos(state.type.repos);
+      } else if (storedData.query === "Developers") {
+        console.log("LS DEV");
+        // 3. if query is 'developers' , update the developers property with the stored data
+        state.type.developers = storedData.developers;
+
+        // 4. render on UI
+        if (state.type.developers !== "") {
+          viewController.displayDevelopers(state.type.developers);
+        }
+      } else {
+        // update the select property of state
+        if (storedData.selected) {
+          state.type.selected = storedData.selected;
+
+          // show the updated text
+          viewController.showSelectedOption(state.type.selected);
+        }
+
+        if (storedData.selectedDuration) {
+          // update the selectedDuration property of state
+          state.type.selectedDuration = storedData.selectedDuration;
+          // show the updated duration text
+          viewController.showSelectedDuration(state.type.selectedDuration);
+        }
+      }
+    }
   };
 
   // Event listeners
@@ -333,50 +390,55 @@ const controller = (function () {
 
   // languages select menu listener
   document.querySelectorAll(".opt-lan").forEach((item) => {
-    item.addEventListener("click", () => {
+    item.addEventListener("click", (e) => {
       document.querySelector(
         ".selected-language"
       ).innerHTML = item.querySelector("label").innerHTML;
       document.querySelector(".lan-opt-container").classList.remove("active");
 
-      handleCategories(item);
+      handleCategories(e);
+      // handleMain(e);
     });
   });
 
   // duration select menu listener
   document.querySelectorAll(".opt-duration").forEach((item) => {
-    item.addEventListener("click", () => {
+    item.addEventListener("click", (e) => {
       document.querySelector(
         ".selected-duration"
       ).innerHTML = item.querySelector("label").innerHTML;
       document.querySelector(".dur-opt-container").classList.remove("active");
 
-      handleDuration(item);
+      handleDuration(e);
+      // handleMain(e);
     });
   });
 
   document.querySelector;
 
+  let query;
+
   // duration select menu listener
 
   async function handleMain(e) {
     // 1. get the query
+    console.log(e.target);
 
-    let query = viewController.getValue(e);
+    query = viewController.getValue(e);
 
     // 2. Add the class active
     viewController.addClass(e);
 
-    // 2. create andobject and save into state
+    // 2. create an object and save into state
     state.type = new searchController.Search(query);
 
-    // 3. clear previpus results
+    // 3. clear previous results
     viewController.clearPreviousResult();
 
-    if (query === "Repositories") {
-      // 4. Render the loader
-      renderLoader(document.querySelector(".loader-container"));
+    // 4. Render the loader
+    renderLoader(document.querySelector(".loader-container"));
 
+    if (query === "Repositories") {
       // 5. make the request(search)
       let data1 = await state.type.repositoriesByMain();
 
@@ -389,9 +451,6 @@ const controller = (function () {
       // 8. save data into LS
       setData();
     } else if (query === "Developers") {
-      // 4. Render the loader
-      renderLoader(document.querySelector(".loader-container"));
-
       // 5. make the request(search)
       let data2 = await state.type.developersByMain();
 
@@ -403,46 +462,58 @@ const controller = (function () {
 
       // 8. save data into LS
       setData();
+    } else if (e.target.parentNode.classList.contains("opt-lan")) {
+      console.log("handle categorees");
+      handleCategories(query);
+    } else if (e.target.parentNode.classList.contains("opt-duration")) {
+      console.log("handle categorees");
+      handleDuration(query);
     }
   }
 
-  async function handleCategories(item) {
-    // 1. get the query
-    let query = item.querySelector("label").innerHTML;
-    console.log(query);
+  async function handleCategories(e) {
+    query = viewController.getValue(e);
 
-    // 2. create a new object and save in state
-    state.type = new searchController.Search(query);
-
-    // 3. clear previpus results
+    // 3. clear previous results
     viewController.clearPreviousResult();
+
+    // 4. Render the loader
+    renderLoader(document.querySelector(".loader-container"));
+    console.log("inside handle categories");
 
     // checking which request is active
     if (document.querySelector(".btn-repo").classList.contains("active")) {
-      // 4. Render the loader
-      renderLoader(document.querySelector(".loader-container"));
-
       // 5. make the request(search)
       let data = await state.type.repositoriesByCategories(query);
+      console.log(state.type.repos);
 
       // 6. Clear loader
       clearLoader();
 
+      // // 7. save the selected text content
+      // const selectedOption = document.querySelector(".selected-language")
+      //   .textContent;
+      // state.type.selected = selectedOption;
+      // console.log(selectedOption);
+
       // 7. Display the result
+      console.log(state.type.repos);
       viewController.displayRepos(state.type.repos);
 
       // 8. save data into LS
       setData();
     } else {
-      // 4. Render the loader
-      renderLoader(document.querySelector(".loader-container"));
-
       // 5. make the request(search)
       let data = await state.type.developersByCategories(query);
 
       // 6. Clear loader
       clearLoader();
 
+      // 7. save the selected text content
+      const selectedOption = document.querySelector(".selected").textContent;
+      state.type.selected = selectedOption;
+      console.log(selectedOption);
+
       // 7. Display the result
       viewController.displayDevelopers(state.type.developers);
 
@@ -451,29 +522,32 @@ const controller = (function () {
     }
   }
 
-  async function handleDuration(item) {
-    // 1. get the query
-    let query = item.querySelector("label").innerHTML;
-
-    // 2. create a new object and save in state
-    state.type = new searchController.Search(query);
+  async function handleDuration(e) {
+    query = viewController.getValue(e);
 
     // 3. clear previous results
     viewController.clearPreviousResult();
+
+    console.log("inside handle duration");
+    // 4. Render the loader
+    renderLoader(document.querySelector(".loader-container"));
 
     // checking which request is active
     if (document.querySelector(".btn-repo").classList.contains("active")) {
       let selected = document.querySelector(".languages .selected").textContent;
       console.log(selected);
 
-      // 4. Render the loader
-      renderLoader(document.querySelector(".loader-container"));
-
       // 5. make the request(search)
       let data = await state.type.repositoriesByDuration(selected, query);
+      console.log(data);
 
       // 6. Clear loader
       clearLoader();
+
+      // 7. save the selected duration content
+      const selectedDuration = document.querySelector(".selected-duration")
+        .textContent;
+      state.type.selectedDuration = selectedDuration;
 
       // 7. Display the result
       viewController.displayRepos(state.type.repos);
@@ -482,14 +556,18 @@ const controller = (function () {
       setData();
     } else {
       let selected = document.querySelector(".languages .selected").textContent;
-      // 4. Render the loader
-      renderLoader(document.querySelector(".loader-container"));
 
       // 5. make the request(search)
-
       let data = await state.type.DevelopersByDuration(selected, query);
+
       // 6. Clear loader
       clearLoader();
+
+      // 7. save the selected duration content
+      const selectedDuration = document.querySelector(".selected-duration")
+        .textContent;
+      state.type.selectedDuration = selectedDuration;
+
       // 7. Display the result
       viewController.displayDevelopers(state.type.developers);
 
@@ -497,4 +575,11 @@ const controller = (function () {
       setData();
     }
   }
+
+  return {
+    loadData,
+  };
 })();
+
+// controller.loadData();
+// localStorage.clear();
