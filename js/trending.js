@@ -242,9 +242,14 @@ const controller = (function () {
   });
 
   // repositories or developers listener
-  document
-    .querySelector(".categories")
-    .addEventListener("click", (e) => handleMain(e));
+  document.querySelector(".categories").addEventListener("click", (e) => {
+    // Reset languages selected option
+    document.querySelector(".languages .selected").textContent =
+      "All Languages";
+    // Reset duration selected option
+    document.querySelector(".duration .selected").textContent = "Today";
+    handleMain(e);
+  });
 
   const all = document.querySelectorAll(".opt-lan");
 
