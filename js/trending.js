@@ -35,13 +35,14 @@ const searchController = (function () {
     }
   };
 
-  Search.prototype.developersByCategories = async function () {
+  Search.prototype.developersByCategories = async function (language) {
     try {
       const developersData = await axios(
         `https://ghapi.huchen.dev/developers?language=${language}&since=daily`
       );
       this.developers = developersData.data;
-      return developers.data;
+      console.log(developersData.data);
+      return this.developers.data;
     } catch (e) {
       return `We've an error here: ${e}`;
     }
@@ -63,7 +64,7 @@ const searchController = (function () {
     }
   };
 
-  Search.prototype.DevelopersByDuration = async function (language) {
+  Search.prototype.DevelopersByDuration = async function (language, duration) {
     try {
       const developersData = await axios(
         `https://ghapi.huchen.dev/developers?language=${language}&since=${duration}`
@@ -93,11 +94,11 @@ const viewController = (function () {
     });
   }
 
-  function displayDevelopers(cur) {
-    return `<a class='repocard__about--developer1' href="#">
-          <img src="${cur.avatar}" alt="">
-       </a>`;
-  }
+  // function displayDevelopers(cur) {
+  //   return `<a class='repocard__about--developer1' href="#">
+  //         <img src="${cur.avatar}" alt="">
+  //      </a>`;
+  // }
 
   function displayRepos(array) {
     console.log(array);
@@ -246,13 +247,10 @@ const controller = (function () {
     .addEventListener("click", (e) => handleMain(e));
 
   const all = document.querySelectorAll(".opt-lan");
-  console.log(all);
 
   // languages select menu listener
   document.querySelectorAll(".opt-lan").forEach((item) => {
     item.addEventListener("click", () => {
-      console.log("yes");
-      console.log(item.querySelector("label").innerHTML);
       document.querySelector(
         ".selected-language"
       ).innerHTML = item.querySelector("label").innerHTML;
@@ -265,7 +263,6 @@ const controller = (function () {
   // duration select menu listener
   document.querySelectorAll(".opt-duration").forEach((item) => {
     item.addEventListener("click", () => {
-      console.log(item.querySelector("label").innerHTML);
       document.querySelector(
         ".selected-duration"
       ).innerHTML = item.querySelector("label").innerHTML;
@@ -283,7 +280,6 @@ const controller = (function () {
     // 1. get the query
 
     let query = viewController.getValue(e);
-    console.log(query);
 
     // 2. Add the class active
     viewController.addClass(e);
@@ -301,38 +297,10 @@ const controller = (function () {
       viewController.displayDevelopers(state.type.developers);
     }
 
-    // 6. show the lists
-    // console.log(state.type.repos);
-
-    // state.type.repos.forEach(function (cur) {
-    //   console.log(cur.builtBy.length);
-    // });
-    // viewController.displayDevelopers(state.type.repos);
-
     console.log(state);
   }
 
   async function handleCategories(item) {
-    console.log(handleCategories);
-    // 1. get the query
-    let query = item.querySelector("label").innerHTML;
-
-    // 2. create a new object and save in state
-    state.type = new searchController.Search(query);
-
-    // 3. make the request(search) based on which request is active
-    if (document.querySelector(".btn-repo").classList.contains("active")) {
-      let data = await state.type.repositoriesByCategories(query);
-      console.log(state.type.developers);
-      viewController.displayRepos(state.type.repos);
-    } else {
-      console.log("no");
-      let data = await state.type.DevelopersForCategories(query);
-    }
-    console.log(state);
-  }
-
-  async function handleDuration(item) {
     // 1. get the query
     let query = item.querySelector("label").innerHTML;
     console.log(query);
@@ -342,16 +310,33 @@ const controller = (function () {
 
     // 3. make the request(search) based on which request is active
     if (document.querySelector(".btn-repo").classList.contains("active")) {
+      let data = await state.type.repositoriesByCategories(query);
+      viewController.displayRepos(state.type.repos);
+    } else {
+      let data = await state.type.developersByCategories(query);
+      viewController.displayDevelopers(state.type.developers);
+    }
+    console.log(state);
+  }
+
+  async function handleDuration(item) {
+    // 1. get the query
+    let query = item.querySelector("label").innerHTML;
+
+    // 2. create a new object and save in state
+    state.type = new searchController.Search(query);
+
+    // 3. make the request(search) based on which request is active
+    if (document.querySelector(".btn-repo").classList.contains("active")) {
       console.log("yes");
-      let data = await state.type.repositoriesByDuration(
-        document.querySelector(".selected").textContent,
-        query
-      );
+      let selected = document.querySelector(".selected");
+      let data = await state.type.repositoriesByDuration(selected, query);
       console.log(data);
       viewController.displayRepos(state.type.repos);
     } else {
       console.log("no");
       let data = await state.type.DevelopersByDuration(query);
+      viewController.displayDevelopers(state.type.developers);
     }
     console.log(state);
   }
