@@ -52,10 +52,29 @@ const searchController = (function () {
     language,
     duration
   ) {
+    let endpoint;
+    if (language === "All Languages") {
+      console.log("all languages");
+      if (duration === "Today") {
+        endpoint = `https://ghapi.huchen.dev/repositories?since=daily`;
+      } else if (duration === "This Week") {
+        endpoint = `https://ghapi.huchen.dev/repositories?since=weekly`;
+      } else {
+        endpoint = `https://ghapi.huchen.dev/repositories?since=monthly`;
+      }
+    } else {
+      console.log("particular languages");
+      if (duration === "Today") {
+        endpoint = `https://ghapi.huchen.dev/repositories?language=${language}&since=daily`;
+      } else if (duration === "This Week") {
+        endpoint = `https://ghapi.huchen.dev/repositories?language=${language}&since=weekly`;
+      } else {
+        endpoint = `https://ghapi.huchen.dev/repositories?language=${language}&since=monthly`;
+      }
+    }
+
     try {
-      const reposData = await axios(
-        `https://ghapi.huchen.dev/repositories?language=${language}&since=${duration}`
-      );
+      const reposData = await axios(endpoint);
       this.repos = reposData.data;
       console.log(reposData.data);
       return reposData.data;
@@ -101,7 +120,6 @@ const viewController = (function () {
   // }
 
   function displayRepos(array) {
-    console.log(array);
     document.querySelector(".grid").innerHTML = "";
     array.forEach(function (obj) {
       let html = `
@@ -301,8 +319,6 @@ const controller = (function () {
       console.log(state.type.developers);
       viewController.displayDevelopers(state.type.developers);
     }
-
-    console.log(state);
   }
 
   async function handleCategories(item) {
@@ -321,7 +337,6 @@ const controller = (function () {
       let data = await state.type.developersByCategories(query);
       viewController.displayDevelopers(state.type.developers);
     }
-    console.log(state);
   }
 
   async function handleDuration(item) {
@@ -333,13 +348,11 @@ const controller = (function () {
 
     // 3. make the request(search) based on which request is active
     if (document.querySelector(".btn-repo").classList.contains("active")) {
-      console.log("yes");
-      let selected = document.querySelector(".selected");
+      let selected = document.querySelector(".languages .selected").textContent;
       let data = await state.type.repositoriesByDuration(selected, query);
       console.log(data);
       viewController.displayRepos(state.type.repos);
     } else {
-      console.log("no");
       let data = await state.type.DevelopersByDuration(query);
       viewController.displayDevelopers(state.type.developers);
     }
