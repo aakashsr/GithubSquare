@@ -76,7 +76,6 @@ const searchController = (function () {
     try {
       const reposData = await axios(endpoint);
       this.repos = reposData.data;
-      console.log(reposData.data);
       return reposData.data;
     } catch (e) {
       return `We've an error here: ${e}`;
@@ -84,10 +83,29 @@ const searchController = (function () {
   };
 
   Search.prototype.DevelopersByDuration = async function (language, duration) {
+    let endpoint;
+    if (language === "All Languages") {
+      console.log("all languages");
+      if (duration === "Today") {
+        endpoint = `https://ghapi.huchen.dev/developers?since=daily`;
+      } else if (duration === "This Week") {
+        endpoint = `https://ghapi.huchen.dev/developers?since=weekly`;
+      } else {
+        endpoint = `https://ghapi.huchen.dev/developers?since=monthly`;
+      }
+    } else {
+      console.log("particular languages");
+      if (duration === "Today") {
+        endpoint = `https://ghapi.huchen.dev/developers?language=${language}&since=daily`;
+      } else if (duration === "This Week") {
+        endpoint = `https://ghapi.huchen.dev/developers?language=${language}&since=weekly`;
+      } else {
+        endpoint = `https://ghapi.huchen.dev/developers?language=${language}&since=monthly`;
+      }
+    }
+
     try {
-      const developersData = await axios(
-        `https://ghapi.huchen.dev/developers?language=${language}&since=${duration}`
-      );
+      const developersData = await axios(endpoint);
       this.developers = developersData.data;
       console.log(developersData.data);
       return developersData.data;
@@ -383,12 +401,14 @@ const controller = (function () {
     // 2. create a new object and save in state
     state.type = new searchController.Search(query);
 
-    // 3. clear previpus results
+    // 3. clear previous results
     viewController.clearPreviousResult();
 
     // checking which request is active
     if (document.querySelector(".btn-repo").classList.contains("active")) {
       let selected = document.querySelector(".languages .selected").textContent;
+      console.log(selected);
+
       // 4. Render the loader
       renderLoader(document.querySelector(".loader-container"));
 
@@ -401,11 +421,13 @@ const controller = (function () {
       // 7. Display the result
       viewController.displayRepos(state.type.repos);
     } else {
+      let selected = document.querySelector(".languages .selected").textContent;
       // 4. Render the loader
       renderLoader(document.querySelector(".loader-container"));
 
       // 5. make the request(search)
-      let data = await state.type.DevelopersByDuration(query);
+
+      let data = await state.type.DevelopersByDuration(selected, query);
       // 6. Clear loader
       clearLoader();
       // 7. Display the result
