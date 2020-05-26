@@ -113,14 +113,11 @@ const viewController = (function () {
     });
   }
 
-  // function displayDevelopers(cur) {
-  //   return `<a class='repocard__about--developer1' href="#">
-  //         <img src="${cur.avatar}" alt="">
-  //      </a>`;
-  // }
+  function clearPreviousResult() {
+    document.querySelector(".grid").innerHTML = "";
+  }
 
   function displayRepos(array) {
-    document.querySelector(".grid").innerHTML = "";
     array.forEach(function (obj) {
       let html = `
     <div class="repoCard">
@@ -191,7 +188,6 @@ const viewController = (function () {
   }
 
   function displayDevelopers(array) {
-    document.querySelector(".grid").innerHTML = "";
     array.forEach(function (obj) {
       let html = `
     <div class="repoCard developerCard ">
@@ -238,6 +234,7 @@ const viewController = (function () {
   return {
     getValue,
     addClass,
+    clearPreviousResult,
     displayRepos,
     displayDevelopers,
     displayDevelopers,
@@ -310,13 +307,32 @@ const controller = (function () {
     // 2. create andobject and save into state
     state.type = new searchController.Search(query);
 
-    // 5. make the request(search)
+    // 3. clear previpus results
+    viewController.clearPreviousResult();
+
     if (query === "Repositories") {
+      // 4. Render the loader
+      renderLoader(document.querySelector(".loader-container"));
+
+      // 5. make the request(search)
       let data1 = await state.type.repositoriesByMain();
+
+      // 6. Clear loader
+      clearLoader();
+
+      // 7. Display the result
       viewController.displayRepos(state.type.repos);
     } else if (query === "Developers") {
+      // 4. Render the loader
+      renderLoader(document.querySelector(".loader-container"));
+
+      // 5. make the request(search)
       let data2 = await state.type.developersByMain();
-      console.log(state.type.developers);
+
+      // 6. Clear loader
+      clearLoader();
+
+      // 7. Display the result
       viewController.displayDevelopers(state.type.developers);
     }
   }
@@ -329,12 +345,33 @@ const controller = (function () {
     // 2. create a new object and save in state
     state.type = new searchController.Search(query);
 
-    // 3. make the request(search) based on which request is active
+    // 3. clear previpus results
+    viewController.clearPreviousResult();
+
+    // checking which request is active
     if (document.querySelector(".btn-repo").classList.contains("active")) {
+      // 4. Render the loader
+      renderLoader(document.querySelector(".loader-container"));
+
+      // 5. make the request(search)
       let data = await state.type.repositoriesByCategories(query);
+
+      // 6. Clear loader
+      clearLoader();
+
+      // 7. Display the result
       viewController.displayRepos(state.type.repos);
     } else {
+      // 4. Render the loader
+      renderLoader(document.querySelector(".loader-container"));
+
+      // 5. make the request(search)
       let data = await state.type.developersByCategories(query);
+
+      // 6. Clear loader
+      clearLoader();
+
+      // 7. Display the result
       viewController.displayDevelopers(state.type.developers);
     }
   }
@@ -346,33 +383,33 @@ const controller = (function () {
     // 2. create a new object and save in state
     state.type = new searchController.Search(query);
 
-    // 3. make the request(search) based on which request is active
+    // 3. clear previpus results
+    viewController.clearPreviousResult();
+
+    // checking which request is active
     if (document.querySelector(".btn-repo").classList.contains("active")) {
       let selected = document.querySelector(".languages .selected").textContent;
+      // 4. Render the loader
+      renderLoader(document.querySelector(".loader-container"));
+
+      // 5. make the request(search)
       let data = await state.type.repositoriesByDuration(selected, query);
-      console.log(data);
+
+      // 6. Clear loader
+      clearLoader();
+
+      // 7. Display the result
       viewController.displayRepos(state.type.repos);
     } else {
+      // 4. Render the loader
+      renderLoader(document.querySelector(".loader-container"));
+
+      // 5. make the request(search)
       let data = await state.type.DevelopersByDuration(query);
+      // 6. Clear loader
+      clearLoader();
+      // 7. Display the result
       viewController.displayDevelopers(state.type.developers);
     }
-    console.log(state);
   }
 })();
-
-/* <a href="" class="card__ratings--stars">
-                            <span class="followers-text small">${
-                              obj.stars
-                            }<img class='color-star'
-                                    src='./img/starfilled.png'></span>
-                        </a>
-                        <a href="" class="card__ratings--forks">
-                            <span class="forked-text small">${
-                              obj.forks
-                            }<img class='color-forked' src='./img/forked.svg'></span>
-                        </a>
-                        <a href="" class="card__ratings--starsRecent">
-                            <span class="stars-text small">${
-                              obj.currentPeriodStars
-                            }<img class='color-issues' src='./img/alert.svg' </span>
-                        </a> */
