@@ -296,6 +296,18 @@ const viewController = (function () {
 const controller = (function () {
   // state
   const state = {};
+
+  // set data into local storage
+  const setData = function () {
+    localStorage.setItem("trendingData", JSON.stringify(state.type));
+  };
+
+  // get data from local storage
+  const getStoredData = function () {
+    const storedData = JSON.parse(localStorage.getItem("trendingData"));
+    return storedData;
+  };
+
   // Event listeners
 
   // To toggle select menu
@@ -373,6 +385,9 @@ const controller = (function () {
 
       // 7. Display the result
       viewController.displayRepos(state.type.repos);
+
+      // 8. save data into LS
+      setData();
     } else if (query === "Developers") {
       // 4. Render the loader
       renderLoader(document.querySelector(".loader-container"));
@@ -385,6 +400,9 @@ const controller = (function () {
 
       // 7. Display the result
       viewController.displayDevelopers(state.type.developers);
+
+      // 8. save data into LS
+      setData();
     }
   }
 
@@ -412,6 +430,9 @@ const controller = (function () {
 
       // 7. Display the result
       viewController.displayRepos(state.type.repos);
+
+      // 8. save data into LS
+      setData();
     } else {
       // 4. Render the loader
       renderLoader(document.querySelector(".loader-container"));
@@ -424,6 +445,9 @@ const controller = (function () {
 
       // 7. Display the result
       viewController.displayDevelopers(state.type.developers);
+
+      // 8. save data into LS
+      setData();
     }
   }
 
@@ -453,6 +477,9 @@ const controller = (function () {
 
       // 7. Display the result
       viewController.displayRepos(state.type.repos);
+
+      // 8. save data into LS
+      setData();
     } else {
       let selected = document.querySelector(".languages .selected").textContent;
       // 4. Render the loader
@@ -465,6 +492,9 @@ const controller = (function () {
       clearLoader();
       // 7. Display the result
       viewController.displayDevelopers(state.type.developers);
+
+      // 8. save data into LS
+      setData();
     }
   }
 })();
