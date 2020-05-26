@@ -135,6 +135,36 @@ const viewController = (function () {
     document.querySelector(".grid").innerHTML = "";
   }
 
+  function applyBgColor(language) {
+    if (language === "Shell") {
+      return "#89e051";
+    } else if (language === "HTML") {
+      return "#e34c26";
+    } else if (language === "Go") {
+      return "#00ADD8";
+    } else if (language === "TypeScript") {
+      return "#2b7489";
+    } else if (language === "Assembly") {
+      return "#6E4C13";
+    } else if (language === "C++") {
+      return "#f34b7d";
+    } else if (language === "C") {
+      return "#555555";
+    } else if (language === "JavaScript") {
+      return "#f1e05a";
+    } else if (language === "Python") {
+      return "#3572A5";
+    } else if (language === "Vue") {
+      return "#2c3e50";
+    } else if (language === "Java") {
+      return "#b07219";
+    } else if (language === "PHP") {
+      return "#4F5D95";
+    } else if (language === "Jupyter Notebook") {
+      return "#DA5B0B";
+    }
+  }
+
   function displayRepos(array) {
     array.forEach(function (obj) {
       let html = `
@@ -153,6 +183,9 @@ const viewController = (function () {
                     <div class="card__name">${obj.name}</div>
                     <div class="card__about">
                         <div class="card__about--language">
+                          <span class='circle' style='background-color:${applyBgColor(
+                            obj.language
+                          )}'></span>
                             ${obj.language}
                         </div>
                         <div class="card__about--developers">
