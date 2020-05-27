@@ -643,10 +643,35 @@ const controller = (function () {
     }
   }
 
+  (async function onFirstLoad() {
+    // If it's very first load i,e local storage is null  -
+    // 1) create 'type' object
+    // 2) call 'displayResults'
+    // 3) call 'displayRepositories' method to render items on UI.
+    // 4) Also show navigation and call event handler on it.
+
+    // NOTE: If you will only make api call and show items on UI using 'showList' then our navigation buttons will not be functional because they involved 'state.search.result' .So it'll say "can't find result of undefined"
+    if (localStorage.getItem("trendingData") === null) {
+      state.type = new searchController.Search("Repositories");
+      const endpoint = `https://ghapi.huchen.dev/repositories`;
+
+      // render loader
+      renderLoader(document.querySelector(".loader-container"));
+
+      await state.type.repositoriesByMain(endpoint);
+
+      // clear loader
+      clearLoader();
+
+      viewController.displayRepos(state.type.repos);
+      // viewController.showNavigation();
+    }
+  })();
+
   return {
     loadData,
   };
 })();
 
 controller.loadData();
-localStorage.clear();
+// localStorage.clear();
