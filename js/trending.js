@@ -149,6 +149,7 @@ const viewController = (function () {
   }
 
   const showSelectedOption = function (data) {
+    console.log("im show selected option");
     document.querySelector(".selected-language").textContent = "";
     document.querySelector(".selected-language").textContent = data;
   };
@@ -349,36 +350,32 @@ const controller = (function () {
       viewController.showNavlinks(state.type.navLinks);
 
       if (storedData.query === "Repositories") {
-        console.log("LS REPO");
         // 3. if query is 'repositories' , update the repos property with the stored data
         state.type.repos = storedData.repos;
 
         // 4. render on UI
         viewController.displayRepos(state.type.repos);
       } else if (storedData.query === "Developers") {
-        console.log("LS DEV");
         // 3. if query is 'developers' , update the developers property with the stored data
         state.type.developers = storedData.developers;
 
         // 4. render on UI
-        if (state.type.developers !== "") {
-          viewController.displayDevelopers(state.type.developers);
-        }
-      } else {
-        // update the selected property of state
-        if (storedData.selected) {
-          state.type.selected = storedData.selected;
+        // if (state.type.developers !== "") {
+        viewController.displayDevelopers(state.type.developers);
+        // }
+      }
+      // update the selected property of state
+      if (storedData.selected) {
+        state.type.selected = storedData.selected;
+        // show the updated text
+        viewController.showSelectedOption(state.type.selected);
+      }
 
-          // show the updated text
-          viewController.showSelectedOption(state.type.selected);
-        }
-
-        if (storedData.selectedDuration) {
-          // update the selectedDuration property of state
-          state.type.selectedDuration = storedData.selectedDuration;
-          // show the updated duration text
-          viewController.showSelectedDuration(state.type.selectedDuration);
-        }
+      if (storedData.selectedDuration) {
+        // update the selectedDuration property of state
+        state.type.selectedDuration = storedData.selectedDuration;
+        // show the updated duration text
+        viewController.showSelectedDuration(state.type.selectedDuration);
       }
     }
   };
