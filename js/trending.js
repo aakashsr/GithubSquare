@@ -120,7 +120,10 @@ const searchController = (function () {
 })();
 const viewController = (function () {
   function getValue(e) {
+    console.log(e.target);
     console.log(e.target.closest(".opt-lan"));
+    // console.log(e.target.closest(".opt-lan")).textContent;
+    console.log(e.target.textContent.trim());
     return e.target.textContent.trim();
   }
 
@@ -347,7 +350,7 @@ const controller = (function () {
           viewController.displayDevelopers(state.type.developers);
         }
       } else {
-        // update the select property of state
+        // update the selected property of state
         if (storedData.selected) {
           state.type.selected = storedData.selected;
 
@@ -466,7 +469,7 @@ const controller = (function () {
       console.log("handle categorees");
       handleCategories(query);
     } else if (e.target.parentNode.classList.contains("opt-duration")) {
-      console.log("handle categorees");
+      console.log("handle duration");
       handleDuration(query);
     }
   }
@@ -581,5 +584,5 @@ const controller = (function () {
   };
 })();
 
-// controller.loadData();
+controller.loadData();
 // localStorage.clear();
