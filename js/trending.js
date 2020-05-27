@@ -401,6 +401,19 @@ const controller = (function () {
     document.querySelector(".dur-opt-container").classList.toggle("active");
   });
 
+  window.onclick = function (e) {
+    const selectedLanguage = document.querySelector(".selected-language");
+    const selectedDuration = document.querySelector(".selected-duration");
+
+    if (e.target !== selectedLanguage) {
+      document.querySelector(".lan-opt-container").classList.remove("active");
+    }
+
+    if (e.target !== selectedDuration) {
+      document.querySelector(".dur-opt-container").classList.remove("active");
+    }
+  };
+
   // repositories or developers listener
   document.querySelector(".categories").addEventListener("click", (e) => {
     // Reset languages selected option
