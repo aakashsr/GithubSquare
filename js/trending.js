@@ -532,7 +532,7 @@ const controller = (function () {
       // 4. make the request(search)
       let data = await state.type.repositoriesByCategories(
         selectedLanguage.trim(),
-        selectedDurationContent
+        selectedDurationContent.trim()
       );
 
       // 5. Clear loader
@@ -562,7 +562,7 @@ const controller = (function () {
       // 4. make the request
       let data = await state.type.developersByCategories(
         selectedLanguage.trim(),
-        selectedDurationContent
+        selectedDurationContent.trim()
       );
 
       // 5. Clear loader
@@ -604,7 +604,7 @@ const controller = (function () {
       // 4. make the request(search)
       let data = await state.type.repositoriesByDuration(
         selectedLanguage.trim(),
-        selectedDurationContent
+        selectedDurationContent.trim()
       );
 
       // 5. Clear loader
@@ -634,7 +634,7 @@ const controller = (function () {
       // 4. make the request(search)
       let data = await state.type.DevelopersByDuration(
         selectedLanguage.trim(),
-        selectedDurationContent
+        selectedDurationContent.trim()
       );
 
       // 5. Clear loader

@@ -131,6 +131,7 @@ li {
     font-weight: bold;
     text-decoration: none;
     color: inherit;
+    cursor: pointer;
 }
 
 .nav li {
@@ -1134,8 +1135,8 @@ a {
     cursor: pointer;
 }
 
-.active {
-    color: #0000ff;
+.categories .active {
+    color: #ef5f63;
 }
 
 .main-container,
@@ -1173,14 +1174,21 @@ a {
     background: aqua;
     padding: 15px;
     box-sizing: border-box;
-    background: linear-gradient(rgba(217, 236, 243, 0.99), rgba(217, 236, 243, .99)),
+    background: linear-gradient(rgba(217, 236, 220, 0.99), rgba(217, 236, 220, .99)),
         url('../img/blackgrit-15c168539fb7109ce300574e7b4b0732.png');
     background-size: contain;
     background-blend-mode: saturation;
     margin-top: 20px;
-    margin-bottom: 25px;
     border-radius: 8px;
     box-shadow: 3px 3px 25px 0 rgba(46, 61, 73, .14);
+    color: #063550;
+    flex-basis: 32%;
+
+}
+
+.repo-card:nth-child(3n+2) {
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
 .card__logo {
