@@ -33,7 +33,7 @@ const searchController = (function () {
     } else if (duration === "This Week") {
       endpoint = `https://ghapi.huchen.dev/repositories?language=${language}&since=weekly`;
     } else {
-      endpoint = `https://ghapi.huchen.dev/repositories?language=${language}&since=montly`;
+      endpoint = `https://ghapi.huchen.dev/repositories?language=${language}&since=monthly`;
     }
 
     try {
