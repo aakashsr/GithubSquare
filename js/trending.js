@@ -23,11 +23,21 @@ const searchController = (function () {
     }
   };
 
-  Search.prototype.repositoriesByCategories = async function (language) {
+  Search.prototype.repositoriesByCategories = async function (
+    language,
+    duration
+  ) {
+    let endpoint;
+    if (duration === "Today") {
+      endpoint = `https://ghapi.huchen.dev/repositories?language=${language}&since=daily`;
+    } else if (duration === "This Week") {
+      endpoint = `https://ghapi.huchen.dev/repositories?language=${language}&since=weekly`;
+    } else {
+      endpoint = `https://ghapi.huchen.dev/repositories?language=${language}&since=montly`;
+    }
+
     try {
-      const reposData = await axios(
-        `https://ghapi.huchen.dev/repositories?language=${language}&since=daily`
-      );
+      const reposData = await axios(endpoint);
       this.repos = reposData.data;
       return reposData.data;
     } catch (e) {
@@ -35,11 +45,21 @@ const searchController = (function () {
     }
   };
 
-  Search.prototype.developersByCategories = async function (language) {
+  Search.prototype.developersByCategories = async function (
+    language,
+    duration
+  ) {
+    let endpoint;
+    console.log(duration);
+    if (duration === "Today") {
+      endpoint = `https://ghapi.huchen.dev/developers?language=${language}&since=daily`;
+    } else if (duration === "This Week") {
+      endpoint = `https://ghapi.huchen.dev/developers?language=${language}&since=weekly`;
+    } else if (duration === "This Month") {
+      endpoint = `https://ghapi.huchen.dev/developers?language=${language}&since=monthly`;
+    }
     try {
-      const developersData = await axios(
-        `https://ghapi.huchen.dev/developers?language=${language}&since=daily`
-      );
+      const developersData = await axios(endpoint);
       this.developers = developersData.data;
       console.log(developersData.data);
       return this.developers.data;
@@ -53,8 +73,9 @@ const searchController = (function () {
     duration
   ) {
     let endpoint;
+    console.log(language);
+    console.log(duration);
     if (language === "All Languages") {
-      console.log("all languages");
       if (duration === "Today") {
         endpoint = `https://ghapi.huchen.dev/repositories?since=daily`;
       } else if (duration === "This Week") {
@@ -63,7 +84,6 @@ const searchController = (function () {
         endpoint = `https://ghapi.huchen.dev/repositories?since=monthly`;
       }
     } else {
-      console.log("particular languages");
       if (duration === "Today") {
         endpoint = `https://ghapi.huchen.dev/repositories?language=${language}&since=daily`;
       } else if (duration === "This Week") {
@@ -76,6 +96,7 @@ const searchController = (function () {
     try {
       const reposData = await axios(endpoint);
       this.repos = reposData.data;
+      console.log(reposData.data);
       return reposData.data;
     } catch (e) {
       return `We've an error here: ${e}`;
@@ -84,8 +105,9 @@ const searchController = (function () {
 
   Search.prototype.DevelopersByDuration = async function (language, duration) {
     let endpoint;
+    console.log(language);
+    console.log(duration);
     if (language === "All Languages") {
-      console.log("all languages");
       if (duration === "Today") {
         endpoint = `https://ghapi.huchen.dev/developers?since=daily`;
       } else if (duration === "This Week") {
@@ -94,7 +116,6 @@ const searchController = (function () {
         endpoint = `https://ghapi.huchen.dev/developers?since=monthly`;
       }
     } else {
-      console.log("particular languages");
       if (duration === "Today") {
         endpoint = `https://ghapi.huchen.dev/developers?language=${language}&since=daily`;
       } else if (duration === "This Week") {
@@ -505,7 +526,15 @@ const controller = (function () {
     // checking which request is active
     if (document.querySelector(".btn-repo").classList.contains("active")) {
       // 5. make the request(search)
-      let data = await state.type.repositoriesByCategories(query);
+      let selectedLanguage = document.querySelector(".selected-language")
+        .textContent;
+      const selectedDurationContent = document.querySelector(
+        ".selected-duration"
+      ).textContent;
+      let data = await state.type.repositoriesByCategories(
+        selectedLanguage.trim(),
+        selectedDurationContent
+      );
       console.log(state.type.repos);
 
       // 6. Clear loader
@@ -528,7 +557,15 @@ const controller = (function () {
       setData();
     } else {
       // 5. make the request(search)
-      let data = await state.type.developersByCategories(query);
+      let selectedLanguage = document.querySelector(".selected-language")
+        .textContent;
+      const selectedDurationContent = document.querySelector(
+        ".selected-duration"
+      ).textContent;
+      let data = await state.type.developersByCategories(
+        selectedLanguage.trim(),
+        selectedDurationContent
+      );
 
       // 6. Clear loader
       clearLoader();
@@ -561,11 +598,19 @@ const controller = (function () {
 
     // checking which request is active
     if (document.querySelector(".btn-repo").classList.contains("active")) {
-      let selected = document.querySelector(".languages .selected").textContent;
-      console.log(selected);
+      let selectedLanguage = document.querySelector(".selected-language")
+        .textContent;
+      // console.log(selected);
+
+      const selectedDurationContent = document.querySelector(
+        ".selected-duration"
+      ).textContent;
 
       // 5. make the request(search)
-      let data = await state.type.repositoriesByDuration(selected, query);
+      let data = await state.type.repositoriesByDuration(
+        selectedLanguage.trim(),
+        selectedDurationContent
+      );
       console.log(data);
 
       // 6. Clear loader
@@ -585,10 +630,18 @@ const controller = (function () {
       // 8. save data into LS
       setData();
     } else {
-      let selected = document.querySelector(".languages .selected").textContent;
+      let selectedLanguage = document.querySelector(".selected-language")
+        .textContent;
+
+      const selectedDurationContent = document.querySelector(
+        ".selected-duration"
+      ).textContent;
 
       // 5. make the request(search)
-      let data = await state.type.DevelopersByDuration(selected, query);
+      let data = await state.type.DevelopersByDuration(
+        selectedLanguage.trim(),
+        selectedDurationContent
+      );
 
       // 6. Clear loader
       clearLoader();
