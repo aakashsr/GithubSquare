@@ -137,6 +137,13 @@ const viewController = (function () {
     }
   }
 
+  function showNavlinks(data) {
+    document.querySelector(".categories").innerHTML = "";
+    document
+      .querySelector(".categories")
+      .insertAdjacentHTML("afterbegin", data);
+  }
+
   function clearPreviousResult() {
     document.querySelector(".grid").innerHTML = "";
   }
@@ -302,6 +309,7 @@ const viewController = (function () {
     getValue,
     addClass,
     clearPreviousResult,
+    showNavlinks,
     displayRepos,
     displayDevelopers,
     displayDevelopers,
@@ -333,6 +341,13 @@ const controller = (function () {
       state.type = new searchController.Search(storedData.query);
       // 2. update the query property of local state
       state.type.query = storedData.query;
+
+      // 3. update the selected property of state
+      state.type.navLinks = storedData.navlinks;
+
+      // 4. display the nav links
+      viewController.showNavlinks(state.type.navLinks);
+
       if (storedData.query === "Repositories") {
         console.log("LS REPO");
         // 3. if query is 'repositories' , update the repos property with the stored data
@@ -451,7 +466,10 @@ const controller = (function () {
       // 7. Display the result
       viewController.displayRepos(state.type.repos);
 
-      // 8. save data into LS
+      // 8. save the nav links
+      state.type.navlinks = document.querySelector(".categories").innerHTML;
+
+      // 9. save data into LS
       setData();
     } else if (query === "Developers") {
       // 5. make the request(search)
@@ -463,7 +481,10 @@ const controller = (function () {
       // 7. Display the result
       viewController.displayDevelopers(state.type.developers);
 
-      // 8. save data into LS
+      // 8. save the nav links
+      state.type.navlinks = document.querySelector(".categories").innerHTML;
+
+      // 9. save data into LS
       setData();
     } else if (e.target.parentNode.classList.contains("opt-lan")) {
       console.log("handle categorees");
@@ -493,11 +514,14 @@ const controller = (function () {
       // 6. Clear loader
       clearLoader();
 
-      // // 7. save the selected text content
-      // const selectedOption = document.querySelector(".selected-language")
-      //   .textContent;
-      // state.type.selected = selectedOption;
-      // console.log(selectedOption);
+      // 7. save the selected text content
+      const selectedOption = document.querySelector(".selected-language")
+        .textContent;
+      state.type.selected = selectedOption;
+      console.log(selectedOption);
+
+      // 8. save the nav links
+      state.type.navlinks = document.querySelector(".categories").innerHTML;
 
       // 7. Display the result
       console.log(state.type.repos);
@@ -516,6 +540,9 @@ const controller = (function () {
       const selectedOption = document.querySelector(".selected").textContent;
       state.type.selected = selectedOption;
       console.log(selectedOption);
+
+      // 8. save the nav links
+      state.type.navlinks = document.querySelector(".categories").innerHTML;
 
       // 7. Display the result
       viewController.displayDevelopers(state.type.developers);
@@ -552,6 +579,9 @@ const controller = (function () {
         .textContent;
       state.type.selectedDuration = selectedDuration;
 
+      // 8. save the nav links
+      state.type.navlinks = document.querySelector(".categories").innerHTML;
+
       // 7. Display the result
       viewController.displayRepos(state.type.repos);
 
@@ -570,6 +600,9 @@ const controller = (function () {
       const selectedDuration = document.querySelector(".selected-duration")
         .textContent;
       state.type.selectedDuration = selectedDuration;
+
+      // 8. save the nav links
+      state.type.navlinks = document.querySelector(".categories").innerHTML;
 
       // 7. Display the result
       viewController.displayDevelopers(state.type.developers);
