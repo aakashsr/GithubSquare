@@ -39,6 +39,7 @@ const searchController = (function () {
     try {
       const reposData = await axios(endpoint);
       this.repos = reposData.data;
+      console.log(reposData.data);
       return reposData.data;
     } catch (e) {
       return `We've an error here: ${e}`;
@@ -257,8 +258,10 @@ const viewController = (function () {
                       }</div>                    
                     </li>
                     <li class="forked">
-                      <span class="stars-text small"><img class='color-issues' src='./img/alert.svg'></span>
-                      <div class='forked-count'>${obj.forks}</div>
+                      <span class="stars-text small"><img class='color-issues' src='./img/starstoday.png'></span>
+                      <div class='forked-count'>${
+                        obj.currentPeriodStars
+                      } stars today</div>
                     
                     </li>
                 </ul>
