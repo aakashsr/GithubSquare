@@ -21,13 +21,13 @@
  </p>
  
  <p align='center'>
-  <img src='./img/trendingsc.png' alt='trending repos page'><br>
+  <img src='./img/treandingsc.png' alt='trending repos page'><br>
   <b>Trending Repos</b>
  </p>
  
  
  <p align='center'>
-  <img src='./img/trendingdevsc.png' alt='trending developers page'><br>
+  <img src='./img/treandingdevsc.png' alt='trending developers page'><br>
   <b>Trending Developers Page</b>
  </p>
  
