@@ -17,7 +17,7 @@
 
 <p align='center'>
   <img src='./img/battlesc.png' alt='battle page'><br>
-  <b>Battle Page</b>
+  <b>Github Battle</b>
  </p>
  
  <p align='center'>
@@ -28,7 +28,7 @@
  
  <p align='center'>
   <img src='./img/treandingdevsc.png' alt='trending developers page'><br>
-  <b>Trending Developers Page</b>
+  <b>Trending Developers</b>
  </p>
  
  <p align='center'>
