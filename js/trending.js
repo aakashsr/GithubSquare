@@ -261,7 +261,7 @@ const viewController = (function () {
                       <span class="stars-text small"><img class='color-issues' src='./img/starstoday.png'></span>
                       <div class='forked-count'>${
                         obj.currentPeriodStars
-                      } stars today</div>
+                      } <span class='stars-today'>stars today</span></div>
                     
                     </li>
                 </ul>
@@ -298,9 +298,9 @@ const viewController = (function () {
       }</a></div>
                       <div class='developer__status'>
                         <div class='repoCard__status--img'>
-                          <img class="status__img" src="../img/trendingdev.svg" />
+                          <img class="status__img" src="../img/fire.png" />
                         </div>
-                        <div class='repoCard__text'>Popular</div>
+                        <div class='repoCard__text'>Popular Repo</div>
                       </div>
                     </div>
                     

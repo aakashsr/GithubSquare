@@ -1149,7 +1149,7 @@ a {
 
 .selectMenu-container,
 .main-container {
-    align-items: flex-start;
+    align-items: center;
 }
 
 .categories li {
@@ -1335,6 +1335,9 @@ a {
     border-radius: 50%;
 }
 
+.stars-today {
+    font-size: 15px;
+}
 
 
 
@@ -1388,8 +1391,8 @@ a {
 }
 
 .status__img {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
 }
 
 .developers__name {
@@ -1464,7 +1467,28 @@ a {
     .grid .card-small {
         flex-basis: 30%;
     }
+
+    .card__ratings .git-info {
+        width: 100%;
+    }
 }
+
+@media only screen and (max-width:1000px) {
+    .repoCard {
+        flex-basis: 49%;
+    }
+
+    .repoCard:nth-child(3n+2) {
+        margin-left: unset;
+        margin-right: unset;
+    }
+
+    .repoCard:nth-child(2n+1) {
+        margin-right: 2%;
+    }
+}
+
+
 
 @media only screen and (max-width:800px) {
     .grid .card-small {
@@ -1495,6 +1519,26 @@ a {
         margin-right: auto;
     }
 
+    /* ------------ TRENDING PAGE STYLES ---------------- */
+    .card__ratings .git-info {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width:768px) {
+
+    .repoCard:nth-child(2n+1) {
+        margin-right: unset;
+    }
+
+    .repoCard {
+        flex-basis: 95%;
+        margin: 2.5% !important;
+    }
+
+    .card__ratings .git-info {
+        width: 55%;
+    }
 }
 
 @media only screen and (max-width: 600px) {
