@@ -1112,6 +1112,7 @@ a {
     display: block;
     overflow-y: scroll;
     width: 250px;
+    margin-top: 10px;
 }
 
 .select-box .dur-opt-container.active {
