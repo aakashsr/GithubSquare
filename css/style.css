@@ -80,6 +80,15 @@ li {
     margin: 0 auto;
     padding: 30px;
     color: #084468;
+
+}
+
+.homeContainer {
+    height: 100%;
+    background: url('../img/Liquid-Cheese.svg');
+    background-size: cover;
+    height: 100vh;
+    max-width: unset;
 }
 
 .flex-center {
@@ -756,9 +765,9 @@ a {
     position: absolute;
     width: 10%;
     background: #FFF;
-    height: 0.3em;
+    height: 0.18em;
     right: 20%;
-    top: -0.21em;
+    top: -0.18em;
     transform: skewX(-45deg);
     -webkit-transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
     transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
@@ -770,9 +779,9 @@ a {
     position: absolute;
     width: 10%;
     background: #fff;
-    height: 0.3em;
+    height: 0.18em;
     left: 20%;
-    bottom: -0.25em;
+    bottom: -0.18em;
     transform: skewX(45deg);
     -webkit-transition: all 0.45 cubic-bezier(0.86, 0, 0.07, 1);
     transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
@@ -1495,11 +1504,21 @@ a {
 
 
 @media only screen and (max-width:800px) {
+
+    .player {
+        width: auto;
+    }
+
     .grid .card-small {
         flex-basis: 45%;
     }
 
     .players-container .player-sm {
+        width: auto;
+    }
+
+    .card-big-container {
+        background: transparent;
         width: auto;
     }
 
@@ -1521,6 +1540,10 @@ a {
     #card-big .brk-btn {
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .bottom-grid {
+        width: 100%;
     }
 
     /* ------------ TRENDING PAGE STYLES ---------------- */
@@ -1608,10 +1631,13 @@ a {
         margin-top: 30px;
     }
 
-    /*----------- search page ------------*/
-    .player {
-        width: auto;
+    /*----------- battle page ------------*/
+    .battle-instructions li {
+        flex-basis: 90%;
+        margin: 0 auto;
     }
+
+    /*----------- search page ------------*/
 
     #card-big {
         width: auto;
@@ -1639,6 +1665,7 @@ a {
         width: 315px;
         margin-left: auto;
         margin-right: auto;
+        background: transparent;
     }
 
     #card-big .user-col {
@@ -1651,6 +1678,11 @@ a {
 
     .player-inputs input {
         background-color: #fff;
+    }
+
+    .bottom-grid {
+        flex-direction: column;
+        width: auto
     }
 
     /*--------------- index page -----------*/
@@ -1722,6 +1754,10 @@ a {
 
     .card__ratings .git-info {
         width: 100%;
+    }
+
+    .select-box .options-container.active {
+        margin-top: 10px;
     }
 }
 
