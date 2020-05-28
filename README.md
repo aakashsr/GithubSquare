@@ -16,5 +16,5 @@
 </p>
 
 |Trending|Battle|Popular|
-|--------|---------|------------------|
+|--------|---------|---------|
 |![](./img/treandingdemo.gif)|![](./img/battledemo.gif)|![](.img/populardemo.gif)|
