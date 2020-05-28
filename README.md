@@ -40,3 +40,17 @@
   <img src='./img/searchsc.png' alt='search page'><br>
   <b>Search Page</b>
  </p>
+ 
+ 
+ ## Contributions
+
+* Spread the word
+* Open pull requests
+
+
+## Thanks
+
+* GithubSquare is using [huchenme/github-trending-api](https://github.com/huchenme/github-trending-api)
+
+## License
+MIT © [Aakash Srivastav](https://aakashdev.me)
