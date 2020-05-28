@@ -16,27 +16,27 @@
 </p>
 
 <p align='center'>
-  <img src='/battlesc.png' alt='battle page'><br>
+  <img src='./img/battlesc.png' alt='battle page'><br>
   <b>Battle Page</b>
  </p>
  
  <p align='center'>
-  <img src='./trendingsc.png' alt='trending repos page'><br>
+  <img src='./img/trendingsc.png' alt='trending repos page'><br>
   <b>Trending Repos</b>
  </p>
  
  
  <p align='center'>
-  <img src='./trendingdevsc.png' alt='trending developers page'><br>
+  <img src='./img/trendingdevsc.png' alt='trending developers page'><br>
   <b>Trending Developers Page</b>
  </p>
  
  <p align='center'>
-  <img src='./popularsc.png' alt='popular page'><br>
+  <img src='./img/popularsc.png' alt='popular page'><br>
   <b>Popular Repos</b>
  </p>
  
  <p align='center'>
-  <img src='./searchsc.png' alt='search page'><br>
+  <img src='./img/searchsc.png' alt='search page'><br>
   <b>Search Page</b>
  </p>
