@@ -16,7 +16,7 @@
 </p>
 
 <p align='center'>
-  <img src='./battlesc.png' alt='battle page'><br>
+  <img src='/battlesc.png' alt='battle page'><br>
   <b>Battle Page</b>
  </p>
  
