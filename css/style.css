@@ -1052,9 +1052,9 @@ a {
 }
 
 .selected {
+    font-family: 'Lato', sans-serif;
     background: #2f3640;
     border-radius: 8px;
-    margin-bottom: 8px;
     color: #f5f6fa;
     position: relative;
 
@@ -1486,6 +1486,10 @@ a {
     .repoCard:nth-child(2n+1) {
         margin-right: 2%;
     }
+
+    .card__ratings .git-info {
+        width: 87%;
+    }
 }
 
 
@@ -1527,17 +1531,43 @@ a {
 
 @media only screen and (max-width:768px) {
 
+    .trending__container {
+        width: 85%;
+        margin: 0 auto;
+    }
+
     .repoCard:nth-child(2n+1) {
         margin-right: unset;
     }
 
     .repoCard {
-        flex-basis: 95%;
-        margin: 2.5% !important;
+        flex-basis: 100%;
+        /* margin: 2.5% !important; */
     }
 
     .card__ratings .git-info {
         width: 55%;
+    }
+
+    .selected {
+        font-size: 14px;
+    }
+
+    .select-box {
+        width: 120px;
+    }
+
+    .selectMenu-container div {
+        margin-left: 10px;
+    }
+
+    .nav-link-trenading {
+        font-family: 'Lato', sans-serif;
+        font-size: 18px;
+    }
+
+    .nav {
+        margin: 15px 0;
     }
 }
 
@@ -1568,7 +1598,6 @@ a {
     .nav {
         justify-content: center;
         font-size: 16px;
-        margin: 6px 0;
     }
 
     .nav li:last-child {
@@ -1662,6 +1691,43 @@ a {
 
     .about {
         font-size: 16px;
+    }
+
+    /* -------------- TRENDING PAGE ----------------*/
+
+    .trending__container {
+        width: 90%;
+    }
+
+    .card__description {
+        font-weight: 300;
+    }
+
+    .select-box {
+        width: 110px;
+    }
+
+    .main-container {
+        flex-direction: column;
+    }
+
+    .selectMenu-container {
+        width: 75%;
+        justify-content: space-between;
+    }
+
+    .selectMenu-container div {
+        margin-left: 0;
+    }
+
+    .card__ratings .git-info {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .trending__container {
+        width: 95%;
     }
 }
 
