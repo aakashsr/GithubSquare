@@ -17,4 +17,6 @@
 
 |Trending|BattlPopular|
 |--------|---------|------------------|
-|![gh-e](./img/treandingdemo.gif)|![image](./img/battledemo.gif)|![gh-e-1](.img/populardemo.gif)|
+|![gh-e](./img/treandingdemo.gif)|![image]
+(./img/battledemo.gif)|![gh-e-1]
+(.img/populardemo.gif)|
