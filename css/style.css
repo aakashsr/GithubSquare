@@ -803,6 +803,11 @@ a {
     font-family: 'r-regular', sans-serif;
 }
 
+.home-nav {
+    width: 1350px;
+    margin: 20px auto;
+}
+
 .nav li {
     position: relative;
 }
