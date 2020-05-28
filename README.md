@@ -18,27 +18,32 @@
 <p align='center'>
   <img src='./img/battlesc.png' alt='battle page'><br>
   <b>Github Battle</b>
+  <sub>💥 Using a simple algo to decide the winner 💥</sub
  </p>
  
  <p align='center'>
   <img src='./img/treandingsc.png' alt='trending repos page'><br>
   <b>Trending Repos</b>
+  <sub>💥 Will remember your selection of language 💥</sub>
  </p>
  
  
  <p align='center'>
   <img src='./img/treandingdevsc.png' alt='trending developers page'><br>
   <b>Trending Developers</b>
+  <sub>💥 Use filter to change languages 💥</sub>
  </p>
  
  <p align='center'>
   <img src='./img/popularsc.png' alt='popular page'><br>
   <b>Popular Repos</b>
+  <sub>💥 Get 30 most popular repos of selected language 💥</sub>
  </p>
  
  <p align='center'>
   <img src='./img/searchsc.png' alt='search page'><br>
   <b>Search Page</b>
+  <sub>💥 Search your favourite profiles 💥</sub>
  </p>
  
  
