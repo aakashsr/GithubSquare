@@ -4,5 +4,6 @@
   <p>GithubSquare</p>
 </h1>
 
+<p align='center'>
 :fire: __GithubSquare__ is a Vanilla JavaScript App that pulls data from Github API and let's you explore the most starred projects , trending developers , popular repositories of any date and let's you face off Github Profiles of your choice. :fire:
-
+</p>
