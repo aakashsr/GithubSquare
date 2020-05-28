@@ -14,3 +14,29 @@
 <p align='center'>
   :fire: <b>GithubSquare</b> is a Vanilla JavaScript App that pulls data from Github API and let's you explore the most starred projects , trending developers , popular repositories of any date and let's you face off Github Profiles of your choice. :fire:
 </p>
+
+<p align='center'>
+  <img src='./battlesc.png' alt='battle page'>
+  <b>Battle Page</b>
+ </p>
+ 
+ <p align='center'>
+  <img src='./trendingsc.png' alt='trending repos page'>
+  <b>Battle Page</b>
+ </p>
+ 
+ 
+ <p align='center'>
+  <img src='./trendingdevsc.png' alt='trending developers page'>
+  <b>Battle Page</b>
+ </p>
+ 
+ <p align='center'>
+  <img src='./popularsc.png' alt='popular page'>
+  <b>Battle Page</b>
+ </p>
+ 
+ <p align='center'>
+  <img src='./searchsc.png' alt='search page'>
+  <b>Battle Page</b>
+ </p>
