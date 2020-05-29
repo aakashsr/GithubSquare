@@ -187,11 +187,10 @@ const controller = (function () {
     // 5. clear previous result
     base.elements.grid.innerHTML = "";
 
-    // 7. clearning navigation so that as soon as loader starts , navigation get disappear
-    // other wise navigation will move to top and will appear with loader
+    // 6. clearning navigation
     base.elements.navigation.innerHTML = "";
 
-    // 6.render the loader only if there is not any loader already
+    // 7.render the loader only if there is not any loader already
     if (base.elements.loaderContainer.innerHTML.trim() === "") {
       console.log("inside");
       renderLoader(base.elements.loaderContainer);
