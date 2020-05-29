@@ -24,7 +24,7 @@
  <p align='center'>
   <img src='./img/treandingsc.png' alt='trending repos page'><br>
   <b>Trending Repos</b><br>
-  <sub>💥 Will remember your selection of language 💥</sub>
+  <sub>💥 Using Local Storage to save the language/duration selected 💥</sub>
  </p>
  
  
