@@ -188,7 +188,10 @@ const controller = (function () {
     base.elements.grid.innerHTML = "";
 
     // 6.render the loader
-    renderLoader(base.elements.loaderContainer);
+    if (base.elements.loaderContainer.innerHTML.trim() === "") {
+      console.log("inside");
+      renderLoader(base.elements.loaderContainer);
+    }
 
     // 7. clearning navigation so that as soon as loader starts , navigation get disappear
     // other wise navigation will move to top and will appear with loader
