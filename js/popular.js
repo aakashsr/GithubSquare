@@ -187,15 +187,15 @@ const controller = (function () {
     // 5. clear previous result
     base.elements.grid.innerHTML = "";
 
+    // 7. clearning navigation so that as soon as loader starts , navigation get disappear
+    // other wise navigation will move to top and will appear with loader
+    base.elements.navigation.innerHTML = "";
+
     // 6.render the loader only if there is not any loader already
     if (base.elements.loaderContainer.innerHTML.trim() === "") {
       console.log("inside");
       renderLoader(base.elements.loaderContainer);
     }
-
-    // 7. clearning navigation so that as soon as loader starts , navigation get disappear
-    // other wise navigation will move to top and will appear with loader
-    base.elements.navigation.innerHTML = "";
 
     // 8. make the search by calling method saved on object's prototype
     await state.search.displayResults(endpoint);
@@ -203,17 +203,17 @@ const controller = (function () {
     // 9. Clear loader
     clearLoader();
 
-    // 10. showing navigation
-    if (base.elements.navigation.innerHTML.trim() === "") {
-      viewController.showNavigation();
-    }
-
-    // 11. Save all the languages
+    // 10. Save all the languages
     const languages = base.elements.languagesContainer.innerHTML;
     state.search.languages = languages;
 
-    // 12. render the results once the data has come
+    // 11. render the results once the data has come
     viewController.showList(state.search.result);
+
+    // 12. show navigation only if there is not any navigation already
+    if (base.elements.navigation.innerHTML.trim() === "") {
+      viewController.showNavigation();
+    }
 
     // 13. Saving data into Local Storage
     setData();
