@@ -187,7 +187,7 @@ const controller = (function () {
     // 5. clear previous result
     base.elements.grid.innerHTML = "";
 
-    // 6.render the loader
+    // 6.render the loader only if there is not any loader already
     if (base.elements.loaderContainer.innerHTML.trim() === "") {
       console.log("inside");
       renderLoader(base.elements.loaderContainer);
@@ -204,7 +204,9 @@ const controller = (function () {
     clearLoader();
 
     // 10. showing navigation
-    viewController.showNavigation();
+    if (base.elements.navigation.innerHTML.trim() === "") {
+      viewController.showNavigation();
+    }
 
     // 11. Save all the languages
     const languages = base.elements.languagesContainer.innerHTML;
