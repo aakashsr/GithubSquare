@@ -474,7 +474,9 @@ const controller = (function () {
     viewController.clearPreviousResult();
 
     // 5. Render the loader
-    renderLoader(document.querySelector(".loader-container"));
+    if (document.querySelector(".loader-container").innerHTML.trim() === "") {
+      renderLoader(document.querySelector(".loader-container"));
+    }
 
     if (query === "Repositories") {
       // 6. make the request(search)
@@ -522,7 +524,9 @@ const controller = (function () {
     viewController.clearPreviousResult();
 
     // 2. Render the loader
-    renderLoader(document.querySelector(".loader-container"));
+    if (document.querySelector(".loader-container").innerHTML.trim() === "") {
+      renderLoader(document.querySelector(".loader-container"));
+    }
 
     // 3. checking which request is active
     if (document.querySelector(".btn-repo").classList.contains("active")) {
@@ -593,7 +597,9 @@ const controller = (function () {
     viewController.clearPreviousResult();
 
     // 2. Render the loader
-    renderLoader(document.querySelector(".loader-container"));
+    if (document.querySelector(".loader-container").innerHTML.trim() === "") {
+      renderLoader(document.querySelector(".loader-container"));
+    }
 
     // 3. checking which request is active
     if (document.querySelector(".btn-repo").classList.contains("active")) {
@@ -672,7 +678,9 @@ const controller = (function () {
       const endpoint = `https://ghapi.huchen.dev/repositories`;
 
       // render loader
-      renderLoader(document.querySelector(".loader-container"));
+      if (document.querySelector(".loader-container").innerHTML.trim() === "") {
+        renderLoader(document.querySelector(".loader-container"));
+      }
 
       await state.type.repositoriesByMain(endpoint);
 

@@ -192,7 +192,6 @@ const controller = (function () {
 
     // 7.render the loader only if there is not any loader already
     if (base.elements.loaderContainer.innerHTML.trim() === "") {
-      console.log("inside");
       renderLoader(base.elements.loaderContainer);
     }
 
