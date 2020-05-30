@@ -75,6 +75,12 @@ li {
     list-style-type: none;
 }
 
+button {
+    background: #fff;
+    border: none;
+    outline: none;
+}
+
 .container {
     max-width: 1350px;
     margin: 0 auto;
@@ -1065,15 +1071,32 @@ a {
     /* display: none; */
 }
 
-.selected {
+.filter-button {
     font-family: 'Lato', sans-serif;
-    background: #2f3640;
     border-radius: 8px;
-    color: #f5f6fa;
     position: relative;
 
+    color: #084468;
+    background: #fff;
+    /* box-shadow: 0 13px 50px -16px #777; */
+    box-shadow: 0 5px 30px -12px;
     order: 0;
+    padding: 10px 6px;
+    cursor: pointer;
+    /* display: flex; */
 }
+
+.filter-button button {
+    display: flex;
+}
+
+.displayType-button {
+    display: flex;
+}
+
+/* .filter-button button {
+    display: flex;
+} */
 
 .selected::after {
     content: "";
@@ -1136,11 +1159,11 @@ a {
     border-radius: 0 8px 8px 0;
 }
 
-.select-box .option,
+/* .select-box .option,
 .selected {
     padding: 10px 6px;
     cursor: pointer;
-}
+} */
 
 .select-box .option:hover {
     background: #414b57;
@@ -1177,6 +1200,21 @@ a {
 
 .select-box .option .radio {
     display: none;
+}
+
+.div__right {
+    display: flex;
+}
+
+.displayType-container {
+    display: flex;
+}
+
+.displayType-container button {
+    background: #2f3640;
+    border-radius: 8px;
+    color: #f5f6fa;
+    padding: 10px 14px;
 }
 
 /* ------------------ REPO CARD --------*/
