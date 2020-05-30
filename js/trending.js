@@ -7,6 +7,7 @@ const searchController = (function () {
     try {
       const reposData = await axios(`https://ghapi.huchen.dev/repositories`);
       this.repos = reposData.data;
+      console.log(reposData.data);
       return reposData.data;
     } catch (e) {
       return `We've an error here: ${e}`;
@@ -214,7 +215,9 @@ const viewController = (function () {
                     </div>
                 </div>
                 <div class="card__main">
-                    <div class="card__name">${obj.name}</div>
+                    <div class="card__name"><a href=${obj.url}>${
+        obj.name.length > 30 ? obj.name.substr(0, 30) + "..." : obj.name
+      }</a></div>
                     <div class="card__about">
                         <div class="card__about--language">
                           <span class='circle' style='background-color:${applyBgColor(
@@ -243,8 +246,8 @@ const viewController = (function () {
                         }</p>
                     </div>
                     <div class="card__ratings">
-                         <div class='git-info'>
-                <ul>
+                      <div class='git-info'>
+                      <ul>
                     <li class="followers">
                       <span class="followers-text small"><img class='color-star' src='./img/starfilled.png'></span>
                       <div class='followers-count'>${
