@@ -1094,6 +1094,11 @@ a {
     display: flex;
 }
 
+.displayType-button button {
+    cursor: pointer;
+
+}
+
 /* .filter-button button {
     display: flex;
 } */
