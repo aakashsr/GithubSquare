@@ -1446,6 +1446,28 @@ a {
 }
 
 
+.developerItem {
+    box-shadow: 3px 3px 25px 0 rgba(46, 61, 73, .14);
+    flex-basis: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.developerItem__header {
+    flex-basis: 20%;
+}
+
+.developerItem__main {
+    flex-basis: 50%;
+}
+
+.developerItem__image {
+    width: 75px;
+    height: 75px;
+}
+
 
 
 

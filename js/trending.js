@@ -200,7 +200,7 @@ const viewController = (function () {
     }
   }
 
-  function displayByList(array) {
+  function displayReposByList(array) {
     console.log(array);
     document.querySelector(".grid").innerHTML = "";
     array.forEach(function (obj) {
@@ -271,6 +271,52 @@ const viewController = (function () {
     </div>
     </div>
       `;
+      document.querySelector(".grid").insertAdjacentHTML("beforeend", html);
+    });
+  }
+
+  function displayDevelopersByList(array) {
+    document.querySelector(".grid").innerHTML = "";
+    array.forEach(function (obj) {
+      let html = `
+    <div class="developerItem">
+        <div class="developerItem__header card__header developers__header">
+            <div class="card__logo developer__logo">
+                <img class='developerImage developerItem__image' src="${
+                  obj.avatar
+                }" alt="">
+            </div>
+            <div class="repoCard__content">
+                <h5 class='margin-0 developer__name'>${obj.name}</h5>
+                <span class='developer__username'>${obj.username}</span>
+            </div>
+        </div>
+        <div class="developerItem__main">
+            <div class='developer__status'>
+                <div class='repoCard__status--img'>
+                    <img class="status__img" src="../img/fire.png" />
+                </div>
+                <div class='repoCard__text'>Popular Repo</div>
+            </div>
+            <div class="repoCard__name developerRepo__name"><a href=${
+              obj.url
+            }>${
+        obj.repo.name.length > 11
+          ? obj.repo.name.substr(0, 11) + "..."
+          : obj.repo.name
+      }</a>
+            </div>
+            <div class="repoCard__description">
+                <p>${
+                  obj.repo.description.length > 70
+                    ? obj.repo.description.substr(0, 70) + "..."
+                    : obj.repo.description
+                }</p>
+            </div>
+        </div>
+
+    </div>
+    `;
       document.querySelector(".grid").insertAdjacentHTML("beforeend", html);
     });
   }
@@ -407,7 +453,8 @@ const viewController = (function () {
     displayDevelopers,
     showSelectedOption,
     showSelectedDuration,
-    displayByList,
+    displayReposByList,
+    displayDevelopersByList,
   };
 })();
 
@@ -522,12 +569,10 @@ const controller = (function () {
           viewController.displayDevelopers(state.type.developers);
         }
       } else if (e.target.textContent === "List") {
-        console.log("List");
-        document.querySelector(".grid").innerHTML = "";
         if (document.querySelector(".btn-repo").classList.contains("active")) {
-          viewController.displayByList(state.type.repos);
+          viewController.displayReposByList(state.type.repos);
         } else {
-          viewController.displayByList(state.type.developers);
+          viewController.displayDevelopersByList(state.type.developers);
         }
       }
     });
