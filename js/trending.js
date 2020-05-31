@@ -200,7 +200,83 @@ const viewController = (function () {
     }
   }
 
+  function displayByList(array) {
+    console.log(array);
+    document.querySelector(".grid").innerHTML = "";
+    array.forEach(function (obj) {
+      let html = `
+      <div class='repoItem'>
+      <div class='repoItem__header'>
+        <div class='repoItem__header--info'>
+            <span class='repoItem__header--username'>${obj.author}</span>
+            <span>/</span>
+            <span class='repoItem__header--reponame'>${obj.name}</span>
+        </div>
+    </div>
+    <div class="repoItem__main">
+        <div class="card__about--developers">
+            <span class="card__about--text">Built by</span>
+            <span class="card__about--images">
+                ${obj.builtBy
+                  .map(function (cur, i = 0) {
+                    let newText = `<a class='card__about--developer${i}' href="#"><img class='teamImage' src=${cur.avatar}
+                        alt=""></a>`;
+                    i++;
+                    return newText;
+                  })
+                  .join("")}
+            </span>
+        </div>
+        <div class="repoItem__description">
+            <p>${
+              obj.description.length > 120
+                ? obj.description.substr(0, 120) + "..."
+                : obj.description
+            }</p>
+        </div>
+    </div>
+    <div class="repoItem__footer">
+        <div class="repoItem__footer--language">
+            <span class='circle' style='background-color:${applyBgColor(
+              obj.language
+            )}'></span>
+            ${obj.language}
+        </div>
+        <div class="card__ratings repoItem__footer--ratings">
+            <div class='git-info'>
+                <ul>
+                    <li class="followers">
+                        <span class="followers-text small"><img class='color-star' src='./img/starfilled.png'></span>
+                        <div class='followers-count'>${obj.stars}</div>
+                    </li>
+                    <li class="stars">
+                        <span class="forked-text small"><img class='color-forked' src='./img/forked.svg'></span>
+                        <div class='stars-count'>${obj.forks}</div>
+                    </li>
+                    <li class="forked">
+                        <span class="stars-text small"><img class='color-issues' src='./img/starstoday.png'></span>
+                        <div class='forked-count'>${
+                          obj.currentPeriodStars
+                        } <span class='stars-today'>stars today</span></div>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="repoItem__logo">
+          <img src='${
+            obj.avatar
+          }' width:'100px' height:'100px' class='repoItem__image'>
+    </div>
+    </div>
+      `;
+      document.querySelector(".grid").insertAdjacentHTML("beforeend", html);
+    });
+  }
+
   function displayRepos(array) {
+    document.querySelector(".grid").innerHTML = "";
     array.forEach(function (obj) {
       let html = `
     <div class="repoCard">
@@ -331,6 +407,7 @@ const viewController = (function () {
     displayDevelopers,
     showSelectedOption,
     showSelectedDuration,
+    displayByList,
   };
 })();
 
@@ -398,7 +475,7 @@ const controller = (function () {
 
   // Event listeners
 
-  // To toggle select menu
+  // To toggle select menu active class
   document.querySelector(".selected-language").addEventListener("click", () => {
     document.querySelector(".lan-opt-container").classList.toggle("active");
   });
@@ -432,6 +509,28 @@ const controller = (function () {
     // call the main handler
     handleMain(e);
   });
+
+  // display type listener
+  document
+    .querySelector(".displayType-button")
+    .addEventListener("click", (e) => {
+      if (e.target.textContent === "Grid") {
+        console.log("Grid");
+        if (document.querySelector(".btn-repo").classList.contains("active")) {
+          viewController.displayRepos(state.type.repos);
+        } else {
+          viewController.displayDevelopers(state.type.developers);
+        }
+      } else if (e.target.textContent === "List") {
+        console.log("List");
+        document.querySelector(".grid").innerHTML = "";
+        if (document.querySelector(".btn-repo").classList.contains("active")) {
+          viewController.displayByList(state.type.repos);
+        } else {
+          viewController.displayByList(state.type.developers);
+        }
+      }
+    });
 
   // languages select menu listener
   document.querySelectorAll(".opt-lan").forEach((item) => {

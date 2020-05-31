@@ -82,7 +82,7 @@ button {
 }
 
 .container {
-    max-width: 1350px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 30px;
     color: #084468;
@@ -1390,6 +1390,59 @@ a {
 
 .stars-today {
     font-size: 15px;
+}
+
+.repoItem {
+    flex-basis: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0.99), rgba(255, 255, 255, .99)),
+        url(../img/blackgrit-15c1685….png);
+    margin-bottom: 25px;
+    box-shadow: 3px 3px 25px 0 rgba(46, 61, 73, .14);
+    padding: 15px;
+    position: relative;
+}
+
+.repoItem__header {
+    padding: 10px 0;
+}
+
+.repoItem__header--reponame {
+    font-weight: 600;
+}
+
+.repoItem__logo {
+    position: absolute;
+    right: 3%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+.repoItem__image {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
+.repoItem__footer {
+    display: flex;
+    justify-content: space-around;
+    width: 52%;
+}
+
+.repoItem__footer .circle {
+    margin-right: 5px;
+}
+
+.repoItem__footer--language {
+    display: flex;
+    align-items: center;
+    flex-basis: 22%;
+
+}
+
+.repoItem__footer--ratings {
+    flex-basis: 78%;
 }
 
 
