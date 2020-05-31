@@ -1447,6 +1447,10 @@ a {
 
 
 .developerItem {
+    background: linear-gradient(rgba(255, 255, 255, 0.99), rgba(255, 255, 255, .99)),
+        url('../img/blackgrit-15c168539fb7109ce300574e7b4b0732.png');
+    background-size: contain;
+    background-blend-mode: saturation;
     box-shadow: 3px 3px 25px 0 rgba(46, 61, 73, .14);
     flex-basis: 100%;
     display: flex;
@@ -1460,7 +1464,7 @@ a {
 }
 
 .developerItem__main {
-    flex-basis: 50%;
+    flex-basis: 55%;
 }
 
 .developerItem__image {

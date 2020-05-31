@@ -18,6 +18,7 @@ const searchController = (function () {
     try {
       const developersData = await axios(`https://ghapi.huchen.dev/developers`);
       this.developers = developersData.data;
+      console.log(developersData.data);
       return developers.data;
     } catch (e) {
       return `We've an error here: ${e}`;
@@ -170,7 +171,7 @@ const viewController = (function () {
     document.querySelector(".selected-duration").textContent = data;
   };
 
-  const validateDescription = function (obj) {
+  const validateDevelopersDescription = function (obj) {
     if (obj.repo.description) {
       let description =
         obj.repo.description.length > 70
@@ -179,6 +180,16 @@ const viewController = (function () {
       return description;
     } else {
       return "No description provided";
+    }
+  };
+
+  const validateReposDescription = function (obj) {
+    if (obj.description) {
+      obj.description.length > 70
+        ? obj.description.substr(0, 70) + "..."
+        : obj.description;
+    } else {
+      return "No description provided!";
     }
   };
 
@@ -213,7 +224,6 @@ const viewController = (function () {
   }
 
   function displayReposByList(array) {
-    console.log(array);
     document.querySelector(".grid").innerHTML = "";
     array.forEach(function (obj) {
       let html = `
@@ -240,7 +250,7 @@ const viewController = (function () {
             </span>
         </div>
         <div class="repoItem__description">
-            <p>${validateDescription(obj)}</p>
+            <p>${validateReposDescription(obj)}</p>
         </div>
     </div>
     <div class="repoItem__footer">
@@ -315,7 +325,7 @@ const viewController = (function () {
       }</a>
             </div>
             <div class="repoCard__description">
-                <p>${validateDescription(obj)}</p>
+                <p>${validateDevelopersDescription(obj)}</p>
             </div>
         </div>
 
@@ -365,7 +375,7 @@ const viewController = (function () {
                         </div>
                     </div>
                     <div class="card__description">
-                        <p>${validateDescription(obj)}</p>
+                        <p>${validateReposDescription(obj)}</p>
                     </div>
                     <div class="card__ratings">
                       <div class='git-info'>
@@ -400,6 +410,7 @@ const viewController = (function () {
   }
 
   function displayDevelopers(array) {
+    document.querySelector(".grid").innerHTML = "";
     array.forEach(function (obj) {
       let html = `
     <div class="repoCard developerCard ">
@@ -430,7 +441,7 @@ const viewController = (function () {
                     </div>
                     
                     <div class="repoCard__description">
-                        <p>${validateDescription(obj)}</p>
+                        <p>${validateDevelopersDescription(obj)}</p>
                     </div>
                 </div>
             </div>
@@ -562,6 +573,7 @@ const controller = (function () {
         if (document.querySelector(".btn-repo").classList.contains("active")) {
           viewController.displayRepos(state.type.repos);
         } else {
+          console.log("not grid");
           viewController.displayDevelopers(state.type.developers);
         }
       } else if (e.target.textContent === "List") {
