@@ -170,6 +170,18 @@ const viewController = (function () {
     document.querySelector(".selected-duration").textContent = data;
   };
 
+  const validateDescription = function (obj) {
+    if (obj.repo.description) {
+      let description =
+        obj.repo.description.length > 70
+          ? obj.repo.description.substr(0, 70) + "..."
+          : obj.repo.description;
+      return description;
+    } else {
+      return "No description provided";
+    }
+  };
+
   function applyBgColor(language) {
     if (language === "Shell") {
       return "#89e051";
@@ -228,11 +240,7 @@ const viewController = (function () {
             </span>
         </div>
         <div class="repoItem__description">
-            <p>${
-              obj.description.length > 120
-                ? obj.description.substr(0, 120) + "..."
-                : obj.description
-            }</p>
+            <p>${validateDescription(obj)}</p>
         </div>
     </div>
     <div class="repoItem__footer">
@@ -307,11 +315,7 @@ const viewController = (function () {
       }</a>
             </div>
             <div class="repoCard__description">
-                <p>${
-                  obj.repo.description.length > 70
-                    ? obj.repo.description.substr(0, 70) + "..."
-                    : obj.repo.description
-                }</p>
+                <p>${validateDescription(obj)}</p>
             </div>
         </div>
 
@@ -361,11 +365,7 @@ const viewController = (function () {
                         </div>
                     </div>
                     <div class="card__description">
-                        <p>${
-                          obj.description.length > 120
-                            ? obj.description.substr(0, 120) + "..."
-                            : obj.description
-                        }</p>
+                        <p>${validateDescription(obj)}</p>
                     </div>
                     <div class="card__ratings">
                       <div class='git-info'>
@@ -430,11 +430,7 @@ const viewController = (function () {
                     </div>
                     
                     <div class="repoCard__description">
-                        <p>${
-                          obj.repo.description.length > 70
-                            ? obj.repo.description.substr(0, 70) + "..."
-                            : obj.repo.description
-                        }</p>
+                        <p>${validateDescription(obj)}</p>
                     </div>
                 </div>
             </div>
