@@ -1090,6 +1090,10 @@ a {
     display: flex;
 }
 
+.fade {
+    opacity: .5;
+}
+
 .displayType-button {
     display: flex;
 }

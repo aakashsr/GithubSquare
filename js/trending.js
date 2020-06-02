@@ -184,7 +184,6 @@ const viewController = (function () {
   };
 
   const validateReposDescription = function (obj) {
-    console.log(obj.description);
     if (obj.description) {
       let description =
         obj.description.length > 70
@@ -194,6 +193,16 @@ const viewController = (function () {
     } else {
       return "No description provided!";
     }
+  };
+
+  const toggleOpacity = function (e) {
+    console.log(e.target);
+    let allButtons = document.querySelectorAll(".filter-button button");
+    allButtons.forEach(function (cur) {
+      cur.classList.add("fade");
+    });
+    console.log(e.target);
+    e.target.parentNode.classList.remove("fade");
   };
 
   function applyBgColor(language) {
@@ -465,6 +474,7 @@ const viewController = (function () {
     showSelectedDuration,
     displayReposByList,
     displayDevelopersByList,
+    toggleOpacity,
   };
 })();
 
@@ -571,15 +581,20 @@ const controller = (function () {
   document
     .querySelector(".displayType-button")
     .addEventListener("click", (e) => {
-      if (e.target.textContent === "Grid") {
-        console.log("Grid");
+      viewController.toggleOpacity(e);
+      if (e.target.parentNode.classList.contains("grid__btn")) {
+        // toggle the fade class
+        // viewController.toggleOpacity(e);
+
         if (document.querySelector(".btn-repo").classList.contains("active")) {
           viewController.displayRepos(state.type.repos);
         } else {
           console.log("not grid");
           viewController.displayDevelopers(state.type.developers);
         }
-      } else if (e.target.textContent === "List") {
+      } else if (e.target.parentNode.classList.contains("list__btn")) {
+        // toggle the fade class
+        // viewController.toggleOpacity(e);
         if (document.querySelector(".btn-repo").classList.contains("active")) {
           viewController.displayReposByList(state.type.repos);
         } else {
