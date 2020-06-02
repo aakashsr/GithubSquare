@@ -184,10 +184,13 @@ const viewController = (function () {
   };
 
   const validateReposDescription = function (obj) {
+    console.log(obj.description);
     if (obj.description) {
-      obj.description.length > 70
-        ? obj.description.substr(0, 70) + "..."
-        : obj.description;
+      let description =
+        obj.description.length > 70
+          ? obj.description.substr(0, 70) + "..."
+          : obj.description;
+      return description;
     } else {
       return "No description provided!";
     }
