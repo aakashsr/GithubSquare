@@ -171,9 +171,18 @@ const controller = (function () {
     }
   };
 
-  document.getElementById("player-1").addEventListener("submit", (e) => {
-    e.preventDefault();
-    handleSearch();
+  document
+    .querySelector(".username1")
+    .addEventListener("input", async function (e) {
+      e.preventDefault();
+      console.log(e.target.value);
+      let data = await axios(`https://api.github.com/users/sdras`);
+      console.log(data);
+    });
+
+  document.getElementById("player-1").addEventListener("submit", function (e) {
+    e.preventDefault(e);
+    handleSearch(e);
   });
 
   const handleSearch = async function () {
